@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#13 451 stupňů Fahrenheita — Ray Bradbury</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: #f5f1ea;
+  color: #2a2520;
+  line-height: 1.65;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+h1, h2, h3, h4, h5, h6 { color: #1a1410; line-height: 1.3; margin-top: 1.4em; margin-bottom: 0.5em; }
+h1 { font-size: 2.2em; margin-top: 0; }
+h2 { font-size: 1.55em; border-bottom: 2px solid #d4c8b8; padding-bottom: 0.3em; }
+h3 { font-size: 1.25em; color: #4a3527; }
+h4 { font-size: 1.08em; color: #4a3527; }
+a { color: #8b3a1a; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* INDEX */
+header.site-header {
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: #f5f1ea;
+  padding: 36px 24px;
+  text-align: center;
+}
+header.site-header h1 { color: #f5f1ea; font-size: 2.6em; margin: 0; }
+header.site-header p { margin: 8px 0 0 0; opacity: 0.85; font-size: 1.05em; }
+header.site-header .header-links {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+header.site-header .header-links a {
+  background: rgba(255,255,255,0.12);
+  color: #f0c486;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95em;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+header.site-header .header-links a:hover {
+  background: rgba(255,255,255,0.22);
+  text-decoration: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.18s, box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.card a { display: flex; flex-direction: column; height: 100%; color: inherit; }
+.card a:hover { text-decoration: none; }
+.card .thumb {
+  aspect-ratio: 2/3;
+  background: #ece4d5 center/cover no-repeat;
+  border-bottom: 1px solid #d4c8b8;
+}
+.card .body { padding: 14px 16px 18px 16px; }
+.card .num {
+  display: inline-block;
+  background: #8b3a1a;
+  color: white;
+  font-size: 0.75em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.card .title { font-size: 1.1em; font-weight: 600; color: #1a1410; margin: 0 0 4px 0; line-height: 1.3; }
+.card .author { font-size: 0.92em; color: #5a4d3f; margin: 0; }
+
+/* DETAIL */
+.book-header {
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: #f5f1ea;
+  padding: 36px 24px 28px 24px;
+}
+.book-header .num { color: #f0c486; font-size: 0.95em; letter-spacing: 0.1em; }
+.book-header h1 { color: white; font-size: 2.6em; margin: 4px 0 6px 0; }
+.book-header .author { color: #d4c8b8; font-size: 1.2em; margin: 0; }
+.book-header .nav { margin-top: 18px; }
+.book-header .nav a { color: #f0c486; font-weight: 600; }
+
+.section { margin: 36px 0; }
+.section > h2 { color: #4a3527; font-size: 1.55em; margin-bottom: 6px; }
+.section-hint {
+  margin: 0 0 16px 0;
+  padding: 8px 14px;
+  background: #fff3e0;
+  border-left: 4px solid #d97500;
+  border-radius: 6px;
+  color: #5a4d3f;
+  font-size: 0.95em;
+}
+.single-card {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.single-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  background: white;
+  cursor: zoom-in;
+  display: block;
+}
+
+/* Speaking step badges inside the tahák */
+.speaking-badge {
+  background: linear-gradient(135deg, #8b3a1a, #a04a26);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px 10px 0 0;
+  margin: 32px 0 0 0;
+  font-weight: 700;
+  font-size: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(139,58,26,0.2);
+}
+.speaking-badge .badge-step { font-size: 1.05em; }
+.speaking-badge .badge-hint {
+  font-weight: 400;
+  font-size: 0.85em;
+  opacity: 0.95;
+  background: rgba(255,255,255,0.18);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+.speaking-badge.helper {
+  background: linear-gradient(135deg, #4a3527, #5a4d3f);
+}
+.speaking-badge + h2 {
+  margin-top: 0 !important;
+  background: #fffaf2;
+  padding: 10px 14px;
+  border-radius: 0 0 8px 8px;
+  border-bottom: 2px solid #d4c8b8;
+}
+
+.images { display: flex; flex-direction: column; gap: 30px; }
+.images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  background: white;
+}
+.image-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 700px) {
+  .image-cards { grid-template-columns: 1fr; }
+}
+.image-cards img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 3px 14px rgba(0,0,0,0.12); cursor: zoom-in; }
+.image-caption { text-align: center; font-size: 0.9em; color: #5a4d3f; margin-top: 6px; }
+
+.tahak {
+  background: white;
+  padding: 30px 36px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.tahak h1 { display: none; }
+.tahak h2 {
+  color: #8b3a1a;
+  margin-top: 1.6em;
+  border-bottom: 2px solid #d4c8b8;
+  padding-bottom: 0.3em;
+}
+.tahak h3 { color: #4a3527; margin-top: 1.4em; }
+.tahak .table-wrap { overflow-x: auto; margin: 12px 0; }
+.tahak table { border-collapse: collapse; width: 100%; }
+.tahak th, .tahak td {
+  border: 1px solid #d4c8b8;
+  padding: 9px 13px;
+  text-align: left;
+  vertical-align: top;
+}
+.tahak th { background: #ece4d5; color: #4a3527; font-weight: 700; }
+.tahak blockquote {
+  border-left: 4px solid #8b3a1a;
+  margin: 16px 0;
+  padding: 8px 18px;
+  background: #f9f4ec;
+  font-style: italic;
+  color: #4a3527;
+}
+.tahak code {
+  background: #ece4d5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+.tahak pre {
+  background: #2a1f15;
+  color: #f5f1ea;
+  padding: 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.tahak pre code { background: transparent; color: inherit; padding: 0; }
+.tahak .numbered { margin: 6px 0; }
+.tahak hr { border: none; border-top: 1px solid #d4c8b8; margin: 28px 0; }
+.tahak ul { padding-left: 24px; }
+.tahak li { margin: 4px 0; }
+
+/* Embedded images inside the tahák — sits right after their relevant section heading */
+.embedded-image, .embedded-postavy {
+  margin: 14px 0 20px 0;
+  padding: 14px;
+  background: #f9f4ec;
+  border: 1px solid #d4c8b8;
+  border-radius: 12px;
+  scroll-margin-top: 80px;
+}
+.embedded-image img, .embedded-postavy img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  cursor: zoom-in;
+  display: block;
+}
+.embedded-image .image-caption,
+.embedded-postavy .image-caption {
+  text-align: center;
+  font-size: 0.92em;
+  color: #5a4d3f;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Plot-context block at the very top — komiks + detailní děj before analytical tahák */
+.plot-context {
+  background: #fff3e0;
+  border: 2px solid #d97500;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+.plot-context > h2 {
+  color: #8b3a1a;
+  border-bottom: none;
+  margin-top: 0;
+}
+.plot-context > .section-hint {
+  background: white;
+  border-left-color: #8b3a1a;
+}
+.dej-block {
+  background: white;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.dej-block .dej-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1.15em;
+  margin-bottom: 8px;
+}
+
+/* Mluvený skript — bottom section, distinct color */
+.projev-section {
+  background: linear-gradient(135deg, #f0f7fb, #e8f1f7);
+  border: 2px solid #2d6a8c;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+.projev-section > h2 {
+  color: #2d6a8c;
+  border-bottom: none;
+  margin-top: 0;
+}
+.projev-section .section-hint {
+  background: white;
+  border-left-color: #2d6a8c;
+}
+.projev-section .tahak {
+  background: white;
+}
+.projev-section .tahak h2 {
+  color: #2d6a8c;
+  border-bottom-color: #b8d4e3;
+}
+.projev-section .tahak h3 {
+  color: #1d556f;
+}
+
+/* Komiks (3 panels) — used inside plot-context AND embedded inside tahák */
+.embedded-komiks {
+  margin: 18px 0 24px 0;
+  padding: 16px;
+  background: #f9f4ec;
+  border: 1px solid #d4c8b8;
+  border-radius: 12px;
+  scroll-margin-top: 80px;
+}
+.embedded-komiks .komiks-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1.1em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.embedded-komiks .komiks-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.embedded-komiks .komiks-strip img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  cursor: zoom-in;
+  display: block;
+}
+.embedded-komiks .komiks-strip .image-caption {
+  text-align: center;
+  font-size: 0.9em;
+  color: #5a4d3f;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.nav-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 20px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-bottom a {
+  background: #8b3a1a;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+}
+.nav-bottom a:hover { background: #6b2a10; text-decoration: none; }
+.nav-bottom a.home { background: #4a3527; }
+
+.toc-jump {
+  background: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  font-size: 0.92em;
+}
+.toc-jump a { margin-right: 14px; color: #8b3a1a; font-weight: 600; }
+
+footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24px 50px 24px; }
+
+/* DRAGGABLE EXAM POPUP */
+.exam-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 340px;
+  max-height: 82vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 1000;
+  font-size: 0.85em;
+  overflow: hidden;
+  border: 2px solid #8b3a1a;
+  display: flex;
+  flex-direction: column;
+}
+.popup-header {
+  background: #8b3a1a;
+  color: white;
+  padding: 10px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+}
+.popup-title { font-size: 0.95em; }
+.popup-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+.popup-btn:hover { background: rgba(255,255,255,0.25); }
+.popup-body {
+  padding: 12px 14px;
+  overflow-y: auto;
+  background: #fffaf2;
+  flex: 1;
+}
+.popup-body h4 {
+  color: #8b3a1a;
+  margin: 10px 0 4px 0;
+  font-size: 0.95em;
+  border-bottom: 1px solid #ddd0bc;
+  padding-bottom: 2px;
+}
+.popup-body h4:first-child { margin-top: 0; }
+.popup-body ol, .popup-body ul {
+  padding-left: 20px;
+  margin: 4px 0 8px 0;
+}
+.popup-body li { margin: 3px 0; line-height: 1.4; }
+.popup-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  margin: 4px 0 6px 0;
+}
+.popup-body th, .popup-body td {
+  border: 1px solid #d4c8b8;
+  padding: 3px 6px;
+  text-align: left;
+}
+.popup-body th { background: #ece4d5; font-weight: 600; }
+.popup-body td.cell-num { text-align: center; font-weight: 600; color: #8b3a1a; }
+.popup-body b { color: #4a3527; }
+.popup-body .warn {
+  background: #fff3e0;
+  border-left: 3px solid #d97500;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-size: 0.95em;
+  border-radius: 4px;
+  line-height: 1.5;
+}
+.popup-body .step-block {
+  background: #ece4d5;
+  border-radius: 8px;
+  padding: 8px 10px 6px 10px;
+  margin: 6px 0;
+}
+.popup-body .step-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1em;
+  margin-bottom: 3px;
+}
+.popup-body .step-meta {
+  font-size: 0.8em;
+  color: #8b3a1a;
+  background: white;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.popup-body .step-list {
+  margin: 4px 0;
+  padding-left: 22px;
+  font-size: 0.95em;
+}
+.popup-body .step-intro {
+  margin: 6px 0 2px 0;
+  color: #4a3527;
+  font-size: 0.92em;
+}
+.popup-body .bonus-info {
+  background: #e8f5e9;
+  border-left: 3px solid #4a7d4a;
+  padding: 6px 10px;
+  margin: 8px 0;
+  font-size: 0.92em;
+  border-radius: 4px;
+}
+
+/* Clickable popup list items — scroll to anchor + flash highlight on page */
+.popup-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-radius: 4px;
+  border-left: 2px solid transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.popup-link:hover {
+  background: rgba(139, 58, 26, 0.08);
+  border-left-color: #8b3a1a;
+  color: #8b3a1a;
+  text-decoration: none;
+}
+.popup-link::after {
+  content: " ↗";
+  opacity: 0.4;
+  font-size: 0.85em;
+}
+.popup-link:hover::after { opacity: 1; }
+
+.popup-external-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #8b3a1a;
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+.popup-external-link:hover {
+  background: #6b2a10;
+  text-decoration: none;
+}
+
+/* Flash highlight when a popup link scrolls to a section */
+.flash-highlight {
+  animation: flash-pulse 2.6s ease-out;
+  scroll-margin-top: 20px;
+}
+@keyframes flash-pulse {
+  0%   { background-color: rgba(240, 196, 134, 0.95); box-shadow: 0 0 0 6px rgba(240, 196, 134, 0.6), 0 0 30px rgba(240, 196, 134, 0.5); }
+  35%  { background-color: rgba(240, 196, 134, 0.85); box-shadow: 0 0 0 4px rgba(240, 196, 134, 0.4), 0 0 24px rgba(240, 196, 134, 0.4); }
+  100% { background-color: transparent; box-shadow: 0 0 0 0 transparent, 0 0 0 transparent; }
+}
+
+/* Make all scroll targets have a comfortable offset from top so they don't hug the edge */
+.tahak h2[id^="cast-"], #autor-img, #dilo-img, #postavy, #komiks, #dej {
+  scroll-margin-top: 16px;
+}
+.exam-popup.minimized {
+  height: auto !important;
+  max-height: none;
+}
+.exam-popup.minimized .popup-body { display: none; }
+.popup-reopen {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #8b3a1a;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1010;
+  font-weight: 700;
+  font-size: 0.95em;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  display: none;
+  animation: popup-reopen-pulse 2.5s ease-in-out infinite;
+}
+.popup-reopen:hover {
+  background: #6b2a10;
+  transform: scale(1.05);
+}
+@keyframes popup-reopen-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 4px 22px rgba(139,58,26,0.7); }
+}
+
+/* GUIDE POPUP — second draggable popup, left side, blue/teal */
+.guide-popup {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 320px;
+  max-height: 75vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 999;
+  font-size: 0.85em;
+  overflow: hidden;
+  border: 2px solid #2d6a8c;
+  display: flex;
+  flex-direction: column;
+}
+.guide-popup .popup-header {
+  background: #2d6a8c;
+  color: white;
+  padding: 10px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+}
+.guide-popup .popup-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+.guide-popup .popup-btn:hover { background: rgba(255,255,255,0.25); }
+.guide-popup .popup-body {
+  padding: 14px 16px;
+  overflow-y: auto;
+  background: #f0f7fb;
+  flex: 1;
+}
+.guide-block {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-left: 4px solid #2d6a8c;
+}
+.guide-block .guide-step-title {
+  color: #1d556f;
+  margin: 0 0 8px 0;
+  font-size: 1.02em;
+  font-weight: 700;
+}
+.guide-block ul {
+  margin: 4px 0 0 0;
+  padding-left: 22px;
+}
+.guide-block li {
+  margin: 5px 0;
+  line-height: 1.4;
+}
+.guide-tip {
+  background: #fff3e0;
+  border-left: 3px solid #d97500;
+  padding: 10px 12px;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 0.92em;
+  line-height: 1.4;
+}
+.guide-reopen {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #2d6a8c;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1010;
+  font-weight: 700;
+  font-size: 0.95em;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  display: none;
+  animation: guide-reopen-pulse 2.5s ease-in-out infinite;
+}
+.guide-reopen:hover {
+  background: #1d556f;
+  transform: scale(1.05);
+}
+@keyframes guide-reopen-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 4px 22px rgba(45,106,140,0.7); }
+}
+.guide-popup.minimized { height: auto !important; max-height: none; }
+.guide-popup.minimized .popup-body { display: none; }
+@media (max-width: 700px) {
+  .guide-popup { width: 270px; font-size: 0.78em; left: 10px; top: 10px; }
+}
+
+/* POP-OUT IMAGE — small button on every embedded image to detach it as a movable+resizable window */
+.popout-trigger {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(42,31,21,0.78);
+  color: white;
+  border: none;
+  padding: 6px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.popout-trigger:hover {
+  background: rgba(42,31,21,1);
+  transform: scale(1.05);
+}
+.embedded-image, .embedded-postavy, .embedded-komiks .komiks-strip > div, .single-card {
+  position: relative;
+}
+
+.img-popout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 480px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid #4a3527;
+  min-width: 260px;
+  min-height: 180px;
+  max-width: 95vw;
+  max-height: 90vh;
+  will-change: transform, width, height;
+}
+.img-popout-header {
+  background: linear-gradient(135deg, #4a3527, #2a1f15);
+  color: white;
+  padding: 8px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  flex-shrink: 0;
+  gap: 8px;
+}
+.img-popout-title {
+  font-size: 0.88em;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.img-popout-controls {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.img-popout .popout-btn {
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 0.95em;
+  line-height: 1;
+  font-weight: 700;
+}
+.img-popout .popout-btn:hover { background: rgba(255,255,255,0.38); }
+.img-popout-body {
+  flex: 1;
+  overflow: hidden;
+  background: #f9f4ec;
+  position: relative;
+  cursor: zoom-in;
+  user-select: none;
+}
+.img-popout-body.zoomed { cursor: grab; }
+.img-popout-body.panning { cursor: grabbing; }
+.img-popout-body img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transform-origin: 0 0;
+  will-change: transform;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.img-popout-body.smooth img { transition: transform 0.18s ease-out; }
+.img-popout-zoom-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(42,31,21,0.78);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78em;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.img-popout-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, rgba(74,53,39,0.55) 50%);
+  border-radius: 0 0 8px 0;
+  z-index: 6;
+}
+@media (max-width: 700px) {
+  .exam-popup { width: 280px; font-size: 0.78em; top: 10px; right: 10px; }
+}
+</style>
+</head>
+<body>
+  
+<div id="exam-popup" class="exam-popup">
+  <div class="popup-header" id="popup-header">
+    <span class="popup-title">📊 Co říct u zkoušky</span>
+    <span>
+      <button class="popup-btn" id="popup-toggle" title="Sbalit / rozbalit">−</button>
+      <button class="popup-btn" id="popup-close" title="Skrýt">×</button>
+    </span>
+  </div>
+  <div class="popup-body">
+
+    <h4>🎯 4 části mluvení (15 min)</h4>
+
+    <div class="step-block">
+      <div class="step-title">1️⃣ Autor &amp; doba <span class="step-meta">3 min · 4 b</span></div>
+      <ul class="step-list">
+        <li><a href="#autor-img" class="popup-link">Kdo to napsal, kdy žil, odkud</a></li>
+        <li><a href="#cast-4" class="popup-link">Jaký to byl literární směr (klasicismus, realismus, antiutopie…)</a></li>
+        <li><a href="#cast-4" class="popup-link">Co dalšího autor napsal (2–3 díla)</a></li>
+        <li><a href="#cast-4" class="popup-link">Co se v té době dělo (krátký kontext)</a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">2️⃣ O knize <span class="step-meta">~4 min · 8 b</span></div>
+      <p class="step-intro">Nejdřív <b>co to je za knihu:</b></p>
+      <ul class="step-list">
+        <li><a href="#dilo-img" class="popup-link">Druh: <b>próza / drama / poezie</b></a></li>
+        <li><a href="#dilo-img" class="popup-link">Žánr: román / komedie / novela / báseň…</a></li>
+        <li><a href="#cast-1" class="popup-link">Kolik kapitol / jednání, <b>kdo vypráví</b> (vypravěč)</a></li>
+        <li><a href="#cast-2" class="popup-link">Hlavní téma + 2–3 motivy</a></li>
+      </ul>
+      <p class="step-intro">Pak <b>co se v úryvku děje:</b></p>
+      <ul class="step-list">
+        <li><a href="#dej" class="popup-link">Kde v knize úryvek je (která kapitola / jednání)</a></li>
+        <li><a href="#postavy" class="popup-link">Kdo v něm vystupuje a jaké jsou vztahy</a></li>
+        <li><a href="#dej" class="popup-link">Co se konkrétně v úryvku odehrává</a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">3️⃣ Jak je napsaný <span class="step-meta">~3 min · 4 b</span></div>
+      <ul class="step-list">
+        <li><a href="#cast-3" class="popup-link">Jaký jazyk: <b>spisovný / hovorový / archaický / nářečí</b></a></li>
+        <li><a href="#cast-3" class="popup-link">2–3 umělecké prostředky a <b>PROČ jsou tam</b><br>
+            <small>Třeba: „Hyperbola — autor přehání, aby vyvolal smích."<br>„Ironie — autor říká opak toho, co myslí, aby zesměšnil postavu."</small></a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">4️⃣ Neumělecký text <span class="step-meta">5 min · 8 b</span></div>
+      <ul class="step-list">
+        <li>Funkční styl: <b>publicistický / odborný / administrativní / umělecký…</b></li>
+        <li>Útvar: článek, recenze, zpráva, esej, návod…</li>
+        <li>O čem text je, k čemu slouží</li>
+        <li><b>Pro koho je napsaný</b> (adresát)</li>
+        <li>Jazykové prostředky (a k čemu)</li>
+        <li><b>Jak souvisí s uměleckým textem</b></li>
+      </ul>
+      <a href="../funkcni-styly.html" target="_blank" class="popup-external-link">↗ Otevřít tahák funkčních stylů</a>
+    </div>
+
+    <p class="bonus-info">➕ <b>Jak mluvíš = 4 b navíc.</b> Mluv spisovně, srozumitelně, plynule, bez vulgarismů.</p>
+
+    <h4>📊 Bodování</h4>
+    <p>Celkem <b>28 bodů</b>. Stačí získat <b>13 bodů (44 %)</b> a prošel/a jsi.</p>
+    <table>
+      <tr><th>Část mluvení</th><th class="cell-num">max</th></tr>
+      <tr><td>1️⃣ Autor &amp; doba</td><td class="cell-num">4</td></tr>
+      <tr><td>2️⃣ O knize (druh+žánr+vypravěč 4 + obsah úryvku 4)</td><td class="cell-num">8</td></tr>
+      <tr><td>3️⃣ Jak je napsaný (jazyk + prostředky)</td><td class="cell-num">4</td></tr>
+      <tr><td>4️⃣ Neumělecký text (styl + obsah)</td><td class="cell-num">8</td></tr>
+      <tr><td>➕ Jak mluvíš (jazyk. kultura)</td><td class="cell-num">4</td></tr>
+      <tr><td><b>Celkem</b></td><td class="cell-num"><b>28</b></td></tr>
+    </table>
+
+    <div class="warn">
+      <b>⚠️ POZOR — 3 pravidla:</b><br>
+      <b>1.</b> Z části o knize + autorovi musíš mít <b>aspoň 4 body</b> (ze 16). Jinak <b>NEPROŠEL/A</b>.<br>
+      <b>2.</b> Ze samotného rozboru úryvku knihy <b>aspoň 3 body</b> (z 12). Jinak <b>NEPROŠEL/A</b>.<br>
+      <b>3.</b> Když máš někde 0 bodů → za „jak mluvíš" dostaneš max 3 body (ne 4).
+    </div>
+
+    <h4>💡 Strategie — kolik bodů kde</h4>
+    <ul>
+      <li>Kniha + autor: cíl <b>8 b</b> (z 16 možných)</li>
+      <li>Neumělecký text: cíl <b>3–4 b</b> (z 8)</li>
+      <li>Jak mluvíš: cíl <b>2 b</b> (z 4)</li>
+      <li>= <b>13–14 b → PROŠEL/A</b> ✅</li>
+    </ul>
+
+    <h4>🧠 Vždy zmínit (kontrolka)</h4>
+    <ul>
+      <li>Druh + žánr knihy</li>
+      <li>Kdo vypráví (vypravěč)</li>
+      <li>U každého prostředku — <b>k čemu tam je</b></li>
+      <li>Literární směr + 2 další díla autora</li>
+      <li>Souvislost mezi uměl. a neuměl. textem</li>
+    </ul>
+
+  </div>
+</div>
+
+<button id="popup-reopen" class="popup-reopen" title="Zobrazit strategii zkoušky">📊 Strategie zkoušky</button>
+
+<div id="guide-popup" class="guide-popup">
+  <div class="popup-header" id="guide-header">
+    <span class="popup-title">🧭 Jak studovat stránku</span>
+    <span>
+      <button class="popup-btn" id="guide-toggle" title="Sbalit / rozbalit">−</button>
+      <button class="popup-btn" id="guide-close" title="Skrýt">×</button>
+    </span>
+  </div>
+  <div class="popup-body">
+
+    <div class="guide-block">
+      <div class="guide-step-title">🧭 Pochop děj knihy (čti nejdřív!)</div>
+      <ul>
+        <li>🎬 <b>Komiks</b> — 3 stránky × 9 scén</li>
+        <li>📜 <b>Detailní děj</b> — plný plot, abys věděl/a o čem to je</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-step-title">📖 Tahák (analytické info v pořadí mluvení)</div>
+      <ul>
+        <li><b>1️⃣</b> Lit. kontext + 👤 obrázek autora</li>
+        <li><b>2️⃣</b> Identifikace + 📖 obrázek knihy</li>
+        <li><b>2️⃣</b> I. ČÁST analýzy</li>
+        <li><b>2️⃣</b> II. ČÁST + 🧬 obrázek postav</li>
+        <li><b>3️⃣</b> III. ČÁST</li>
+        <li><b>📌</b> Pomocníci (opěrné body, úryvek, test)</li>
+      </ul>
+    </div>
+
+    <p class="guide-tip">💡 <b>Až znáš děj, analytické info ti dá smysl.</b> Bez děje to bude jen seznam slov.</p>
+
+  </div>
+</div>
+
+<button id="guide-reopen" class="guide-reopen" title="Zobrazit průvodce">🧭 Jak studovat</button>
+
+  <header class="book-header">
+    <div class="container">
+      <div class="num">KNIHA #13</div>
+      <h1>451 stupňů Fahrenheita</h1>
+      <p class="author">Ray Bradbury</p>
+      <div class="nav">
+        <a href="../index.html">← Zpět na seznam</a>
+        &nbsp;·&nbsp;
+        <a href="../funkcni-styly.html">📰 Funkční styly (neumělecký text)</a>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+
+    <div class="toc-jump">
+      <strong>Skok na:</strong>
+      <a href="#komiks">🎬 Komiks</a>
+      <a href="#dej">📜 Detailní děj</a>
+      <a href="#tahak">📖 Tahák</a>
+      <a href="#autor-img">1️⃣ Autor</a>
+      <a href="#dilo-img">2️⃣ O knize</a>
+      <a href="#postavy">🧬 Postavy</a>
+      <a href="#projev">🎙️ Skript</a>
+    </div>
+
+    
+    <section id="plot-context" class="section plot-context">
+      <h2>🧭 Pochop děj knihy (čti nejdřív!)</h2>
+      <p class="section-hint">Než pojdeš na analytické věci, ujasni si nejdřív, o čem ta kniha je.</p>
+      
+      <div id="komiks" class="embedded-komiks" style="margin-top: 0;">
+        <div class="komiks-title">🎬 Děj v komiksu (3 stránky × 3 panely = 9 scén)</div>
+        <div class="komiks-strip">
+          <div><img src="../../images/13-bradbury-451-stupnu-fahrenheita/01-komiks-1.jpg" alt="Komiks I"><div class="image-caption">I — Expozice & kolize</div></div>
+          <div><img src="../../images/13-bradbury-451-stupnu-fahrenheita/02-komiks-2.jpg" alt="Komiks II"><div class="image-caption">II — Krize & vyvrcholení</div></div>
+          <div><img src="../../images/13-bradbury-451-stupnu-fahrenheita/03-komiks-3.jpg" alt="Komiks III"><div class="image-caption">III — Rozuzlení & závěr</div></div>
+        </div>
+      </div>
+
+      <div id="dej" class="dej-block">
+        <div class="dej-title">📜 Detailní děj knihy</div>
+        <div class="tahak"><h1>Ray Bradbury — 451 stupňů Fahrenheita — Detailní děj</h1>
+
+<blockquote><strong>Antiutopický (dystopický) sci-fi román z roku 1953.</strong> Próza ve <strong>3 částech</strong> s poetickými názvy: <em>Ohniště a salamandr / Síto a písek / Oheň se rozhoří</em>. Vyprávěno v <strong>er-formě s vnitřní perspektivou hlavního hrdiny Guye Montaga</strong>. Vedle Huxleyho <em>Konce civilizace</em> a Orwellova <em>1984</em> třetí klasická antiutopie 20. století.</blockquote>
+
+<hr>
+
+<h2>Úvod (expozice) — svět a postavy</h2>
+
+<p><strong>Doba a místo:</strong> Nejmenované <strong>americké velkoměsto budoucnosti</strong> (Bradbury záměrně netvrdí, ve kterém roce — pravděpodobně někde po roce 1990, vzhledem k roku napsání 1953). Společnost je <strong>přetechnizovaná, totalitní a konzumní</strong>: lidé bydlí v domech s <strong>velkoplošnými „parlourními&quot; TV stěnami</strong> (tři, ideálně čtyři stěny obývacího pokoje pokryté televizí), v uších nosí miniaturní sluchátka „<strong>mušličky</strong>&quot; (<em>seashells</em>), polykají prášky na spaní, jezdí auty s rychlostí 160 km/h a hltají povrchní zábavu. <strong>Knihy jsou zakázány</strong> zákonem. <strong>Hasiči (firemen) je pálí</strong> spolu s domy, ve kterých je najdou. Nad městem se chystá <strong>válka</strong>, ale nikoho to nezajímá.</p>
+
+<p><strong>Hlavní postavy se kterými se hned setkáme:</strong></p>
+<ul>
+<li><strong>Guy Montag</strong> — třicetiletý hasič-pálič, helma s číslem <strong>451</strong> (teplota zapálení papíru), na rukávu <strong>salamandr</strong> (mytologický tvor žijící v ohni, znak hasičů), na hrudi <strong>fénix</strong> (pták povstávající z popela). Hlavní hrdina, vypravěč skrze něj.</li>
+<li><strong>Mildred Montagová</strong> — Montagova manželka. Konzumní, prázdná, hltá TV „rodinu&quot; v parloru, v uších má „mušličky&quot;, polyká prášky.</li>
+<li><strong>Clarisse McClellanová</strong> — <strong>sedmnáctiletá</strong> nová sousedka. Zvědavá, ráda chodí pěšky, ochutnává déšť, pozoruje listí. Žije s podivínskou rodinou (strýček, rodiče).</li>
+<li><strong>Kapitán Beatty</strong> — Montagův šéf u hasičského sboru. Paradoxně sečtělý, cituje knihy, ale brání systém.</li>
+<li><strong>Profesor Faber</strong> — bývalý profesor anglické literatury, vyhozený z univerzity. Bydlí o samotě, bojí se, ale touží po odporu.</li>
+<li><strong>Mechanický pes (Mechanical Hound / Ohař)</strong> — <strong>osminohá robotická lovecká bestie</strong> s jehlou plnou <strong>prokainu</strong> v tlamě. Loví „zločince&quot; pro hasiče.</li>
+<li><strong>Granger</strong> — vůdce skupiny „lidí-knih&quot; mimo město.</li>
+</ul>
+
+<hr>
+
+<h2>ČÁST 1 — Ohniště a salamandr (<em>The Hearth and the Salamander</em>)</h2>
+
+<h3>Úvodní scéna — „Bylo příjemné pálit&quot;</h3>
+
+<p>Román začíná <strong>slavnou větou</strong>: „<strong>Bylo příjemné pálit.</strong>&quot; („<em>It was a pleasure to burn.</em>&quot;) Guy Montag stojí s <strong>mosaznou hubicí plamenometu</strong> v rukou a sleduje, jak plameny stravují knihy a dům, v němž byly schované. Cítí pyšné, smyslné potěšení — pálení popisuje jako „symfonii plamenů&quot;, které dirigent řídí; oheň je pro něj jako „<strong>krajta plivající petrolej</strong>&quot; do světa. Knihy hoří jako „<strong>holubice s ohnivými křídly</strong>&quot;. Montag se na konci usmívá „divokým úsměvem všech popálených mužů&quot;.</p>
+
+<h3>Setkání s Clarisse McClellanovou</h3>
+
+<p>Po zásahu se Montag vrací domů. <strong>Cestou potká novou sousedku Clarisse McClellanovou</strong>, sedmnáctiletou dívku, která se před ním zhmotní jako z neznámého světa. <strong>Jde pěšky</strong> (což nikdo nedělá), nese si v ruce <strong>pampelišku</strong>, voní deštěm, ochutnává jazykem dešťové kapky. Pozoruje <strong>„muže v měsíci&quot;</strong>, ptá se Montaga na podivné věci:</p>
+<ul>
+<li>„<strong>Pravda je, že hasiči kdysi hasili, místo aby zapalovali?</strong>&quot;</li>
+<li>„<strong>Vy si nikdy nečtete knihy, které pálíte?</strong>&quot; Montag odpoví: „To je proti zákonu!&quot;</li>
+<li>A pak ho zasáhne otázkou: „<strong>Jste šťastný?</strong>&quot;</li>
+</ul>
+
+<p>Clarisse zmizí v noci ve svém domě, kde svítí všechna okna (na rozdíl od ostatních domů ve čtvrti). Montag jde domů s otázkou v hlavě, kterou si nikdy předtím nepoložil. Klade si ji nahlas: „<strong>Jsem šťastný? Já — šťastný?</strong>&quot; — a odpověď zní ne.</p>
+
+<h3>Mildredina sebevražda (vlastně: předávkování)</h3>
+
+<p>Doma v ložnici Montag najde <strong>Mildred ležící na zádech, studenou, s rozšířenýma očima</strong>. Na zemi vidí <strong>prázdnou lahvičku po prášcích na spaní</strong> — celá lahvička, <strong>30 kapslí</strong>, je pryč. Mildred se předávkovala. Montag v panice volá pohotovost.</p>
+
+<p><strong>Místo lékařů přijdou dva technici</strong> v montérkách (v originále <em>„operators&quot;</em>, česky někdy „<strong>odpadářské</strong>&quot; technici nebo „<strong>čističi</strong>&quot;) s dvěma stroji:</p>
+<p class="numbered"><strong>1.</strong> <strong>„Černý had&quot;</strong> — sondy s elektrickou kamerou, který Mildred „prosaje&quot; žaludek a krev.</p>
+<p class="numbered"><strong>2.</strong> <strong>Druhý stroj</strong> kompletně <strong>vymění Mildredinu krev</strong> — vysaje starou, dodá novou.</p>
+
+<p>Technici se chovají, jako by spravovali kbelík nebo prasklou trubku. Jeden z nich Montagovi nepřímo říká, že „<strong>takových případů máme devět nebo deset za noc</strong>, máme jich tolik, že jsme si museli pořídit speciální stroje&quot;. Pro Montaga otřesný zážitek. Když se ráno Mildred probudí, <strong>nic si nepamatuje</strong> — popírá, že by se předávkovala, hraje si u snídaně se svými televizními „rodinami&quot;, má hlad. Montag si poprvé uvědomuje, jak <strong>odcizená</strong> je jeho žena.</p>
+
+<h3>Další rozhovory s Clarisse — proměna Montaga</h3>
+
+<p>V následujících dnech Montag chodí denně do práce a každý den před prací <strong>mluví s Clarisse</strong>. Ta mu vypráví o tom:</p>
+<ul>
+<li>jak chodí pěšky v dešti,</li>
+<li>jak rodiče v noci sedí v obývacím pokoji <strong>bez puštěné TV</strong> a <strong>povídají si</strong> (něco neslýchaného),</li>
+<li>jak ona ve škole nezapadá, protože <strong>odmítá pasivně přijímat informace</strong>,</li>
+<li>jak její strýček byl jednou zatčen za to, že jel autem <strong>pomalu</strong> a šel pěšky.</li>
+</ul>
+
+<p>Pak jednoho dne <strong>Clarisse zmizí</strong>. Montag se po pár dnech od Mildred dozví <strong>mimochodem, mezi kousky toustu</strong>, že „<strong>ji srazilo auto</strong>&quot; a <strong>její rodina se odstěhovala</strong>. Mildred to říká s naprostým nezájmem. (V textu je naznačeno, že to mohlo být úmyslné odstranění Clarisse úřady — Bradbury nechává nejednoznačné.)</p>
+
+<h3>Stará žena se upálí spolu s knihami</h3>
+
+<p>Hasiči (Montag, Beatty a další) vyjedou na zásah do staršího domu, kde tipař udal <strong>starou ženu</strong> s tajnou knihovnou. V domě najdou <strong>stovky knih</strong>. Stará žena však odmítá odejít. Drží v ruce <strong>zápalku</strong>. Beatty na ni křičí, vykládá zákon. Ale stará žena pevně cituje:</p>
+
+<blockquote>„<strong>Vzmužte se, mistře Ridley, a stůjte na svém. Dnešní den, z Boží milosti, zažehneme v Anglii takovou svíci, která, jak doufám, nikdy neuhasne.</strong>&quot; <em>(Slova mučedníka <strong>Hugha Latimera</strong> Nicholasi Ridleyovi před jejich upálením v roce 1555.)</em></blockquote>
+
+<p>A pak <strong>sama škrtne zápalkou a upálí se s knihami</strong>. Tato scéna <strong>otřese Montagem</strong> víc, než cokoli předtím. <strong>Doma předtím — ne, během zásahu — Montag ukradne jednu knihu</strong> (zastrčí si ji pod paži). <strong>Doma poprvé v životě nedokáže usnout.</strong> Ptá se Mildred, jestli si pamatuje, kde se poprvé potkali. Mildred si nepamatuje nic.</p>
+
+<h3>Tajná kolekce a Beattyho přednáška</h3>
+
+<p>Ukáže se, že <strong>Montag si knihy krade už delší dobu</strong> — má jich <strong>schovaných asi dvacet</strong> za <strong>mřížkou ventilace v hale</strong> (za „kuchyňským otvorem&quot;). Doma jednu po druhé čte v noci.</p>
+
+<p><strong>Druhý den ráno Mildred ucítí, že se něco děje.</strong> Jako by tušila pravdu. Montag se snaží Mildred zapojit do čtení, ona ho odmítá a děsí se.</p>
+
+<p><strong>Kapitán Beatty přijde Montagovi na návštěvu</strong> — Montag totiž neodešel do práce (předstírá nemoc, je rozhozený z upalování ženy). Beatty si sedne v obývacím pokoji a <strong>přednese dlouhý monolog o tom, proč jsou knihy nebezpečné</strong>. Tato přednáška je <strong>jedna z klíčových pasáží románu</strong>. Beatty paradoxně:</p>
+
+<ul>
+<li>cituje různé autory,</li>
+<li>vysvětluje, že <strong>knihy nezakázala vláda — chtěli to lidé sami</strong>,</li>
+<li>popisuje, jak se literatura zkracovala: <strong>knihy → digesty → výtahy z digestů → titulky</strong>,</li>
+<li>jak menšiny si stěžovaly, že je něco uráží, a tak se škrtalo a škrtalo, až nezůstalo nic,</li>
+<li>jak <strong>masová zábava</strong> (TV, sport, rychlost) vytlačila myšlení,</li>
+<li>jak <strong>hasiči se stali strážci „štěstí&quot;</strong> — pálí, co lidi „znepokojuje&quot;.</li>
+</ul>
+
+<p>Beatty má i napomenutí: <strong>„Každý hasič dřív nebo později něco ukradne. Je to lidská zvědavost. Dáme mu 24 hodin. Když knihu spálí, je vše OK. Když ne — přijdeme.&quot;</strong> Beatty odejde. Montag pochopí, že <strong>Beatty ví</strong>.</p>
+
+<p>Po Beattyho odchodu Montag ukáže Mildred svoji <strong>tajnou kolekci knih</strong> za mřížkou. Mildred je v hysterice, chce je spálit. Montag se rozhodne, že je čas najít někoho, kdo mu pomůže rozluštit, co v knihách je. Vzpomene si na <strong>starého pána, kterého před lety potkal v parku</strong> — bývalého profesora anglické literatury, který se jmenoval <strong>Faber</strong>.</p>
+
+<hr>
+
+<h2>ČÁST 2 — Síto a písek (<em>The Sieve and the Sand</em>)</h2>
+
+<h3>Vzpomínka: Síto a písek (název části)</h3>
+
+<p>Název části pochází z <strong>Montagovy dětské vzpomínky</strong> — bratranec ho jako malého kluka <strong>na pláži vyzval, aby naplnil síto pískem za peníz</strong>. Montag se snažil, ale <strong>písek mu propadal stejně rychle, jak ho sypal</strong>. Tak teď čte knihy: snaží se urvat z nich smysl, ale slova mu „propadávají&quot; hlavou stejně jako písek sítem. <strong>Potřebuje pomoc.</strong></p>
+
+<h3>Cesta za profesorem Faberem</h3>
+
+<p>Montag jede metrem k Faberovi domů. Cestou si v hlavě opakuje verše z <strong>Bible — z knihy Kazatel</strong> („Vanitas vanitatum…&quot;) a chce si je zapamatovat dřív, než mu propadnou.</p>
+
+<p>U Fabera se přizná: <strong>má knihy, chce pomoci</strong>. <strong>Faber je nejdřív vyděšený</strong> — strach z hasičů ho ovládá. Ale postupně se obměkčí, když vidí, že Montag drží <strong>Bibli</strong> (vzácnou knihu — možná poslední dochovaná na celém kontinentu).</p>
+
+<p>Faber <strong>vykládá Montagovi tři věci, které knihy mají a televize ne</strong>:</p>
+<p class="numbered"><strong>1.</strong> <strong>Kvalita informací</strong> — hutnost, detail, „póry&quot; v ploše.</p>
+<p class="numbered"><strong>2.</strong> <strong>Čas k jejich strávení</strong> — možnost se zamyslet.</p>
+<p class="numbered"><strong>3.</strong> <strong>Právo jednat na základě toho, co prvé dvě dají dohromady</strong>.</p>
+
+<p>Faber se nakonec rozhodne pomoci. Dá Montagovi <strong>miniaturní obousměrné rádio („zelenou nábojku&quot;), které si Montag strčí do ucha</strong> — díky tomu ho <strong>Faber bude koučovat na dálku</strong>. Montag mu odejde s plánem: vrátit se do hasičského sboru a působit zevnitř.</p>
+
+<h3>Doma — Mildred a její kamarádky, čtení básně</h3>
+
+<p>Montag se vrátí domů a zjistí, že Mildred má návštěvu — <strong>paní Phelpsovou (Mrs. Phelps)</strong> a <strong>paní Bowlesovou (Mrs. Bowles)</strong>, dvě její kamarádky. Sedí v parlouru a sledují TV „<strong>rodinu</strong>&quot; (interaktivní program). Paní Bowlesová má za sebou <strong>dva potraty</strong> a <strong>tři rozvody</strong>, paní Phelpsová má manžela na vojně (válka se chystá), o které říká: „Až umře, <strong>vystrojím další svatbu</strong>, ale ne tu velkou pompu.&quot;</p>
+
+<p>Montag, <strong>rozzlobený jejich povrchností</strong>, <strong>vypne TV stěny</strong> a donutí ženy poslouchat. <strong>Vytáhne knihu poezie</strong> a <strong>přečte jim báseň</strong> — <strong>„Dover Beach&quot; od Matthewa Arnolda</strong>:</p>
+
+<blockquote>„<em>A my zde jsme jako na ztemnělé pláni, / kterou švihají zmatené šelmy boje a útěku, / kde zástupy nevědomé na sebe v noci vrážejí…</em>&quot;</blockquote>
+
+<p>(Faber mu do ucha šeptá, ať toho nechá.) <strong>Paní Phelpsová začne plakat</strong> — báseň jí dojme. <strong>Paní Bowlesová se rozzlobí</strong>: „Vidím to! Takové věci jsou špatné! Slzy jsou špatné! <strong>Já ho udám!</strong>&quot; Obě odejdou hluboce rozrušené.</p>
+
+<h3>Návrat do hasičské stanice — vlastní dům</h3>
+
+<p>Montag se vrátí na hasičskou stanici. Beatty s ním vede další dlouhý slovní souboj — <strong>cituje protichůdné kusy z různých knih</strong> (Shakespeare, Bible, Boswell, Swift), aby ukázal, že knihy se navzájem popírají a nedají se brát vážně. Montag mlčí, Faber mu do ucha radí.</p>
+
+<p>Pak <strong>zazvoní poplach</strong>. Hasiči vyrazí na adresu. Montag si všimne, kam jedou. <strong>„Tady už jsme byli, ne?&quot;</strong> ptá se Beatty s úsměvem. <strong>Je to Montagův vlastní dům.</strong> Mildred utíká s kufrem do taxíku, nedívá se na něj, mumlá: „Chudák rodina, chudák rodina… všechno pryč…&quot; — to ona ho udala (spolu s paní Bowlesovou; první alarm dala kdosi z její rodiny, ale konečné udání přišlo od Mildred).</p>
+
+<hr>
+
+<h2>ČÁST 3 — Oheň se rozhoří (<em>Burning Bright</em>)</h2>
+
+<h3>Montag pálí svůj dům a zabíjí Beattyho</h3>
+
+<p>Beatty Montagovi přikáže, aby <strong>sám zapálil svůj dům plamenometem</strong>. Montag poslechne. Spálí TV stěny, postel, knihy — vše. <strong>Užije si poslední destrukci</strong>. Když je dům v plamenech, Beatty si všimne <strong>ušního rádia</strong> v Montagově uchu. Vytrhne mu ho a zlomyslně <strong>slibuje, že vystopuje Fabera</strong>.</p>
+
+<p>V tu chvíli Montag zlomí. <strong>Otočí plamenomet proti Beattymu</strong> a zapálí ho. Beatty hoří v plamenech — a Montagovi se zdá, že <strong>Beatty zemřel, jako by chtěl zemřít</strong> (jeho cynismus byl maskou pro vlastní zoufalství). Montag pak omráčí dva další hasiče a vyřadí <strong>mechanického psa</strong>, ale Ohař ho stihne <strong>bodnout jehlou s prokainem do nohy</strong> — Montag si <strong>kulhavě</strong> prchá.</p>
+
+<h3>Útěk přes město a přes řeku</h3>
+
+<p>Montag se hroutí v nečekanou roli — <strong>hledaný zločinec</strong>. Nad městem se zvedá poplach: <strong>policejní vrtulníky</strong> ho hledají, <strong>další mechanický pes</strong> (záložní) je vypuštěn, <strong>televize vysílají živou štvanici</strong> jako reality show.</p>
+
+<p>Montag doběhne k <strong>Faberovi</strong>. Faber mu dá <strong>starší šaty</strong> (aby smyl pach), pomůže mu naplánovat útěk z města k <strong>bývalé železniční trati u řeky</strong>, kde podle Fabera žijí <strong>„lidé-knihy&quot;</strong> — tuláci, kteří utekli ze systému. Faber mu radí, ať <strong>pustí televizi v jeho domě</strong>, aby si pes spletl Faberovu vůni s dalším člověkem. Pak Montag spěšně utíká.</p>
+
+<p>Cestou Montag <strong>proběhne ulicí</strong>, kde <strong>málem narazí na pětici teenagerů</strong> v rychlém autě — chtěli ho přejet pro zábavu, ale on uskočí.</p>
+
+<p>Montag se <strong>dostane k řece</strong>, <strong>svleče se</strong> (aby smyl pach), <strong>obleče si Faberovy staré šaty</strong> a <strong>pustí se po proudu</strong>. Voda ho <strong>smyje, očistí, oddělí od starého světa</strong>. <strong>Mechanický pes ztrácí stopu.</strong></p>
+
+<p>Mezitím televize <strong>musí někoho ukázat</strong>, jak chytili Montaga (kvůli živému vysílání) — <strong>chytí náhodného nevinného chodce</strong> a před kamerami ho <strong>mechanický pes zabije</strong>. Národ uvidí „spravedlnost&quot;, aniž tuší, že to není Montag.</p>
+
+<h3>Lidé-knihy a Granger</h3>
+
+<p>Montag vyleze z řeky <strong>na venkově</strong>, kde nikdy nebyl. Ucítí seno, dobytek, <strong>vidí oheň</strong> mezi stromy — ale <strong>tento oheň hřeje místo aby pálil</strong>. Najde <strong>skupinu mužů u ohně</strong>: vůdce <strong>Granger</strong> a další (pět nebo víc bývalých intelektuálů — profesoři, kněží, spisovatelé).</p>
+
+<p>Granger Montaga uvítá, pohostí, dá mu <strong>chemický koktejl</strong> na změnu chemického složení potu (aby mu pes ztratil stopu definitivně). Pak <strong>u přenosné TV</strong> sledují <strong>závěr živé štvanice</strong> — jak „Montaga&quot; (toho nevinného) zabíjí pes.</p>
+
+<p><strong>Granger Montagovi vysvětlí</strong>: každý z této skupiny si <strong>pamatuje jednu knihu (nebo její část) nazpaměť</strong>. Granger je *<em>Platónův </em>Stát<em><strong>. Někdo jiný je </strong>Marcus Aurelius<strong>, jiný </strong>Jonathan Swift<strong>, další část </strong>Bible<strong>, </strong>Shakespeare<strong>, </strong>Thomas Paine<strong>, </strong>Machiavelli<strong>, </strong>Charles Darwin<strong>, </strong>Albert Einstein<strong>. „</strong>Lidé nejsou důležití. Důležité jsou věci, které v sobě nesou.<strong>&quot; Když dojde čas, tato znalost se předá dál — </strong>slovo od slova, z otce na syna<strong>, ústně. Knihy fyzicky pálit nemůžou — ale </strong>kulturu uchovává v posledku člověk, ne papír</em>*.</p>
+
+<p>Granger Montagovi vykládá <strong>legendu o fénixovi</strong> — pták, který se sám upálí na hranici a z popela znovu povstane. <strong>Lidstvo dělá to samé: ničí samo sebe, ale pokaždé povstává.</strong> Rozdíl mezi námi a fénixem: <strong>my si pamatujeme</strong>. Pamatujeme všechny minulé pády — a snad se z nich poučíme.</p>
+
+<h3>Atomová bomba a konec</h3>
+
+<p>Vzduch nad městem se rozsvítí. <strong>Začala válka.</strong> <strong>Atomové bomby dopadnou na město</strong> v dálce. Tlaková vlna srazí Montaga a ostatní k zemi. Město je <strong>během několika vteřin srovnáno se zemí</strong>. Mildred a všichni v parlourech zemřou — Montag si vybaví Mildred v okamžiku, <strong>kdy se na ni hroutí strop</strong>, a pokusí se vzpomenout, kde se s ní vlastně potkali, ale stále si nemůže vzpomenout.</p>
+
+<p>Když se prach usadí, <strong>Granger a jeho lidé vstanou</strong>, <strong>uvaří si snídani</strong> (slaninu na ohni), <strong>a vydají se směrem k troskám města pomoci přeživším postavit lepší společnost</strong>. Montag se k nim připojí. V mysli mu zní verš z <strong>Bible — z knihy Zjevení Janovo</strong>:</p>
+
+<blockquote>„<em>A na obou stranách řeky bylo dřevo života, vydávající dvanácte úrod, vydávajíc plody své na každý měsíc; a listí dříví toho ke zdraví národů.</em>&quot;</blockquote>
+
+<p>Tuto pasáž si <strong>Montag pamatuje</strong> — bude ji předávat dál. <strong>Konec je otevřený, ambivalentní</strong>: civilizace je v troskách, ale skrze paměť „lidí-knih&quot; je naděje obnovy — motiv <strong>fénixe povstávajícího z popela</strong>.</p>
+
+<hr>
+
+<h2>Vrchol a rozuzlení (shrnutí)</h2>
+
+<p><strong>Vrchol:</strong> Montag pálí svůj vlastní dům a v afektu <strong>zabíjí kapitána Beattyho</strong> plamenometem. Tím definitivně přechází z poslušného páliče v rebela.</p>
+
+<p><strong>Krize:</strong> Útěk před mechanickým psem; přebrodění řeky; nepoznání lidí-knih; sledování vlastní popravy v TV (kde popravený je někdo jiný).</p>
+
+<p><strong>Rozuzlení:</strong> Atomová bomba zničí město. Granger a jeho skupina (nyní i s Montagem) se vydávají pomoci přeživším a budovat novou společnost — kulturu předávat slovem od slova, z paměti, jako fénix povstávající z popela.</p>
+
+<hr>
+
+<h2>Klíčové pasáže pro maturitu (pravděpodobné úryvky)</h2>
+
+<h3>A) Úvodní pasáž — „Bylo příjemné pálit&quot; (začátek části 1)</h3>
+<ul>
+<li><strong>Kdo/co:</strong> Vypravěč v er-formě s vnitřní perspektivou Montaga; popis Montaga s plamenometem během pálení knih.</li>
+<li><strong>Klíčová věta:</strong> „<strong>Bylo příjemné pálit.</strong>&quot;</li>
+<li><strong>Prostředky:</strong> <strong>metafora</strong> („krajta plivající petrolej&quot;, „dirigent symfonie plamenů&quot;, „holubice s ohnivými křídly&quot;), <strong>personifikace</strong> ohně, <strong>lyričnost a estetizace násilí</strong>, <strong>synestezie</strong> (vidět/slyšet/cítit oheň najednou).</li>
+<li><strong>Funkce:</strong> Krása popisu kontrastuje s morální hrůzou — to je Bradburyho trik. Čtenář ještě neví, <strong>proč</strong> se má cítit znechucen.</li>
+</ul>
+
+<h3>B) Setkání s Clarisse — „Jste šťastný?&quot; (kapitola 1, část 1)</h3>
+<ul>
+<li><strong>Kdo/co:</strong> Dialog Montaga a Clarisse na chodníku v noci po práci.</li>
+<li><strong>Klíčové věty:</strong> „<strong>Pravda je, že hasiči kdysi hasili, místo aby zapalovali?</strong>&quot; — „<strong>Vy si nikdy nečtete knihy, které pálíte?</strong>&quot; — „<strong>Jste šťastný?</strong>&quot;</li>
+<li><strong>Prostředky:</strong> <strong>řečnické otázky</strong>, <strong>kontrast</strong> mechanického Montaga × živé Clarisse; <strong>dětský, smyslový jazyk</strong> Clarisse (déšť, listí, Měsíc).</li>
+<li><strong>Funkce:</strong> Zaseté zrno pochybnosti — <strong>celá Montagova proměna začíná touto otázkou</strong>.</li>
+</ul>
+
+<h3>C) Žena se upálí s knihami (část 1)</h3>
+<ul>
+<li><strong>Kdo/co:</strong> Hasiči přijdou pálit dům staré ženy; ona odmítne odejít, sama si škrtne zápalkou a upálí se s knihami.</li>
+<li><strong>Klíčová věta (citát Hugha Latimera):</strong> „<strong>Vzmužte se, mistře Ridley, a stůjte na svém. Dnešní den zažehneme v Anglii takovou svíci, která nikdy neuhasne.</strong>&quot;</li>
+<li><strong>Prostředky:</strong> <strong>aluze</strong> (na upalování křesťanských mučedníků v 16. století — Latimer + Ridley), <strong>gradace</strong>, <strong>antiteze</strong> (vědomá dobrovolná smrt × mechanické pálení hasičů).</li>
+<li><strong>Funkce:</strong> <strong>Zlomový bod Montagova svědomí</strong> — když je člověk ochoten zemřít za knihy, mají hodnotu.</li>
+</ul>
+
+<h3>D) Beattyho monolog o knihách (část 1)</h3>
+<ul>
+<li><strong>Kdo/co:</strong> Beatty doma u Montaga vysvětluje historii cenzury; paradoxně cituje knihy.</li>
+<li><strong>Klíčová myšlenka:</strong> „<strong>Knihy nezakázala vláda. Lidé sami je přestali chtít.</strong>&quot; Gradace zkracování literatury: <strong>knihy → digesty → výtahy z digestů → titulky</strong>.</li>
+<li><strong>Prostředky:</strong> <strong>paradox</strong> (vzdělaný hájí cenzuru), <strong>ironie</strong>, <strong>gradace</strong>, <strong>vložené citáty</strong> Shakespeara, Swifta, Bible — Beatty „<strong>střílí slovy jako kulkami</strong>&quot;.</li>
+<li><strong>Funkce:</strong> Bradburyho vlastní kritika <strong>masmédií</strong> a <strong>konzumní pasivity</strong> ústy padouchovy.</li>
+</ul>
+
+<h3>E) Lidé-knihy a Granger u řeky (závěr části 3)</h3>
+<ul>
+<li><strong>Kdo/co:</strong> Granger Montagovi vykládá, co dělají; každý je „chodící kniha&quot;.</li>
+<li><strong>Klíčová věta:</strong> „*<em>Já jsem Platónův </em>Stát<em>. Tohle je Marcus Aurelius.<strong>&quot; — „</strong>Lidé nejsou důležití. Důležité jsou věci, které v sobě nesou.</em>*&quot;</li>
+<li><strong>Prostředky:</strong> <strong>alegorie</strong> (lidé = živé knihovny), <strong>biblické echo</strong> (předávání slova z otce na syna), <strong>symbolika fénixe</strong>.</li>
+<li><strong>Funkce:</strong> <strong>Naděje obnovy</strong> — kulturu nezachrání papír, ale <strong>lidská paměť a společenství</strong>.</li>
+</ul>
+
+<hr>
+
+<h2>Časté chyby a záměny</h2>
+
+<ul>
+<li><strong>Číslo 451</strong> je teplota ve <strong>Fahrenheitech</strong>, <strong>ne Celsiích</strong> (= asi 233 °C). Bradburyho výpočet <strong>není přesně vědecký</strong> — papír skutečně začíná hořet kolem <strong>218–246 °C</strong> podle typu, ale 451 °F znělo dobře.</li>
+<li><strong>Salamandr × fénix</strong> — <strong>salamandr</strong> je znak hasičů na rukávu (mytologický tvor žijící v ohni); <strong>fénix</strong> je znak na hrudi a symbol naděje obnovy v závěru. <strong>Nezaměňovat.</strong></li>
+<li><strong>Clarisse McClellanová</strong> je <strong>sedmnáctiletá</strong>, ne dospělá; <strong>Mildred</strong> je Montagova <strong>manželka</strong> (asi třicátnice). Snadná záměna v hlavě.</li>
+<li><strong>Mechanický pes (Mechanical Hound / Ohař)</strong> má <strong>8 nohou</strong> a jehlu s <strong>prokainem</strong> v tlamě, nikoliv kulky.</li>
+<li><strong>Pasáž, kterou Montag čte Mildrediným kamarádkám</strong>, je báseň <strong>„Dover Beach&quot; Matthewa Arnolda</strong> — anglického viktoriánského básníka 19. století, <strong>ne moderního autora</strong>.</li>
+<li><strong>Stará žena se upálí citátem Hugha Latimera</strong> (mučedník upálený v Anglii roku 1555) — pozor, <strong>není to citát z Bible</strong>, ačkoli zní podobně.</li>
+<li><strong>Mildred není v závěru jasně mrtvá</strong>, ale silně se to naznačuje — atomová bomba ji zasáhne v okamžiku, kdy je v parlouru a poprvé si snad uvědomí, <strong>že nikoho ve své „rodině&quot; nemiluje</strong>.</li>
+<li><strong>Beatty pravděpodobně chtěl zemřít</strong> — Bradbury naznačuje, že Beattyho cynismus byl maskou vlastní zoufalství; <strong>Montag ho zabil, ale Beatty se nebránil</strong>.</li>
+<li><strong>„Mušličky&quot; (seashells)</strong> = miniaturní sluchátka v uších, <strong>ne</strong> velké stěny TV. <strong>Velké stěny TV</strong> = parlourní stěny / „rodina&quot;.</li>
+<li><strong>Mildred neumírá na předávkování</strong> v části 1 — je „vyčištěna&quot; technikem a probouzí se, jako by se nic nestalo. Umírá až ve finále, při atomové bombě.</li>
+<li><strong>Beatty není totožný s Faberem</strong> — Beatty je <strong>nepřítel</strong> systému-obhájce, Faber je <strong>spojenec</strong> (bývalý profesor).</li>
+<li><strong>Tři klasické antiutopie 20. století</strong>: Huxley (slast), Orwell (strach), Bradbury (zábava + cenzura). Nezaměňovat autory.</li>
+</ul>
+
+<hr>
+
+<h2>Zdroje (ověřeno)</h2>
+
+<ul>
+<li><a href="https://rozbor-dila.cz/451-stupnu-fahrenheita-rozbor-dila-k-maturite-2/" target="_blank" rel="noopener">Rozbor-dila.cz — 451 stupňů Fahrenheita, rozbor díla k maturitě</a></li>
+<li><a href="https://rozbor-dila.cz/451-stupnu-fahrenheita-kratky-ctenarsky-denik/" target="_blank" rel="noopener">Rozbor-dila.cz — krátký čtenářský deník</a></li>
+<li><a href="https://www.cesky-jazyk.cz/ctenarsky-denik/ray-bradbury/451-stupnu-fahrenheita.html" target="_blank" rel="noopener">Český-jazyk.cz — čtenářský deník (verze 1)</a></li>
+<li><a href="https://www.cesky-jazyk.cz/ctenarsky-denik/ray-bradbury/451-stupnu-fahrenheita-3.html" target="_blank" rel="noopener">Český-jazyk.cz — čtenářský deník (verze 3)</a></li>
+<li><a href="https://bohemista.cz/451-stupnu-fahrenheita-rozbor-dila-k-maturite/" target="_blank" rel="noopener">Bohemista.cz — rozbor díla k maturitě</a></li>
+<li><a href="https://www.odmaturuj.cz/ctenarsky-denik/bradbury-ray-451-stupnu-fahrenheita-2/" target="_blank" rel="noopener">Odmaturuj.cz — čtenářský deník</a></li>
+<li><a href="https://cs.wikipedia.org/wiki/451_stup%C5%88%C5%AF_Fahrenheita" target="_blank" rel="noopener">Cs.wikipedia.org — 451 stupňů Fahrenheita</a></li>
+</ul>
+</div>
+      </div>
+
+    </section>
+
+
+    <section id="tahak" class="section">
+      <h2>📖 Kompletní maturitní tahák (v pořadí mluvení)</h2>
+      <p class="section-hint">Analytické info v pořadí, jak budeš mluvit u zkoušky. Obrázky jsou hned u sekce, ke které patří.</p>
+      <div class="tahak">
+        <h1>13. Ray Bradbury — 451 stupňů Fahrenheita (<em>Fahrenheit 451</em>)</h1>
+
+<blockquote><strong>Klasická americká antiutopie (1953)</strong> o budoucí společnosti, v níž jsou knihy zakázány a <strong>hasiči je pálí</strong>. Titul odkazuje na <strong>teplotu, při níž se vzněcuje papír — 451 °F (≈ 233 °C)</strong>. Hlavní hrdina <strong>Guy Montag</strong>, sám hasič-pálič, se postupně probouzí z konzumního spánku skrze setkání se sousedkou Clarisse, profesorem Faberem a komunitou „lidí-knih&quot;. Vedle Orwellova <em>1984</em> a Huxleyho <em>Konce civilizace</em> <strong>třetí klasická antiutopie 20. století</strong>.</blockquote>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">1️⃣ Mluvíš v 1. části</span><span class="badge-hint">Autor &amp; lit. kontext · 3 min · 4 b</span></div><h2 id="cast-4">4) LITERÁRNĚHISTORICKÝ KONTEXT (0–4 b)</h2>
+<div id="autor-img" class="embedded-image">
+  <a href="../../images/13-bradbury-451-stupnu-fahrenheita/00-author.jpg" target="_blank"><img src="../../images/13-bradbury-451-stupnu-fahrenheita/00-author.jpg" alt="Karta autora"></a>
+  <div class="image-caption">👤 Autor · biografie · slavná díla · směr · kontext</div>
+</div>
+
+<p><strong>Autor</strong></p>
+<ul>
+<li><strong>Ray Bradbury</strong> (1920–2012), <strong>americký spisovatel</strong>, klasik <strong>sci-fi, fantasy a antiutopie</strong>. Pocházel z Illinois, neměl vysokoškolské vzdělání — všechno se „dovzdělal v knihovně&quot; (vlastní výrok).</li>
+<li><strong>Stylově unikátní</strong> mezi sci-fi autory — místo důrazu na techniku <strong>lyrický, básnický, humanistický</strong> přístup; soustředí se na <strong>člověka a jeho duši</strong>, ne na fyzikální detaily.</li>
+<li><strong>Další díla:</strong></li>
+<li><em>Marťanská kronika</em> (<em>The Martian Chronicles</em>, 1950) — povídková mozaika o kolonizaci Marsu, alegorie americké historie.</li>
+<li><em>Ilustrovaný muž</em> (<em>The Illustrated Man</em>, 1951) — soubor povídek spojených postavou potetovaného muže.</li>
+<li><em>Mlha přichází</em> (<em>Something Wicked This Way Comes</em>, 1962) — fantasy o cirkusu, čase a zlu.</li>
+<li><em>Pampeliškové víno</em> (<em>Dandelion Wine</em>, 1957) — poetické vzpomínky na chlapecké léto.</li>
+<li>Stručná historie sci-fi a četné povídkové sbírky.</li>
+</ul>
+
+<p><strong>Literární / kulturní kontext</strong></p>
+<ul>
+<li><strong>Americká antiutopická literatura 50. let 20. století</strong> — období po 2. světové válce, <strong>začátek studené války</strong>, atomový strach.</li>
+<li><strong>Mccarthismus (1947–1957)</strong> — éra <strong>honu na komunisty</strong> v USA, černé listiny, výslechy intelektuálů a umělců, <strong>cenzura ve filmu i v literatuře</strong>. Bradbury psal <em>451</em> přímo do této atmosféry.</li>
+<li><strong>Inspirace pálením knih nacisty</strong> v Berlíně <strong>10. května 1933</strong> (Goebbelsova kampaň proti „nečisté&quot; literatuře) — Bradbury to opakovaně označoval za prvotní impuls.</li>
+<li><strong>Strach z masmédií</strong> — v 50. letech masivní nástup televize do amerických domácností; Bradbury vidí v TV stěnách hrozbu vytlačování čtení a myšlení.</li>
+<li><strong>Tři klasické antiutopie 20. století</strong> (učit se nazpaměť):</li>
+<li>*<em>Aldous Huxley — </em>Konec civilizace<em> / </em>Brave New World<em><strong> (1932) — totalita </strong>přes slast</em>* (drogy, eugenika, povrchní štěstí).</li>
+<li>*<em>George Orwell — </em>1984<em><strong> (1949) — totalita </strong>přes strach</em>* (Velký bratr, dohled, mučení).</li>
+<li>*<em>Ray Bradbury — </em>451 stupňů Fahrenheita<em><strong> (1953) — totalita </strong>přes zábavu a cenzuru</em>* (média, pálení knih, konzum).</li>
+<li>Souvislost s českou literaturou: *<em>Karel Čapek — </em>R.U.R.<em>, </em>Válka s mloky**<em> (česká antiutopická tradice, 30. léta); v 60.–80. letech česká „šuplíková&quot; literatura kvůli komunistické cenzuře (Hrabal, Škvorecký, Vaculík) — </em>Fahrenheit 451* zde rezonoval velmi silně.</li>
+<li><strong>Filmové adaptace:</strong> François Truffaut (1966), Ramin Bahrani (HBO, 2018).</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — základ</span><span class="badge-hint">O díle: druh, žánr</span></div><h2 id="cast-0">0) ZÁKLADNÍ IDENTIFIKACE</h2>
+<div id="dilo-img" class="embedded-image">
+  <a href="../../images/13-bradbury-451-stupnu-fahrenheita/00-book-info.jpg" target="_blank"><img src="../../images/13-bradbury-451-stupnu-fahrenheita/00-book-info.jpg" alt="Karta díla"></a>
+  <div class="image-caption">📖 Žánr · doba · kompozice · motivy · prostředky</div>
+</div>
+<ul>
+<li><strong>Autor:</strong> Ray Bradbury (1920–2012), USA, mistr sci-fi a fantasy povídky</li>
+<li><strong>Dílo:</strong> <em>451 stupňů Fahrenheita</em> (<em>Fahrenheit 451</em>), <strong>1953</strong> — psáno <strong>prózou</strong></li>
+<li><strong>Literární druh:</strong> <strong>epika</strong></li>
+<li><strong>Literární žánr:</strong> <strong>antiutopický (dystopický) román</strong> s prvky <strong>vědecko-fantastické literatury (sci-fi)</strong></li>
+<li><strong>Místo vzniku:</strong> USA, poválečná Amerika, počátek studené války a doby mccarthismu</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — I.</span><span class="badge-hint">Druh + žánr · výstavba · vypravěč (4 b)</span></div><h2 id="cast-1">1) I. ČÁST ANALÝZY (0–4 b)</h2>
+
+<p><strong>Literární druh a žánr</strong></p>
+<ul>
+<li><strong>Epika</strong> (vyprávění s dějem a vypravěčem, próza).</li>
+<li><strong>Antiutopie / dystopie</strong> — žánr, který zobrazuje fiktivní, „dokonale&quot; uspořádanou budoucí společnost jako ve skutečnosti děsivou, totalitní, odlidštěnou.</li>
+<li><strong>Sci-fi</strong> — fikční budoucí svět s technologií (mechanický pes, parlourní TV stěny, atomová válka, ušní rádia).</li>
+<li>Bradbury kombinuje <strong>sociální kritiku přítomnosti</strong> (cenzura, masmédia, konzum) s <strong>fantastickou nadsázkou</strong> budoucnosti.</li>
+</ul>
+
+<p><strong>Výstavba díla / kompozice</strong></p>
+<ul>
+<li><strong>Román rozdělen do 3 částí</strong> s poetickými, symbolickými názvy:</li>
+</ul>
+<p class="numbered"><strong>1.</strong> <strong>„Ohniště a salamandr&quot;</strong> (<em>The Hearth and the Salamander</em>) — expozice světa hasičů-páličů; Montagovo první zaváhání (Clarisse, upalující se žena, Mildredina sebevražda).</p>
+<p class="numbered"><strong>2.</strong> <strong>„Síto a písek&quot;</strong> (<em>The Sieve and the Sand</em>) — Montagova vnitřní proměna; čte tajně knihy, hledá pomoc u profesora Fabera, dostává miniaturní rádio do ucha.</p>
+<p class="numbered"><strong>3.</strong> <strong>„Oheň se rozhoří&quot;</strong> (<em>Burning Bright</em>) — konflikt se systémem vrcholí: Montag zabíjí kapitána Beattyho, prchá před mechanickým psem, přeplave řeku, najde lidi-knihy; nad městem vybuchne atomová bomba.</p>
+<ul>
+<li>Děj je <strong>chronologický</strong>, ale s <strong>vnitřními retrospekcemi</strong> a sny (Montag vzpomíná na dětství, vidí sám sebe v zrcadle Clarissiny otázky).</li>
+<li>Závěr je <strong>otevřený, ambivalentní</strong> — civilizace zničena, ale „lidé-knihy&quot; jdou pomoci obnovit kulturu (motiv <strong>fénixe</strong> povstávajícího z popela).</li>
+</ul>
+
+<p><strong>Veršová výstavba</strong></p>
+<ul>
+<li>N/A — <strong>próza</strong>. Místy však <strong>lyrizovaná, básnivá</strong>, zvláště v pasážích o ohni a v dialozích s Clarisse („Pršely listy z platanů…&quot;).</li>
+</ul>
+
+<p><strong>Vypravěč / typ promluvy</strong></p>
+<ul>
+<li><strong>Vypravěč v er-formě (3. osoba)</strong> — ale s <strong>vnitřní perspektivou Guye Montaga</strong> (= tzv. <strong>personální vypravěč</strong>). Čtenář vidí svět <strong>Montagovýma očima</strong> — sleduje jeho myšlenky, pochybnosti, vnitřní monology, sny.</li>
+<li>Vyprávění střídá:</li>
+<li><strong>dějové pasáže</strong> (akce, pálení, útěk),</li>
+<li><strong>dialogy</strong> (Montag × Clarisse, Montag × Faber, Beattyho monology o knihách),</li>
+<li><strong>vnitřní monology</strong> Montaga (proud vědomí, otázky, vzpomínky),</li>
+<li><strong>lyrické, popisné pasáže</strong> (oheň, déšť, řeka, listí).</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — II.</span><span class="badge-hint">Zasazení do děje · postavy · téma · motivy (4 b)</span></div><h2 id="cast-2">2) II. ČÁST ANALÝZY (0–4 b)</h2>
+<div id="postavy" class="embedded-image">
+  <a href="../../images/13-bradbury-451-stupnu-fahrenheita/04-postavy.jpg" target="_blank"><img src="../../images/13-bradbury-451-stupnu-fahrenheita/04-postavy.jpg" alt="Postavy a jejich vztahy"></a>
+  <div class="image-caption">🧬 Mapa postav · rodinné vazby · láska · konflikty</div>
+</div>
+
+<p><strong>Zasazení výňatku do kontextu díla</strong> (uprav podle úryvku, který ti dají)</p>
+<ul>
+<li>Děj probíhá v <strong>americkém velkoměstě budoucnosti</strong> (nepojmenované), v <strong>přetechnizované totalitní společnosti</strong>, kde jsou <strong>knihy zakázány</strong> a <strong>hasiči (firemen) je pálí</strong> spolu s domy, v nichž je najdou. Lidé žijí pasivně, hltají zábavu z <strong>velkoplošných TV stěn</strong> v „parlourech&quot; (obývácích) a poslouchají „mušličky&quot; v uších. Kritické myšlení vymřelo, nikdo se nikoho neptá „proč&quot;.</li>
+<li>Možné situace v maturitních úryvcích:</li>
+<li><strong>Začátek díla</strong> — „Bylo příjemné pálit.&quot; Montag s helmou č. 451, salamandrem na rukávu a fénixem na hrudi pyšně sleduje, jak plameny stravují knihy.</li>
+<li><strong>Setkání s Clarisse</strong> — sousedka McClellanová se ho zeptá: „Jste šťastný?&quot; — otázka, kterou si Montag nikdy nepoložil.</li>
+<li><strong>Mildredina sebevražda</strong> — manželka spolkne celou lahvičku prášků; přijde anonymní obsluha s pumpou, vymění jí krev, ráno si nic nepamatuje.</li>
+<li><strong>Žena se upálí s knihami</strong> — starší žena raději shoří se svou knihovnou, než aby se jí vzdala; v Montagovi to zlomí poslušnost.</li>
+<li><strong>Montag a Faber</strong> — bývalý profesor literatury učí Montaga číst přes ušní rádio („mušličku&quot;), vysvětluje mu <strong>proč</strong> mají knihy hodnotu.</li>
+<li><strong>Beattyho monolog</strong> — kapitán Beatty cituje paradoxně z knih a vysvětluje Montagovi, <strong>proč</strong> společnost knihy zakázala (lidé si to chtěli sami, knihy znepokojovaly).</li>
+<li><strong>Montag zabíjí Beattyho</strong> — Beatty ho přivede k vlastnímu domu, donutí ho zapálit ho; Montag obrátí plamenomet proti Beattymu.</li>
+<li><strong>Útěk přes řeku</strong> — Montag prchá před <strong>mechanickým psem</strong>, přeplave řeku, voda smyje pach, pes ho ztratí.</li>
+<li><strong>Lidé-knihy</strong> — u ohně v lese potká <strong>Grangera</strong> a skupinu tuláků; každý z nich umí jednu knihu nazpaměť (Platón, Bible, Shakespeare, Marcus Aurelius…).</li>
+<li><strong>Závěr</strong> — atomová bomba zničí město; „lidé-knihy&quot; jdou pomoci stavět novou společnost.</li>
+</ul>
+
+<p><strong>Téma a motivy</strong></p>
+<ul>
+<li><strong>Hlavní téma:</strong> <strong>cenzura, manipulace masmédii a ztráta kritického myšlení</strong> v moderní konzumní společnosti — a <strong>probuzení jedince</strong> skrze setkání s druhým člověkem, knihu a přírodu.</li>
+<li><strong>Vedlejší témata:</strong> hodnota čtení a vzdělání; <strong>kulturní paměť</strong> a zodpovědnost ji uchovat; <strong>konformismus × individualita</strong>; rychlost a povrchnost moderního života; <strong>láska × prázdné manželství</strong> (Mildred); odcizení.</li>
+<li><strong>Klíčové motivy a symboly:</strong></li>
+<li><strong>Oheň 451 °F</strong> — teplota, při níž hoří papír; symbol <strong>ničení knih i kultury</strong>, ale v závěru i <strong>očištění a obnovy</strong> (fénix).</li>
+<li><strong>Salamandr</strong> — emblém hasičů (mytologický tvor, jenž žije v ohni); symbolizuje pyšnou službu ohni.</li>
+<li><strong>Fénix</strong> — pták povstávající z popela; uzavírá román jako naděje obnovy.</li>
+<li><strong>Mechanický pes (Mechanical Hound)</strong> — robotická lovecká bestie s jehlou plnou prokainu; <strong>symbol technologické kontroly a strachu</strong>.</li>
+<li><strong>Parlourní stěny / „rodina&quot;</strong> — velkoplošné TV obrazovky, které pokrývají všechny stěny obývacího pokoje; Mildred jim říká „rodina&quot;. <strong>Symbol prázdné konzumní zábavy</strong> nahrazující skutečné vztahy.</li>
+<li><strong>Mušličky (seashells)</strong> — miniaturní sluchátka v uších; permanentní bzukot médií, žádný klid pro vlastní myšlení.</li>
+<li><strong>Prášky / spánkové tabletky</strong> — symbol útěku Mildred a celé společnosti před realitou.</li>
+<li><strong>Řeka</strong> — <strong>očištění, křest, znovuzrození</strong> (smyje pach, zachrání Montaga, oddělí starý svět od nového).</li>
+<li><strong>Lidé-knihy</strong> — chodící knihovny; <strong>symbol toho, že kulturu uchovává v posledku člověk, nikoli papír</strong>.</li>
+<li><strong>Kontrast Mildred × Clarisse</strong> — prázdná, pasivní manželka × živá, zvědavá sedmnáctiletá sousedka.</li>
+</ul>
+
+<p><strong>Postavy</strong></p>
+<ul>
+<li><strong>Guy Montag</strong> — třicátník, <strong>hasič-pálič</strong>, hlavní hrdina. Na začátku spokojený, „šťastný&quot;, pálí knihy s rozkoší. Postupně se probouzí: Clarisse v něm vzbudí pochybnosti, žena hořící s knihami otřese jeho jistotou, Faber ho učí myslet. Z poslušného automatu se stává <strong>rebel a hledač pravdy</strong>.</li>
+<li><strong>Mildred Montagová</strong> — Montagova manželka. <strong>Karikatura konzumní povrchnosti</strong>: hltá TV „rodinu&quot;, má v uších „mušličky&quot;, spolkla prášky a nepamatuje si to. Montaga <strong>udá</strong> úřadům. Symbol odlidštěné Ameriky.</li>
+<li><strong>Clarisse McClellanová</strong> — <strong>sedmnáctiletá sousedka</strong>, ráda chodí pěšky, pozoruje listí, ptá se „proč&quot;. Pro Montaga <strong>katalyzátor probuzení</strong>. Brzy po jejich setkání zmizí (pravděpodobně srazí auto) — ale otázku „Jste šťastný?&quot; mu zaseje do hlavy.</li>
+<li><strong>Kapitán Beatty</strong> — Montagův šéf u hasičů. <strong>Tragická, paradoxní postava</strong> — sám sečtělý, cituje z knih, ale slouží systému. Vysvětluje Montagovi historii cenzury (lidé sami zjednodušili literaturu, menšiny se urazily, masová média nahradila knihy). Nakonec zemře Montagovou rukou — možná <strong>dobrovolně</strong>, jako únik z vlastní rozporuplnosti.</li>
+<li><strong>Profesor Faber</strong> — bývalý <strong>profesor anglické literatury</strong>, vyhnán z univerzity, žije ve strachu. Montagův <strong>intelektuální mentor</strong>, učí ho číst přes miniaturní ušní rádio („mušličku&quot; obrácenou na osvobození). Slabý, ale moudrý.</li>
+<li><strong>Granger</strong> — vůdce <strong>lidí-knih</strong> u řeky, intelektuál, historik. Učí Montaga o <strong>fénixovi</strong> a o tom, jak kulturu zachránit pamětí.</li>
+<li><strong>Mechanický pes (Mechanical Hound)</strong> — technologická lovecká zbraň hasičského sboru, 8 nohou, jehla s prokainem; <strong>alegorie totalitní policie</strong>.</li>
+<li><strong>Lidé-knihy u řeky</strong> — bývalí profesoři, kněží, spisovatelé; každý se naučil <strong>jednu knihu nazpaměť</strong> (Platónův <em>Stát</em>, Bible, Shakespeare, Swift, Marcus Aurelius…).</li>
+</ul>
+
+<p><strong>Typy promluv</strong></p>
+<ul>
+<li>Vyprávění er-formou + <strong>vnitřní monology Montaga</strong> + <strong>přímá řeč</strong> (dialogy) + <strong>citáty z knih</strong> vložené do textu (Beatty cituje, Faber recituje, Montag si pamatuje verš ze Žaltáře a z <em>Matouše Arnolda</em>).</li>
+</ul>
+
+<p><strong>Jiné typické prvky</strong></p>
+<ul>
+<li><strong>Alegorie pálení knih</strong> — odkaz na <strong>pálení knih nacisty v roce 1933</strong> (a obecně na cenzuru).</li>
+<li><strong>Společenská kritika přítomnosti</strong> převedená do budoucnosti — typický rys antiutopie.</li>
+<li><strong>Kontrasty:</strong> technika × příroda, město × les, oheň × voda, Mildred × Clarisse, mlčení × řeč, slepota × prozření.</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">3️⃣ Mluvíš v 3. části</span><span class="badge-hint">Jazyk + umělecké prostředky &amp; funkce · 4 b</span></div><h2 id="cast-3">3) III. ČÁST ANALÝZY (0–4 b)</h2>
+
+<p><strong>Jazykové prostředky</strong></p>
+<ul>
+<li><strong>Próza, spisovný jazyk</strong>, místy s prvky <strong>poetické řeči</strong> — Bradbury byl původem <strong>povídkář a básník</strong>, znát to.</li>
+<li><strong>Lyrické, smyslové, expresivní pasáže</strong> — zvl. popis ohně („Plameny se točily jako šafrán, jako oranžová posekaná tráva…&quot;), deště, řeky.</li>
+<li><strong>Rozvitá souvětí</strong> s metaforami v lyrických pasážích × <strong>krátké úsečné věty</strong> v dějových scénách (akce, útěk, pálení).</li>
+<li><strong>Stylová diferenciace postav:</strong></li>
+<li><strong>Clarisse</strong> mluví zvědavě, dětsky-básnivě, klade otázky.</li>
+<li><strong>Beatty</strong> mluví vzdělaně, ironicky, <strong>paradoxně cituje knihy proti knihám</strong>.</li>
+<li><strong>Mildred</strong> mluví prázdně, klišé, opakuje fráze z TV.</li>
+<li><strong>Faber</strong> mluví tiše, opatrně, vědecky.</li>
+<li><strong>Vložené citáty</strong> z reálné literatury (Bible, Shakespeare, Matthew Arnold <em>Dover Beach</em>, Swift, Boswell, Platón) — knihy „mluví&quot; v textu samy.</li>
+</ul>
+
+<p><strong>Umělecké prostředky</strong></p>
+<ul>
+<li><strong>Symbolika ohně</strong> — pálení (destrukce) × krb (domov, teplo) × ohně tuláků v lese (paměť, společenství) × atomový hřib (zničení i očištění). Klíčový <strong>mnohoznačný symbol</strong>.</li>
+<li><strong>Salamandr a fénix</strong> — <strong>mytologické symboly</strong> v erbech: salamandr = hasiči pálící, fénix = naděje obnovy.</li>
+<li><strong>Alegorie</strong> — celý román je alegorií cenzury a manipulace masmédii.</li>
+<li><strong>Antiteze (protiklad):</strong> technika × příroda; oheň × voda; Mildred × Clarisse; Beatty × Faber; ticho mušličky × hluk parlourní TV.</li>
+<li><strong>Metafora a personifikace</strong> — knihy „křičí&quot;, plameny „tančí&quot;, mechanický pes „čenichá pravdu&quot;.</li>
+<li><strong>Hyperbola</strong> — parlourní stěny pokrývající celé místnosti, čtyři televize naráz.</li>
+<li><strong>Symbolika čísel</strong> — <strong>451</strong> (teplota zapálení papíru) v titulu i na Montagově helmě; 24 hodin denně mušličky.</li>
+<li><strong>Citace v textu</strong> — vnitřní intertextualita: Beatty střílí z citátů („slova jako kulky&quot;), Montag si tajně opakuje verš z Bible („<em>Lilie polní…</em>&quot;).</li>
+<li><strong>Kontrasty</strong> jako stavební princip celé knihy.</li>
+</ul>
+
+<p><strong>Funkce prostředků:</strong> Lyrický, smyslový jazyk dělá z <strong>pálení knih obraz krásna i hrůzy zároveň</strong> — tím se násobí morální nejednoznačnost. Symbolika (oheň, fénix, řeka) povyšuje sci-fi příběh do roviny <strong>moderního mýtu o civilizaci</strong>. Vložené citáty čtenáři <strong>fyzicky předvádějí</strong>, <strong>co se ztrácí</strong>, když knihy mizí.</p>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Opěrné body — mnemoniky k zapamatování</span></div><h2 id="cast-5">5) OPĚRNÉ BODY DO HLAVY (NAUČIT SE NAZPAMĚŤ)</h2>
+
+<p><strong>Definitorická věta:</strong> <em>451 stupňů Fahrenheita je antiutopický román Raye Bradburyho z roku 1953, psaný prózou ve 3 částech (Ohniště a salamandr / Síto a písek / Oheň se rozhoří). Vyprávění je v er-formě s vnitřní perspektivou hasiče Guye Montaga, který se z pálíče knih stává jejich obhájcem. Vedle Huxleyho a Orwella třetí klasická antiutopie 20. století.</em></p>
+
+<p><strong>3 postavy stačí znát:</strong> <strong>Guy Montag</strong> (hasič, hlavní hrdina, prochází vnitřní proměnou), <strong>Clarisse McClellanová</strong> (mladá sousedka, katalyzátor probuzení), <strong>kapitán Beatty</strong> (Montagův šéf, paradoxně sečtělý obhájce systému).</p>
+
+<p><strong>Téma 1 větou:</strong> <em>Společnost, která se vzdá knih a kritického myšlení ve prospěch povrchní zábavy a konformity, se odsuzuje k duchovní smrti — a probudit se z ní lze jen skrze druhého člověka, řeč a paměť.</em></p>
+
+<p><strong>3 motivy/symboly se zdůvodněním:</strong></p>
+<ul>
+<li><strong>Oheň 451 °F</strong> = teplota zapálení papíru → ničí knihy, ale v závěru i očišťuje (fénix).</li>
+<li><strong>Mechanický pes</strong> = technologická totalita a strach.</li>
+<li><strong>Lidé-knihy</strong> = kulturu uchovává v posledku člověk, nikoli papír.</li>
+</ul>
+
+<p><strong>Antiutopie heslovitě:</strong> budoucí společnost zobrazená jako noční můra; kritika přítomnosti převedená do fikce budoucnosti; tři klasiky 20. století = <strong>Huxley (slast) — Orwell (strach) — Bradbury (zábava a cenzura)</strong>.</p>
+
+<p><strong>Číslo k zapamatování:</strong> <strong>451 °F</strong> = teplota, při níž se vznítí papír (≈ 233 °C).</p>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Častý úryvek u zkoušky</span></div><h2 id="cast-6">6) ČASTÝ ÚRYVEK U ZKOUŠKY</h2>
+
+<p>Nejčastěji se v maturitních pracovních listech objevují tyto <strong>úseky:</strong></p>
+
+<h3>A) Úvodní pasáž — „Bylo příjemné pálit&quot;</h3>
+<blockquote><em>„Bylo příjemné pálit. Bylo to zvláštní potěšení vidět, jak jsou věci stravovány, jak černají a mění se. […] S mosaznou hubicí v pěstích, s tím obrovským krajtou plivajícím petrolej do světa, mu bušila krev ve spáncích a jeho ruce se podobaly rukám jakéhosi úžasného dirigenta, řídícího symfonii plamenů, aby strhal cáry a uhlíky z dějin.&quot;</em></blockquote>
+
+<p><strong>Co u takového úryvku poznáš:</strong></p>
+<ul>
+<li><strong>vypravěč</strong> → er-forma s vnitřní perspektivou Montaga (3. os., ale jeho pocity);</li>
+<li><strong>prostředky</strong> → <strong>metafora</strong> („krajta plivající petrolej&quot;, „dirigent symfonie plamenů&quot;), <strong>personifikace</strong> ohně, <strong>estetizace násilí</strong> (pálení jako umělecký výkon), <strong>lyričnost</strong> jazyka;</li>
+<li><strong>funkce</strong> → čtenář <strong>na začátku ještě nechápe, že je to špatně</strong> — to je Bradburyho trik. Krása popisu kontrastuje s morální hrůzou, což zostřuje účinek později, kdy se Montag probudí.</li>
+</ul>
+
+<h3>B) Setkání s Clarisse</h3>
+<blockquote><em>„Vy si nikdy nečtete knihy, které pálíte?&quot; — „To je proti zákonu!&quot; […] „Jste šťastný?&quot;</em></blockquote>
+
+<p><strong>Co poznáš:</strong></p>
+<ul>
+<li>typ promluvy → <strong>dialog</strong>, klíčové <strong>řečnické otázky</strong>;</li>
+<li>prostředky → <strong>kontrast</strong> Montagovy mechanické odpovědi × Clarissin lidský zájem;</li>
+<li>funkce → <strong>zaseté zrno pochybnosti</strong> — celá Montagova proměna začíná touto otázkou.</li>
+</ul>
+
+<h3>C) Žena upalující se s knihami</h3>
+<blockquote><em>„Hořte se mnou. Chcete moje knihy? Spalte si i mě.&quot;</em></blockquote>
+
+<p><strong>Co poznáš:</strong></p>
+<ul>
+<li>prostředky → <strong>gradace</strong>, <strong>antiteze</strong> (vědomá oběť × strojené pálení), aluze na <strong>upalování křesťanských mučedníků / Husa</strong>;</li>
+<li>funkce → <strong>zlomový bod</strong> Montagova svědomí — když je člověk ochoten zemřít za knihy, mají hodnotu.</li>
+</ul>
+
+<h3>D) Beatty mluví o knihách</h3>
+<blockquote><em>„Knihy vás znepokojují. Není v nich pevná půda pod nohama. […] Lidi se proto chtěli odlišovat čím dál tím méně. Tloušťka knih se ztenčila. Pak digesty, výtahy z digestů. Politika? Jeden sloupec, dvě věty, titulek!&quot;</em></blockquote>
+
+<p><strong>Co poznáš:</strong></p>
+<ul>
+<li>typ promluvy → <strong>monolog</strong> vzdělané postavy zevnitř systému;</li>
+<li>prostředky → <strong>paradox</strong> (vzdělaný hájí cenzuru), <strong>ironie</strong>, <strong>gradace zkracování</strong>;</li>
+<li>funkce → Bradburyho <strong>vlastní kritika masmédií</strong> ústy Beattyho — knihy nezakázala vláda, <strong>lidé sami</strong> je přestali chtít.</li>
+</ul>
+
+<h3>E) Lidé-knihy u řeky (Granger)</h3>
+<blockquote><em>„Já jsem Platónův </em>Stát<em>. Tohle je Markus Aurelius. […] Když přijde čas, předáme to dál — slovo od slova, ústně, z otce na syna.&quot;</em></blockquote>
+
+<p><strong>Co poznáš:</strong></p>
+<ul>
+<li>prostředky → <strong>alegorie</strong> (lidé = živé knihovny), <strong>biblické echo</strong> (předávání slova), <strong>symbolika kruhu / fénixe</strong>;</li>
+<li>funkce → <strong>naděje obnovy</strong> — kulturu nezachrání papír, ale <strong>lidská paměť a společenství</strong>.</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Test pro sebe (autokontrola)</span></div><h2 id="cast-7">7) RYCHLÝ TEST PRO SEBE</h2>
+
+<p class="numbered"><strong>1.</strong> Co znamená číslo 451 v titulu? <strong>Teplotu (°F), při níž se vznítí papír.</strong></p>
+<p class="numbered"><strong>2.</strong> Jak se jmenují 3 části románu? <strong>Ohniště a salamandr / Síto a písek / Oheň se rozhoří.</strong></p>
+<p class="numbered"><strong>3.</strong> Kdo je Clarisse a jakou má funkci? ____</p>
+<p class="numbered"><strong>4.</strong> Proč Montag zabije Beattyho? ____</p>
+<p class="numbered"><strong>5.</strong> Co dělají „lidé-knihy&quot; u řeky? ____</p>
+<p class="numbered"><strong>6.</strong> Které tři klasické antiutopie 20. století znáš a jakou strategií totalita ovládá společnost v každé z nich? ____</p>
+
+      </div>
+    </section>
+
+    
+    <section id="projev" class="section projev-section">
+      <h2>🎙️ Co říct u zkoušky — mluvený skript</h2>
+      <p class="section-hint">Plynulý text — to, co bys přímo říkal/a u maturity. Přečti si ho nahlas několikrát.</p>
+      <div class="tahak">
+        <h1>Co říct u zkoušky — Ray Bradbury: 451 stupňů Fahrenheita</h1>
+
+<blockquote>Mluvený skript v pořadí mluvení (4 části). Čti si ho nahlas. Po 2–3 přečteních zjistíš, že už ho víc-méně umíš.</blockquote>
+
+<hr>
+
+<h2>1️⃣ ČÁST: Autor a literárněhistorický kontext (3 min · 4 b)</h2>
+
+<p>Autorem této knihy je Ray Bradbury, americký spisovatel 20. století, který žil v letech 1920 až 2012. Pocházel z Illinois, neměl žádné vysokoškolské vzdělání a sám o sobě říkal, že se všechno dovzdělal v knihovně. To je důležitá věc, protože když pak v dospělosti psal o tom, jak je pálení knih zločin proti lidskosti, mluvil opravdu osobně — knihovny mu nahradily univerzitu.</p>
+
+<p>Bradbury je jedním z klasiků americké sci-fi a fantasy literatury, ale je v rámci tohoto žánru dost specifický. Zatímco většina sci-fi autorů 50. let se soustředila na technické detaily, vesmírné lodě a vědecké zákony, Bradbury byl spíš básník mezi vědci. Psal lyricky, smyslově, humanisticky — zajímal ho člověk a jeho duše, ne třeba pohon raket. Z dalších jeho děl bych zmínil <em>Marťanskou kroniku</em> z roku 1950, což je vlastně mozaika povídek o kolonizaci Marsu, která je zároveň alegorií americké historie a dobývání Divokého západu. Pak <em>Pampeliškové víno</em> z roku 1957, kde poeticky vzpomíná na chlapecké léto, a <em>Ilustrovaného muže</em>, soubor povídek spojených postavou potetovaného muže, jehož tetování ožívají.</p>
+
+<p>A teď ke kontextu, ve kterém <em>451 stupňů Fahrenheita</em> vzniklo. Píše se rok 1953, jsme v USA krátce po druhé světové válce, na začátku studené války a v plné éře takzvaného mccarthismu. To je období, kdy americký senátor Joseph McCarthy spustil hon na komunisty a domnělé „nepřátele Ameriky&quot; — vznikaly černé listiny umělců a spisovatelů, lidé byli vyslýcháni, ve filmu i v literatuře se zavedla skrytá cenzura. Bradbury psal tento román přímo do téhle paranoidní atmosféry.</p>
+
+<p>A je tu ještě jeden důležitý impuls, který sám Bradbury opakovaně zmiňoval: pálení knih nacisty v Berlíně 10. května 1933, kdy Goebbels nechal na hranicích spálit takzvaně „nečistou&quot; literaturu. Bradbury tu hrůzu nikdy nezapomněl a vlastně z ní vyrostl celý román. Třetí kontext, který je dobré zmínit, je nástup televize do amerických domácností v 50. letech — Bradbury v ní viděl hrozbu, že vytlačí čtení a myšlení, a v románu to dotáhl do extrému.</p>
+
+<p>A tady je dobré říct ještě jednu věc: vedle Aldouse Huxleyho a jeho <em>Konce civilizace</em> z roku 1932 a vedle Orwellova <em>1984</em> z roku 1949 je <em>451 stupňů Fahrenheita</em> z roku 1953 třetí klasickou antiutopií 20. století. Tahle trojice se učí společně.</p>
+
+<hr>
+
+<h2>2️⃣ ČÁST: O knize — druh, žánr, kompozice, postavy, téma (~4 min · 8 b)</h2>
+
+<p>Posunu se k samotnému dílu. <em>451 stupňů Fahrenheita</em> vyšlo v roce 1953 a co se týče literárního druhu, je to epika, konkrétně próza. Žánrově je to antiutopický, nebo také dystopický román s prvky vědecko-fantastické literatury, tedy sci-fi. Antiutopie znamená, že autor zobrazuje fiktivní budoucí společnost, která je sice „dokonale&quot; uspořádaná, ale ve skutečnosti je děsivá, totalitní a odlidštěná — kritika přítomnosti převedená do fikce budoucnosti.</p>
+
+<p>Kompozice románu je rozdělena do tří částí s poetickými, symbolickými názvy. První se jmenuje <em>Ohniště a salamandr</em>, druhá <em>Síto a písek</em> a třetí <em>Oheň se rozhoří</em>. Děj plyne chronologicky, ale jsou tam vnitřní retrospektivy a sny, kdy hlavní hrdina vzpomíná na dětství. Vypravěč je ve třetí osobě, takzvaná er-forma, ale s vnitřní perspektivou Guye Montaga — je to takzvaný personální vypravěč, kdy vidíme svět Montagovýma očima, sledujeme jeho myšlenky, pochybnosti a vnitřní monology.</p>
+
+<p>Hlavním tématem románu je cenzura, manipulace masmédii a ztráta kritického myšlení v konzumní společnosti — a probuzení jedince skrze setkání s druhým člověkem, knihu a přírodu. Mezi hlavní motivy patří oheň, mechanický pes jako symbol technologické totality, parlourní televizní stěny jako prázdná zábava nahrazující vztahy, řeka jako symbol očištění a křtu, a fénix povstávající z popela jako naděje obnovy.</p>
+
+<p>Teď stručně k ději. Příběh se odehrává v nejmenovaném americkém velkoměstě budoucnosti, v přetechnizované totalitní společnosti, kde jsou knihy zakázány a hasiči, anglicky firemen, je pálí spolu s domy. Hlavním hrdinou je Guy Montag, třicetiletý hasič-pálič, který na začátku knihy říká slavnou větu: „Bylo příjemné pálit.&quot; Jeho probuzení začne tím, že potká novou sousedku Clarisse McClellanovou — sedmnáctiletou dívku, která ráda chodí pěšky, pozoruje listí a zeptá se ho otázku, kterou si nikdy nepoložil: „Jste šťastný?&quot; Pak najde svou ženu Mildred po předávkování prášky a otřese ho také to, když starší žena raději shoří se svou knihovnou, než by knihy vydala.</p>
+
+<p>Montag začne tajně knihy krást a doma je číst. Vyhledá pomoc bývalého profesora literatury Fabera, který mu dá miniaturní obousměrné rádio do ucha. Jeho šéf, kapitán Beatty, paradoxně sečtělý muž, který ale brání systém, mu vysvětluje, proč jsou knihy zakázány. Vrcholem je okamžik, kdy hasiči přijedou pálit Montagův vlastní dům — udala ho jeho žena — a Montag obrátí plamenomet proti Beattymu a zabije ho. Pak prchá před mechanickým psem, přepluje řeku a najde u ohně v lese skupinu „lidí-knih&quot; vedenou Grangerem. Každý z nich umí jednu knihu nazpaměť — Platóna, Bibli, Shakespeara, Marca Aurelia. Na konci atomová bomba zničí město a tato skupina se vydává pomoci postavit novou civilizaci.</p>
+
+<p>Pokud bych dostal úryvek z této knihy, pravděpodobně by byl jeden z těchto: úvodní pasáž „Bylo příjemné pálit&quot;, kde Montag s plamenometem pyšně pálí knihy a Bradbury to popisuje jako symfonii plamenů; dialog se Clarisse, kde se ho ptá, jestli je šťastný; scéna se ženou, která se sama upálí citátem mučedníka Hugha Latimera; Beattyho monolog o tom, proč společnost knihy zakázala; nebo závěrečná scéna s Grangerem u řeky, kdy se představují jako „já jsem Platónův <em>Stát</em>, tohle je Marcus Aurelius&quot;.</p>
+
+<hr>
+
+<h2>3️⃣ ČÁST: Jak je napsaný — jazyk a umělecké prostředky (~3 min · 4 b)</h2>
+
+<p>A teď k jazykovým a uměleckým prostředkům. Bradbury byl původně povídkář a básník, a je to na jeho próze hodně znát. Jazyk románu je spisovný, ale místy silně lyrizovaný, smyslový, až básnivý — to platí hlavně pro pasáže o ohni, dešti a řece. Ve vyprávění se střídají dějové pasáže s krátkými, úsečnými větami v akčních scénách, dále dialogy, vnitřní monology Montaga a popisné lyrické pasáže s rozvitými souvětími a metaforami.</p>
+
+<p>Zajímavé je, jak Bradbury rozlišuje jazyk podle postav: Clarisse mluví zvědavě, dětsky-básnivě a klade otázky; Beatty mluví vzdělaně, ironicky a paradoxně cituje knihy proti knihám; Mildred mluví prázdně, klišé, opakuje fráze z televize; a Faber mluví tiše, opatrně, vědecky.</p>
+
+<p>Z konkrétních uměleckých prostředků bych zmínil pět nejdůležitějších. Zaprvé symboliku ohně — oheň je v románu mnohoznačný: jednou je destrukcí, jindy domovem v krbu, jindy společenstvím u táboráku tuláků v lese, a nakonec očištěním v podobě atomové bomby. Funkce je v tom, že Bradbury povyšuje sci-fi příběh do roviny moderního mýtu o civilizaci.</p>
+
+<p>Zadruhé metafora a personifikace — plameny „tančí&quot;, knihy „křičí&quot;, mechanický pes „čenichá pravdu&quot;. Plamenomet je popisován jako „obrovská krajta plivající petrolej&quot;. Funkce: estetizace násilí kontrastuje s morální hrůzou, čímž Bradbury násobí účinek — čtenář je na začátku okouzlen krásou popisu a teprve potom si uvědomí, jak je to hrozné.</p>
+
+<p>Zatřetí alegorie. Celý román je alegorií cenzury a manipulace masmédii. A pak je tam jedna konkrétnější alegorie — lidé-knihy v závěru, kteří se sami stávají živými knihovnami. Funkce: Bradbury říká, že kulturu nezachrání papír, ale lidská paměť a společenství.</p>
+
+<p>Začtvrté antiteze, tedy protiklady, které jsou stavebním principem celé knihy. Technika versus příroda, oheň versus voda, město versus les, Mildred versus Clarisse, Beatty versus Faber, mlčení versus řeč. Funkce: ostré kontrasty vyjadřují morální dilema hrdiny.</p>
+
+<p>A zapáté vložené citáty z reálné literatury — z Bible, Shakespeara, Matthewa Arnolda, Swifta, Platóna. Beatty „střílí slovy jako kulkami&quot;. Funkce: knihy v textu doslova „mluví samy&quot; — čtenáři se fyzicky předvádí, co se ztrácí, když knihy mizí. A nakonec ještě symbolika čísel: číslo 451 v titulu i na Montagově helmě označuje teplotu ve Fahrenheitech, při níž se vznítí papír — to je asi 233 stupňů Celsia.</p>
+
+<hr>
+
+<h2>4️⃣ ČÁST: Neumělecký text (~5 min · 8 b)</h2>
+
+<p>Po prostudování neuměleckého textu řeknu zhruba toto (vyplním podle konkrétního textu):</p>
+
+<p>Tento neumělecký text patří k <strong>[funkčnímu stylu — vyber: prostěsdělovací / publicistický / odborný / administrativní / řečnický / umělecký]</strong>. Konkrétně se jedná o <strong>[útvar — článek, recenzi, esej, zprávu, dopis, návod, vědecký článek, reportáž, fejeton...]</strong>.</p>
+
+<p>Typické prvky tohoto stylu, které tu nacházím: <strong>[konkrétně 2–3 prvky — např. odborná terminologie, expresivní výrazy, řečnické otázky, statistiky, citáty, neformální oslovení adresáta]</strong>.</p>
+
+<p>Hlavní myšlenka textu je <strong>[téma]</strong>. Autor se k němu staví <strong>[informativně / kriticky / přesvědčovacně / popisně]</strong>.</p>
+
+<p>Jazykové prostředky, které jsou v textu zajímavé:</p>
+<ul>
+<li><strong>[Prostředek 1]</strong> — funkce: <strong>[k čemu slouží]</strong></li>
+<li><strong>[Prostředek 2]</strong> — funkce: <strong>[k čemu slouží]</strong></li>
+</ul>
+
+<p>Komunikační situace: text je psán pro <strong>[adresát — odborná veřejnost / laici / specifická skupina]</strong> s cílem <strong>[účel — informovat / přesvědčit / pobavit / poučit]</strong>.</p>
+
+<p>A na závěr — souvislost s naším uměleckým textem: pokud najdu tematickou nebo myšlenkovou paralelu, zmíním ji. U <em>451 stupňů Fahrenheita</em> se nabízí spojení s tématy jako cenzura, svoboda slova, vliv masmédií na společnost, hodnota čtení a knih, povrchnost konzumní kultury, technologická závislost, ztráta soustředění v digitální době, nebo paměť a kulturní dědictví. Mohu říct například: „Oba texty se zabývají otázkou, jak masmédia ovlivňují schopnost člověka kriticky myslet&quot;, nebo „zatímco Bradbury popisuje cenzuru jako fyzické pálení knih, tento publicistický text mluví o cenzuře skryté, ale fungující na podobném principu — odpoutávání pozornosti od podstatného&quot;.</p>
+
+<hr>
+
+<h2>💡 Tipy k mluvení</h2>
+
+<ul>
+<li>Mluv pomalu a srozumitelně — máš 15 minut, nemusíš spěchat</li>
+<li>Když si na něco nemůžeš vzpomenout, řekni: <em>„Vrátím se k tomu za chvíli&quot;</em> a jdi dál</li>
+<li>Komise oceňuje <strong>strukturovanou mluvu</strong> — slovní pauzy mezi částmi typu „Posunu se k...&quot; / „A teď k jazykovým prostředkům...&quot; pomáhají</li>
+<li>Dej si <strong>vodu</strong> před sebe, doušek pomáhá srovnat myšlenky</li>
+<li>U <em>451</em> nezapomeň: <strong>Fahrenheit, ne Celsius</strong> (= 233 °C); <strong>salamandr</strong> na rukávu × <strong>fénix</strong> na hrudi; <strong>Clarisse</strong> je 17, <strong>Mildred</strong> je manželka; <strong>Beatty</strong> je nepřítel, <strong>Faber</strong> je spojenec</li>
+<li>Trojici antiutopií 20. století si pamatuj heslovitě: <strong>Huxley — slast, Orwell — strach, Bradbury — zábava a cenzura</strong></li>
+</ul>
+
+      </div>
+    </section>
+
+
+    <div class="nav-bottom">
+      <a href="12.html">← #12 Pygmalion</a><a href="../index.html" class="home">← Domů (všech 20)</a><a href="14.html">#14 Edison →</a>
+    </div>
+  </div>
+  <footer>
+    Vizuální studijní materiály pro maturitu 2026 · Kniha 13 / 20
+  </footer>
+  
+<script>
+(function() {
+  const popup = document.getElementById('exam-popup');
+  const header = document.getElementById('popup-header');
+  const toggleBtn = document.getElementById('popup-toggle');
+  const closeBtn = document.getElementById('popup-close');
+  const reopenBtn = document.getElementById('popup-reopen');
+
+  // Load saved position
+  try {
+    const savedPos = localStorage.getItem('examPopupPos');
+    if (savedPos) {
+      const pos = JSON.parse(savedPos);
+      if (pos.left) { popup.style.left = pos.left; popup.style.right = 'auto'; }
+      if (pos.top)  { popup.style.top = pos.top; }
+    }
+  } catch(e) {}
+
+  // Restore minimized / closed state
+  if (localStorage.getItem('examPopupMinimized') === '1') {
+    popup.classList.add('minimized');
+    toggleBtn.textContent = '+';
+  }
+  if (localStorage.getItem('examPopupClosed') === '1') {
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+  }
+
+  // Drag — mouse
+  let isDragging = false, ox = 0, oy = 0;
+  function startDrag(clientX, clientY) {
+    isDragging = true;
+    const rect = popup.getBoundingClientRect();
+    ox = clientX - rect.left;
+    oy = clientY - rect.top;
+  }
+  function doDrag(clientX, clientY) {
+    if (!isDragging) return;
+    let l = clientX - ox;
+    let t = clientY - oy;
+    // Keep on screen
+    l = Math.max(0, Math.min(window.innerWidth - 60, l));
+    t = Math.max(0, Math.min(window.innerHeight - 40, t));
+    popup.style.left = l + 'px';
+    popup.style.top = t + 'px';
+    popup.style.right = 'auto';
+  }
+  function endDrag() {
+    if (isDragging) {
+      isDragging = false;
+      localStorage.setItem('examPopupPos', JSON.stringify({
+        top: popup.style.top, left: popup.style.left
+      }));
+    }
+  }
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    startDrag(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', endDrag);
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    const t = e.touches[0];
+    startDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    doDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchend', endDrag);
+
+  // Toggle minimize
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.classList.toggle('minimized');
+    const min = popup.classList.contains('minimized');
+    toggleBtn.textContent = min ? '+' : '−';
+    localStorage.setItem('examPopupMinimized', min ? '1' : '0');
+  });
+
+  // Close
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+    localStorage.setItem('examPopupClosed', '1');
+  });
+
+  // Reopen
+  reopenBtn.addEventListener('click', function() {
+    popup.style.display = 'flex';
+    reopenBtn.style.display = 'none';
+    localStorage.setItem('examPopupClosed', '0');
+  });
+})();
+
+// GUIDE POPUP — same mechanics, different IDs and storage keys
+(function() {
+  const popup = document.getElementById('guide-popup');
+  const header = document.getElementById('guide-header');
+  const toggleBtn = document.getElementById('guide-toggle');
+  const closeBtn = document.getElementById('guide-close');
+  const reopenBtn = document.getElementById('guide-reopen');
+  if (!popup || !header) return;
+
+  try {
+    const savedPos = localStorage.getItem('guidePopupPos');
+    if (savedPos) {
+      const pos = JSON.parse(savedPos);
+      if (pos.left) { popup.style.left = pos.left; popup.style.right = 'auto'; }
+      if (pos.top)  { popup.style.top = pos.top; }
+    }
+  } catch(e) {}
+
+  if (localStorage.getItem('guidePopupMinimized') === '1') {
+    popup.classList.add('minimized');
+    toggleBtn.textContent = '+';
+  }
+  if (localStorage.getItem('guidePopupClosed') === '1') {
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+  }
+
+  let isDragging = false, ox = 0, oy = 0;
+  function startDrag(clientX, clientY) {
+    isDragging = true;
+    const rect = popup.getBoundingClientRect();
+    ox = clientX - rect.left;
+    oy = clientY - rect.top;
+    popup.style.zIndex = 1001;
+  }
+  function doDrag(clientX, clientY) {
+    if (!isDragging) return;
+    let l = clientX - ox;
+    let t = clientY - oy;
+    l = Math.max(0, Math.min(window.innerWidth - 60, l));
+    t = Math.max(0, Math.min(window.innerHeight - 40, t));
+    popup.style.left = l + 'px';
+    popup.style.top = t + 'px';
+    popup.style.right = 'auto';
+  }
+  function endDrag() {
+    if (isDragging) {
+      isDragging = false;
+      localStorage.setItem('guidePopupPos', JSON.stringify({
+        top: popup.style.top, left: popup.style.left
+      }));
+    }
+  }
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    startDrag(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', endDrag);
+
+  header.addEventListener('touchstart', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    const t = e.touches[0];
+    startDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    doDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchend', endDrag);
+
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.classList.toggle('minimized');
+    const min = popup.classList.contains('minimized');
+    toggleBtn.textContent = min ? '+' : '−';
+    localStorage.setItem('guidePopupMinimized', min ? '1' : '0');
+  });
+
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+    localStorage.setItem('guidePopupClosed', '1');
+  });
+
+  reopenBtn.addEventListener('click', function() {
+    popup.style.display = 'flex';
+    reopenBtn.style.display = 'none';
+    localStorage.setItem('guidePopupClosed', '0');
+  });
+})();
+
+// POP-OUT IMAGES — click "⤢ Popoutnout" on any embedded image to detach as draggable+resizable window
+(function() {
+  // All images that should get a pop-out button
+  const candidates = document.querySelectorAll(
+    '.embedded-image > a > img, .embedded-image > img, ' +
+    '.embedded-postavy > a > img, .embedded-postavy > img, ' +
+    '.embedded-komiks .komiks-strip > div > img, ' +
+    '.single-card > a > img, .single-card > img'
+  );
+
+  let popoutZ = 2000;
+
+  candidates.forEach(function(img) {
+    // Find the container that should host the trigger button
+    const container = img.closest(
+      '.embedded-image, .embedded-postavy, .komiks-strip > div, .single-card'
+    );
+    if (!container) return;
+    if (container.querySelector(':scope > .popout-trigger')) return; // already added
+
+    const btn = document.createElement('button');
+    btn.className = 'popout-trigger';
+    btn.title = 'Otevřít jako popup (lze přesouvat a měnit velikost)';
+    btn.innerHTML = '⤢ Popoutnout';
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      createPopout(img);
+    });
+    container.appendChild(btn);
+  });
+
+  function createPopout(srcImg) {
+    const popout = document.createElement('div');
+    popout.className = 'img-popout';
+
+    let caption = srcImg.alt || 'Obrázek';
+    const nearbyCaption = srcImg.closest('div')?.querySelector('.image-caption');
+    if (nearbyCaption && nearbyCaption.textContent.trim()) {
+      caption = nearbyCaption.textContent.trim();
+    }
+    const safeCaption = caption.replace(/[<>"'&]/g, function(c) {
+      return {'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','&':'&amp;'}[c];
+    });
+
+    popout.innerHTML = (
+      '<div class="img-popout-header">' +
+        '<span class="img-popout-title">' + safeCaption + '</span>' +
+        '<div class="img-popout-controls">' +
+          '<button class="popout-btn pop-zoom-out" title="Zmenšit obrázek">−</button>' +
+          '<button class="popout-btn pop-zoom-in" title="Zvětšit obrázek">+</button>' +
+          '<button class="popout-btn pop-zoom-reset" title="Reset zoomu (1:1)">⊡</button>' +
+          '<button class="popout-btn pop-close" title="Zavřít">×</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="img-popout-body">' +
+        '<img src="' + srcImg.src + '" alt="' + safeCaption + '" />' +
+        '<div class="img-popout-zoom-hint">Klikni = lupa · drag = posun · scroll = zoom</div>' +
+      '</div>' +
+      '<div class="img-popout-resize"></div>'
+    );
+    document.body.appendChild(popout);
+
+    // ====== POPOUT POSITION (transform-based for smooth dragging) ======
+    const existingCount = document.querySelectorAll('.img-popout').length;
+    let popX = 60 + (existingCount - 1) * 28;
+    let popY = 60 + (existingCount - 1) * 28;
+    function applyPopoutPos() {
+      popout.style.transform = 'translate3d(' + popX + 'px,' + popY + 'px,0)';
+    }
+    applyPopoutPos();
+    popout.style.zIndex = ++popoutZ;
+
+    popout.addEventListener('mousedown', function() {
+      popout.style.zIndex = ++popoutZ;
+    });
+
+    // ====== DRAG popup by header (uses transform + rAF) ======
+    const header = popout.querySelector('.img-popout-header');
+    let isDragging = false, dragStartX = 0, dragStartY = 0, dragOriginPopX = 0, dragOriginPopY = 0;
+    let dragRaf = null;
+
+    function startDrag(cx, cy) {
+      isDragging = true;
+      dragStartX = cx;
+      dragStartY = cy;
+      dragOriginPopX = popX;
+      dragOriginPopY = popY;
+    }
+    function doDrag(cx, cy) {
+      if (!isDragging) return;
+      if (dragRaf) return;
+      dragRaf = requestAnimationFrame(function() {
+        dragRaf = null;
+        const dx = cx - dragStartX;
+        const dy = cy - dragStartY;
+        popX = Math.max(0, Math.min(window.innerWidth - 60, dragOriginPopX + dx));
+        popY = Math.max(0, Math.min(window.innerHeight - 40, dragOriginPopY + dy));
+        applyPopoutPos();
+      });
+    }
+    let lastMouseX = 0, lastMouseY = 0;
+    function endDrag() { isDragging = false; }
+
+    function mouseMoveHandler(e) {
+      lastMouseX = e.clientX; lastMouseY = e.clientY;
+      if (isDragging) doDrag(e.clientX, e.clientY);
+      if (isResizing) doResize(e.clientX, e.clientY);
+      if (isPanning) doPan(e.clientX, e.clientY);
+    }
+    function mouseUpHandler() {
+      endDrag(); endResize(); endPan();
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
+    }
+    function attachDocListeners() {
+      document.addEventListener('mousemove', mouseMoveHandler);
+      document.addEventListener('mouseup', mouseUpHandler);
+    }
+
+    header.addEventListener('mousedown', function(e) {
+      if (e.target.closest('.popout-btn')) return;
+      startDrag(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+    });
+
+    // Touch drag
+    header.addEventListener('touchstart', function(e) {
+      if (e.target.closest('.popout-btn')) return;
+      const t = e.touches[0];
+      startDrag(t.clientX, t.clientY);
+    }, {passive: true});
+    popout.addEventListener('touchmove', function(e) {
+      const t = e.touches[0];
+      if (isDragging) doDrag(t.clientX, t.clientY);
+      if (isResizing) doResize(t.clientX, t.clientY);
+      if (isPanning) doPan(t.clientX, t.clientY);
+    }, {passive: true});
+    popout.addEventListener('touchend', function() {
+      endDrag(); endResize(); endPan();
+    });
+
+    // ====== RESIZE popup via corner ======
+    const resizeHandle = popout.querySelector('.img-popout-resize');
+    let isResizing = false, rsW = 0, rsH = 0, rsX = 0, rsY = 0;
+    let resizeRaf = null;
+
+    function startResize(cx, cy) {
+      isResizing = true;
+      const rect = popout.getBoundingClientRect();
+      rsW = rect.width; rsH = rect.height;
+      rsX = cx; rsY = cy;
+    }
+    function doResize(cx, cy) {
+      if (!isResizing) return;
+      if (resizeRaf) return;
+      resizeRaf = requestAnimationFrame(function() {
+        resizeRaf = null;
+        const dx = cx - rsX;
+        const dy = cy - rsY;
+        popout.style.width = Math.max(260, rsW + dx) + 'px';
+        popout.style.height = Math.max(180, rsH + dy) + 'px';
+      });
+    }
+    function endResize() { isResizing = false; }
+
+    resizeHandle.addEventListener('mousedown', function(e) {
+      startResize(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    resizeHandle.addEventListener('touchstart', function(e) {
+      const t = e.touches[0];
+      startResize(t.clientX, t.clientY);
+    }, {passive: true});
+
+    // ====== IMAGE ZOOM + PAN inside body ======
+    const bodyEl = popout.querySelector('.img-popout-body');
+    const imgEl = bodyEl.querySelector('img');
+    const zoomHint = bodyEl.querySelector('.img-popout-zoom-hint');
+    let zoomScale = 1;
+    let zoomTX = 0, zoomTY = 0;
+    const ZOOM_STEP = 1.5;
+    const ZOOM_MIN = 1;
+    const ZOOM_MAX = 8;
+    let zoomRaf = null;
+
+    function applyImgTransform() {
+      if (zoomRaf) return;
+      zoomRaf = requestAnimationFrame(function() {
+        zoomRaf = null;
+        imgEl.style.transform = 'translate3d(' + zoomTX + 'px,' + zoomTY + 'px,0) scale(' + zoomScale + ')';
+        if (zoomScale > 1) bodyEl.classList.add('zoomed');
+        else bodyEl.classList.remove('zoomed');
+        if (zoomScale > 1.01 && zoomHint) zoomHint.style.display = 'none';
+      });
+    }
+
+    function clampOffsets() {
+      // Allow panning at any scale (including 1:1). Keep at least some of image visible.
+      const bw = bodyEl.clientWidth;
+      const bh = bodyEl.clientHeight;
+      const iw = imgEl.naturalWidth || imgEl.clientWidth || bw;
+      const ih = imgEl.naturalHeight || imgEl.clientHeight || bh;
+      // Effective rendered size at scale 1 (object-fit: contain semantics):
+      const bodyAspect = bw / Math.max(1, bh);
+      const imgAspect = iw / Math.max(1, ih);
+      let dispW, dispH;
+      if (imgAspect > bodyAspect) {
+        dispW = bw;
+        dispH = bw / imgAspect;
+      } else {
+        dispH = bh;
+        dispW = bh * imgAspect;
+      }
+      const scaledW = dispW * zoomScale;
+      const scaledH = dispH * zoomScale;
+      // Keep at least this much of the image visible (so user can't completely lose it)
+      const visibleMargin = Math.min(80, scaledW * 0.25, scaledH * 0.25);
+      zoomTX = Math.max(-scaledW + visibleMargin, Math.min(bw - visibleMargin, zoomTX));
+      zoomTY = Math.max(-scaledH + visibleMargin, Math.min(bh - visibleMargin, zoomTY));
+    }
+
+    function zoomAtPoint(cx, cy, factor) {
+      // cx, cy are coords inside bodyEl (0..clientWidth, 0..clientHeight)
+      const newScale = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoomScale * factor));
+      if (Math.abs(newScale - zoomScale) < 0.001) return;
+      // Keep the point under cursor stable in image-space:
+      // imgPoint = (cx - zoomTX) / zoomScale
+      // After zoom: cx = imgPoint * newScale + new_zoomTX
+      const px = (cx - zoomTX) / zoomScale;
+      const py = (cy - zoomTY) / zoomScale;
+      zoomTX = cx - px * newScale;
+      zoomTY = cy - py * newScale;
+      zoomScale = newScale;
+      clampOffsets();
+      bodyEl.classList.add('smooth');
+      applyImgTransform();
+      setTimeout(function() { bodyEl.classList.remove('smooth'); }, 200);
+    }
+
+    function resetZoom() {
+      zoomScale = 1; zoomTX = 0; zoomTY = 0;
+      bodyEl.classList.add('smooth');
+      applyImgTransform();
+      if (zoomHint) zoomHint.style.display = '';
+      setTimeout(function() { bodyEl.classList.remove('smooth'); }, 200);
+    }
+
+    // ====== IMAGE PAN (when zoomed) ======
+    let isPanning = false, isPotentialPan = false, panStartX = 0, panStartY = 0, panOriginTX = 0, panOriginTY = 0;
+
+    function startPanCandidate(cx, cy) {
+      isPotentialPan = true;
+      panStartX = cx; panStartY = cy;
+      panOriginTX = zoomTX; panOriginTY = zoomTY;
+    }
+    function doPan(cx, cy) {
+      const dx = cx - panStartX;
+      const dy = cy - panStartY;
+      // Lower threshold for trackpad sensitivity — start panning sooner
+      if (!isPanning && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
+        isPanning = true;
+        bodyEl.classList.add('panning');
+        if (zoomHint) zoomHint.style.display = 'none';
+      }
+      if (isPanning) {
+        zoomTX = panOriginTX + dx;
+        zoomTY = panOriginTY + dy;
+        clampOffsets();
+        applyImgTransform();
+      }
+    }
+    function endPan() {
+      if (isPotentialPan && !isPanning) {
+        // It was a click — zoom in at the click point
+        const rect = bodyEl.getBoundingClientRect();
+        zoomAtPoint(lastMouseX - rect.left, lastMouseY - rect.top, ZOOM_STEP);
+      }
+      isPotentialPan = false;
+      isPanning = false;
+      bodyEl.classList.remove('panning');
+    }
+
+    bodyEl.addEventListener('mousedown', function(e) {
+      if (e.button !== 0) return;
+      lastMouseX = e.clientX; lastMouseY = e.clientY;
+      startPanCandidate(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+    });
+
+    bodyEl.addEventListener('touchstart', function(e) {
+      const t = e.touches[0];
+      lastMouseX = t.clientX; lastMouseY = t.clientY;
+      startPanCandidate(t.clientX, t.clientY);
+    }, {passive: true});
+
+    // Wheel = zoom at cursor (passive: false because we preventDefault)
+    bodyEl.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      const rect = bodyEl.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.18 : (1 / 1.18);
+      zoomAtPoint(cx, cy, factor);
+    }, {passive: false});
+
+    // Double-click = reset zoom
+    bodyEl.addEventListener('dblclick', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      resetZoom();
+    });
+
+    // Buttons
+    popout.querySelector('.pop-zoom-in').addEventListener('click', function() {
+      zoomAtPoint(bodyEl.clientWidth / 2, bodyEl.clientHeight / 2, ZOOM_STEP);
+    });
+    popout.querySelector('.pop-zoom-out').addEventListener('click', function() {
+      zoomAtPoint(bodyEl.clientWidth / 2, bodyEl.clientHeight / 2, 1 / ZOOM_STEP);
+    });
+    popout.querySelector('.pop-zoom-reset').addEventListener('click', resetZoom);
+
+    // Close
+    popout.querySelector('.pop-close').addEventListener('click', function() {
+      popout.remove();
+    });
+  }
+})();
+
+// POPUP LIST LINKS — click an item in the strategy popup → smooth scroll + flash highlight on page
+(function() {
+  document.querySelectorAll('.popup-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (!target) return;
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      document.querySelectorAll('.flash-highlight').forEach(function(el) {
+        el.classList.remove('flash-highlight');
+      });
+      void target.offsetWidth; // force reflow to re-trigger animation
+      target.classList.add('flash-highlight');
+      setTimeout(function() {
+        target.classList.remove('flash-highlight');
+      }, 2600);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

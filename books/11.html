@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#11 Velký Gatsby — Francis Scott Fitzgerald</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: #f5f1ea;
+  color: #2a2520;
+  line-height: 1.65;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+h1, h2, h3, h4, h5, h6 { color: #1a1410; line-height: 1.3; margin-top: 1.4em; margin-bottom: 0.5em; }
+h1 { font-size: 2.2em; margin-top: 0; }
+h2 { font-size: 1.55em; border-bottom: 2px solid #d4c8b8; padding-bottom: 0.3em; }
+h3 { font-size: 1.25em; color: #4a3527; }
+h4 { font-size: 1.08em; color: #4a3527; }
+a { color: #8b3a1a; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* INDEX */
+header.site-header {
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: #f5f1ea;
+  padding: 36px 24px;
+  text-align: center;
+}
+header.site-header h1 { color: #f5f1ea; font-size: 2.6em; margin: 0; }
+header.site-header p { margin: 8px 0 0 0; opacity: 0.85; font-size: 1.05em; }
+header.site-header .header-links {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+header.site-header .header-links a {
+  background: rgba(255,255,255,0.12);
+  color: #f0c486;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95em;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+header.site-header .header-links a:hover {
+  background: rgba(255,255,255,0.22);
+  text-decoration: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.18s, box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.card a { display: flex; flex-direction: column; height: 100%; color: inherit; }
+.card a:hover { text-decoration: none; }
+.card .thumb {
+  aspect-ratio: 2/3;
+  background: #ece4d5 center/cover no-repeat;
+  border-bottom: 1px solid #d4c8b8;
+}
+.card .body { padding: 14px 16px 18px 16px; }
+.card .num {
+  display: inline-block;
+  background: #8b3a1a;
+  color: white;
+  font-size: 0.75em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.card .title { font-size: 1.1em; font-weight: 600; color: #1a1410; margin: 0 0 4px 0; line-height: 1.3; }
+.card .author { font-size: 0.92em; color: #5a4d3f; margin: 0; }
+
+/* DETAIL */
+.book-header {
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: #f5f1ea;
+  padding: 36px 24px 28px 24px;
+}
+.book-header .num { color: #f0c486; font-size: 0.95em; letter-spacing: 0.1em; }
+.book-header h1 { color: white; font-size: 2.6em; margin: 4px 0 6px 0; }
+.book-header .author { color: #d4c8b8; font-size: 1.2em; margin: 0; }
+.book-header .nav { margin-top: 18px; }
+.book-header .nav a { color: #f0c486; font-weight: 600; }
+
+.section { margin: 36px 0; }
+.section > h2 { color: #4a3527; font-size: 1.55em; margin-bottom: 6px; }
+.section-hint {
+  margin: 0 0 16px 0;
+  padding: 8px 14px;
+  background: #fff3e0;
+  border-left: 4px solid #d97500;
+  border-radius: 6px;
+  color: #5a4d3f;
+  font-size: 0.95em;
+}
+.single-card {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.single-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  background: white;
+  cursor: zoom-in;
+  display: block;
+}
+
+/* Speaking step badges inside the tahák */
+.speaking-badge {
+  background: linear-gradient(135deg, #8b3a1a, #a04a26);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px 10px 0 0;
+  margin: 32px 0 0 0;
+  font-weight: 700;
+  font-size: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(139,58,26,0.2);
+}
+.speaking-badge .badge-step { font-size: 1.05em; }
+.speaking-badge .badge-hint {
+  font-weight: 400;
+  font-size: 0.85em;
+  opacity: 0.95;
+  background: rgba(255,255,255,0.18);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+.speaking-badge.helper {
+  background: linear-gradient(135deg, #4a3527, #5a4d3f);
+}
+.speaking-badge + h2 {
+  margin-top: 0 !important;
+  background: #fffaf2;
+  padding: 10px 14px;
+  border-radius: 0 0 8px 8px;
+  border-bottom: 2px solid #d4c8b8;
+}
+
+.images { display: flex; flex-direction: column; gap: 30px; }
+.images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  background: white;
+}
+.image-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 700px) {
+  .image-cards { grid-template-columns: 1fr; }
+}
+.image-cards img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 3px 14px rgba(0,0,0,0.12); cursor: zoom-in; }
+.image-caption { text-align: center; font-size: 0.9em; color: #5a4d3f; margin-top: 6px; }
+
+.tahak {
+  background: white;
+  padding: 30px 36px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.tahak h1 { display: none; }
+.tahak h2 {
+  color: #8b3a1a;
+  margin-top: 1.6em;
+  border-bottom: 2px solid #d4c8b8;
+  padding-bottom: 0.3em;
+}
+.tahak h3 { color: #4a3527; margin-top: 1.4em; }
+.tahak .table-wrap { overflow-x: auto; margin: 12px 0; }
+.tahak table { border-collapse: collapse; width: 100%; }
+.tahak th, .tahak td {
+  border: 1px solid #d4c8b8;
+  padding: 9px 13px;
+  text-align: left;
+  vertical-align: top;
+}
+.tahak th { background: #ece4d5; color: #4a3527; font-weight: 700; }
+.tahak blockquote {
+  border-left: 4px solid #8b3a1a;
+  margin: 16px 0;
+  padding: 8px 18px;
+  background: #f9f4ec;
+  font-style: italic;
+  color: #4a3527;
+}
+.tahak code {
+  background: #ece4d5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+.tahak pre {
+  background: #2a1f15;
+  color: #f5f1ea;
+  padding: 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.tahak pre code { background: transparent; color: inherit; padding: 0; }
+.tahak .numbered { margin: 6px 0; }
+.tahak hr { border: none; border-top: 1px solid #d4c8b8; margin: 28px 0; }
+.tahak ul { padding-left: 24px; }
+.tahak li { margin: 4px 0; }
+
+/* Embedded images inside the tahák — sits right after their relevant section heading */
+.embedded-image, .embedded-postavy {
+  margin: 14px 0 20px 0;
+  padding: 14px;
+  background: #f9f4ec;
+  border: 1px solid #d4c8b8;
+  border-radius: 12px;
+  scroll-margin-top: 80px;
+}
+.embedded-image img, .embedded-postavy img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  cursor: zoom-in;
+  display: block;
+}
+.embedded-image .image-caption,
+.embedded-postavy .image-caption {
+  text-align: center;
+  font-size: 0.92em;
+  color: #5a4d3f;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Plot-context block at the very top — komiks + detailní děj before analytical tahák */
+.plot-context {
+  background: #fff3e0;
+  border: 2px solid #d97500;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+.plot-context > h2 {
+  color: #8b3a1a;
+  border-bottom: none;
+  margin-top: 0;
+}
+.plot-context > .section-hint {
+  background: white;
+  border-left-color: #8b3a1a;
+}
+.dej-block {
+  background: white;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.dej-block .dej-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1.15em;
+  margin-bottom: 8px;
+}
+
+/* Mluvený skript — bottom section, distinct color */
+.projev-section {
+  background: linear-gradient(135deg, #f0f7fb, #e8f1f7);
+  border: 2px solid #2d6a8c;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+.projev-section > h2 {
+  color: #2d6a8c;
+  border-bottom: none;
+  margin-top: 0;
+}
+.projev-section .section-hint {
+  background: white;
+  border-left-color: #2d6a8c;
+}
+.projev-section .tahak {
+  background: white;
+}
+.projev-section .tahak h2 {
+  color: #2d6a8c;
+  border-bottom-color: #b8d4e3;
+}
+.projev-section .tahak h3 {
+  color: #1d556f;
+}
+
+/* Komiks (3 panels) — used inside plot-context AND embedded inside tahák */
+.embedded-komiks {
+  margin: 18px 0 24px 0;
+  padding: 16px;
+  background: #f9f4ec;
+  border: 1px solid #d4c8b8;
+  border-radius: 12px;
+  scroll-margin-top: 80px;
+}
+.embedded-komiks .komiks-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1.1em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.embedded-komiks .komiks-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.embedded-komiks .komiks-strip img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  cursor: zoom-in;
+  display: block;
+}
+.embedded-komiks .komiks-strip .image-caption {
+  text-align: center;
+  font-size: 0.9em;
+  color: #5a4d3f;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.nav-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 20px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-bottom a {
+  background: #8b3a1a;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+}
+.nav-bottom a:hover { background: #6b2a10; text-decoration: none; }
+.nav-bottom a.home { background: #4a3527; }
+
+.toc-jump {
+  background: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  font-size: 0.92em;
+}
+.toc-jump a { margin-right: 14px; color: #8b3a1a; font-weight: 600; }
+
+footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24px 50px 24px; }
+
+/* DRAGGABLE EXAM POPUP */
+.exam-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 340px;
+  max-height: 82vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 1000;
+  font-size: 0.85em;
+  overflow: hidden;
+  border: 2px solid #8b3a1a;
+  display: flex;
+  flex-direction: column;
+}
+.popup-header {
+  background: #8b3a1a;
+  color: white;
+  padding: 10px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+}
+.popup-title { font-size: 0.95em; }
+.popup-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+.popup-btn:hover { background: rgba(255,255,255,0.25); }
+.popup-body {
+  padding: 12px 14px;
+  overflow-y: auto;
+  background: #fffaf2;
+  flex: 1;
+}
+.popup-body h4 {
+  color: #8b3a1a;
+  margin: 10px 0 4px 0;
+  font-size: 0.95em;
+  border-bottom: 1px solid #ddd0bc;
+  padding-bottom: 2px;
+}
+.popup-body h4:first-child { margin-top: 0; }
+.popup-body ol, .popup-body ul {
+  padding-left: 20px;
+  margin: 4px 0 8px 0;
+}
+.popup-body li { margin: 3px 0; line-height: 1.4; }
+.popup-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  margin: 4px 0 6px 0;
+}
+.popup-body th, .popup-body td {
+  border: 1px solid #d4c8b8;
+  padding: 3px 6px;
+  text-align: left;
+}
+.popup-body th { background: #ece4d5; font-weight: 600; }
+.popup-body td.cell-num { text-align: center; font-weight: 600; color: #8b3a1a; }
+.popup-body b { color: #4a3527; }
+.popup-body .warn {
+  background: #fff3e0;
+  border-left: 3px solid #d97500;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-size: 0.95em;
+  border-radius: 4px;
+  line-height: 1.5;
+}
+.popup-body .step-block {
+  background: #ece4d5;
+  border-radius: 8px;
+  padding: 8px 10px 6px 10px;
+  margin: 6px 0;
+}
+.popup-body .step-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1em;
+  margin-bottom: 3px;
+}
+.popup-body .step-meta {
+  font-size: 0.8em;
+  color: #8b3a1a;
+  background: white;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.popup-body .step-list {
+  margin: 4px 0;
+  padding-left: 22px;
+  font-size: 0.95em;
+}
+.popup-body .step-intro {
+  margin: 6px 0 2px 0;
+  color: #4a3527;
+  font-size: 0.92em;
+}
+.popup-body .bonus-info {
+  background: #e8f5e9;
+  border-left: 3px solid #4a7d4a;
+  padding: 6px 10px;
+  margin: 8px 0;
+  font-size: 0.92em;
+  border-radius: 4px;
+}
+
+/* Clickable popup list items — scroll to anchor + flash highlight on page */
+.popup-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-radius: 4px;
+  border-left: 2px solid transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.popup-link:hover {
+  background: rgba(139, 58, 26, 0.08);
+  border-left-color: #8b3a1a;
+  color: #8b3a1a;
+  text-decoration: none;
+}
+.popup-link::after {
+  content: " ↗";
+  opacity: 0.4;
+  font-size: 0.85em;
+}
+.popup-link:hover::after { opacity: 1; }
+
+.popup-external-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #8b3a1a;
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+.popup-external-link:hover {
+  background: #6b2a10;
+  text-decoration: none;
+}
+
+/* Flash highlight when a popup link scrolls to a section */
+.flash-highlight {
+  animation: flash-pulse 2.6s ease-out;
+  scroll-margin-top: 20px;
+}
+@keyframes flash-pulse {
+  0%   { background-color: rgba(240, 196, 134, 0.95); box-shadow: 0 0 0 6px rgba(240, 196, 134, 0.6), 0 0 30px rgba(240, 196, 134, 0.5); }
+  35%  { background-color: rgba(240, 196, 134, 0.85); box-shadow: 0 0 0 4px rgba(240, 196, 134, 0.4), 0 0 24px rgba(240, 196, 134, 0.4); }
+  100% { background-color: transparent; box-shadow: 0 0 0 0 transparent, 0 0 0 transparent; }
+}
+
+/* Make all scroll targets have a comfortable offset from top so they don't hug the edge */
+.tahak h2[id^="cast-"], #autor-img, #dilo-img, #postavy, #komiks, #dej {
+  scroll-margin-top: 16px;
+}
+.exam-popup.minimized {
+  height: auto !important;
+  max-height: none;
+}
+.exam-popup.minimized .popup-body { display: none; }
+.popup-reopen {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #8b3a1a;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1010;
+  font-weight: 700;
+  font-size: 0.95em;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  display: none;
+  animation: popup-reopen-pulse 2.5s ease-in-out infinite;
+}
+.popup-reopen:hover {
+  background: #6b2a10;
+  transform: scale(1.05);
+}
+@keyframes popup-reopen-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 4px 22px rgba(139,58,26,0.7); }
+}
+
+/* GUIDE POPUP — second draggable popup, left side, blue/teal */
+.guide-popup {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 320px;
+  max-height: 75vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 999;
+  font-size: 0.85em;
+  overflow: hidden;
+  border: 2px solid #2d6a8c;
+  display: flex;
+  flex-direction: column;
+}
+.guide-popup .popup-header {
+  background: #2d6a8c;
+  color: white;
+  padding: 10px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+}
+.guide-popup .popup-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+.guide-popup .popup-btn:hover { background: rgba(255,255,255,0.25); }
+.guide-popup .popup-body {
+  padding: 14px 16px;
+  overflow-y: auto;
+  background: #f0f7fb;
+  flex: 1;
+}
+.guide-block {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-left: 4px solid #2d6a8c;
+}
+.guide-block .guide-step-title {
+  color: #1d556f;
+  margin: 0 0 8px 0;
+  font-size: 1.02em;
+  font-weight: 700;
+}
+.guide-block ul {
+  margin: 4px 0 0 0;
+  padding-left: 22px;
+}
+.guide-block li {
+  margin: 5px 0;
+  line-height: 1.4;
+}
+.guide-tip {
+  background: #fff3e0;
+  border-left: 3px solid #d97500;
+  padding: 10px 12px;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 0.92em;
+  line-height: 1.4;
+}
+.guide-reopen {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #2d6a8c;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1010;
+  font-weight: 700;
+  font-size: 0.95em;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  display: none;
+  animation: guide-reopen-pulse 2.5s ease-in-out infinite;
+}
+.guide-reopen:hover {
+  background: #1d556f;
+  transform: scale(1.05);
+}
+@keyframes guide-reopen-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 4px 22px rgba(45,106,140,0.7); }
+}
+.guide-popup.minimized { height: auto !important; max-height: none; }
+.guide-popup.minimized .popup-body { display: none; }
+@media (max-width: 700px) {
+  .guide-popup { width: 270px; font-size: 0.78em; left: 10px; top: 10px; }
+}
+
+/* POP-OUT IMAGE — small button on every embedded image to detach it as a movable+resizable window */
+.popout-trigger {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(42,31,21,0.78);
+  color: white;
+  border: none;
+  padding: 6px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.popout-trigger:hover {
+  background: rgba(42,31,21,1);
+  transform: scale(1.05);
+}
+.embedded-image, .embedded-postavy, .embedded-komiks .komiks-strip > div, .single-card {
+  position: relative;
+}
+
+.img-popout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 480px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid #4a3527;
+  min-width: 260px;
+  min-height: 180px;
+  max-width: 95vw;
+  max-height: 90vh;
+  will-change: transform, width, height;
+}
+.img-popout-header {
+  background: linear-gradient(135deg, #4a3527, #2a1f15);
+  color: white;
+  padding: 8px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  flex-shrink: 0;
+  gap: 8px;
+}
+.img-popout-title {
+  font-size: 0.88em;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.img-popout-controls {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.img-popout .popout-btn {
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 0.95em;
+  line-height: 1;
+  font-weight: 700;
+}
+.img-popout .popout-btn:hover { background: rgba(255,255,255,0.38); }
+.img-popout-body {
+  flex: 1;
+  overflow: hidden;
+  background: #f9f4ec;
+  position: relative;
+  cursor: zoom-in;
+  user-select: none;
+}
+.img-popout-body.zoomed { cursor: grab; }
+.img-popout-body.panning { cursor: grabbing; }
+.img-popout-body img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transform-origin: 0 0;
+  will-change: transform;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.img-popout-body.smooth img { transition: transform 0.18s ease-out; }
+.img-popout-zoom-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(42,31,21,0.78);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78em;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.img-popout-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, rgba(74,53,39,0.55) 50%);
+  border-radius: 0 0 8px 0;
+  z-index: 6;
+}
+@media (max-width: 700px) {
+  .exam-popup { width: 280px; font-size: 0.78em; top: 10px; right: 10px; }
+}
+</style>
+</head>
+<body>
+  
+<div id="exam-popup" class="exam-popup">
+  <div class="popup-header" id="popup-header">
+    <span class="popup-title">📊 Co říct u zkoušky</span>
+    <span>
+      <button class="popup-btn" id="popup-toggle" title="Sbalit / rozbalit">−</button>
+      <button class="popup-btn" id="popup-close" title="Skrýt">×</button>
+    </span>
+  </div>
+  <div class="popup-body">
+
+    <h4>🎯 4 části mluvení (15 min)</h4>
+
+    <div class="step-block">
+      <div class="step-title">1️⃣ Autor &amp; doba <span class="step-meta">3 min · 4 b</span></div>
+      <ul class="step-list">
+        <li><a href="#autor-img" class="popup-link">Kdo to napsal, kdy žil, odkud</a></li>
+        <li><a href="#cast-4" class="popup-link">Jaký to byl literární směr (klasicismus, realismus, antiutopie…)</a></li>
+        <li><a href="#cast-4" class="popup-link">Co dalšího autor napsal (2–3 díla)</a></li>
+        <li><a href="#cast-4" class="popup-link">Co se v té době dělo (krátký kontext)</a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">2️⃣ O knize <span class="step-meta">~4 min · 8 b</span></div>
+      <p class="step-intro">Nejdřív <b>co to je za knihu:</b></p>
+      <ul class="step-list">
+        <li><a href="#dilo-img" class="popup-link">Druh: <b>próza / drama / poezie</b></a></li>
+        <li><a href="#dilo-img" class="popup-link">Žánr: román / komedie / novela / báseň…</a></li>
+        <li><a href="#cast-1" class="popup-link">Kolik kapitol / jednání, <b>kdo vypráví</b> (vypravěč)</a></li>
+        <li><a href="#cast-2" class="popup-link">Hlavní téma + 2–3 motivy</a></li>
+      </ul>
+      <p class="step-intro">Pak <b>co se v úryvku děje:</b></p>
+      <ul class="step-list">
+        <li><a href="#dej" class="popup-link">Kde v knize úryvek je (která kapitola / jednání)</a></li>
+        <li><a href="#postavy" class="popup-link">Kdo v něm vystupuje a jaké jsou vztahy</a></li>
+        <li><a href="#dej" class="popup-link">Co se konkrétně v úryvku odehrává</a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">3️⃣ Jak je napsaný <span class="step-meta">~3 min · 4 b</span></div>
+      <ul class="step-list">
+        <li><a href="#cast-3" class="popup-link">Jaký jazyk: <b>spisovný / hovorový / archaický / nářečí</b></a></li>
+        <li><a href="#cast-3" class="popup-link">2–3 umělecké prostředky a <b>PROČ jsou tam</b><br>
+            <small>Třeba: „Hyperbola — autor přehání, aby vyvolal smích."<br>„Ironie — autor říká opak toho, co myslí, aby zesměšnil postavu."</small></a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">4️⃣ Neumělecký text <span class="step-meta">5 min · 8 b</span></div>
+      <ul class="step-list">
+        <li>Funkční styl: <b>publicistický / odborný / administrativní / umělecký…</b></li>
+        <li>Útvar: článek, recenze, zpráva, esej, návod…</li>
+        <li>O čem text je, k čemu slouží</li>
+        <li><b>Pro koho je napsaný</b> (adresát)</li>
+        <li>Jazykové prostředky (a k čemu)</li>
+        <li><b>Jak souvisí s uměleckým textem</b></li>
+      </ul>
+      <a href="../funkcni-styly.html" target="_blank" class="popup-external-link">↗ Otevřít tahák funkčních stylů</a>
+    </div>
+
+    <p class="bonus-info">➕ <b>Jak mluvíš = 4 b navíc.</b> Mluv spisovně, srozumitelně, plynule, bez vulgarismů.</p>
+
+    <h4>📊 Bodování</h4>
+    <p>Celkem <b>28 bodů</b>. Stačí získat <b>13 bodů (44 %)</b> a prošel/a jsi.</p>
+    <table>
+      <tr><th>Část mluvení</th><th class="cell-num">max</th></tr>
+      <tr><td>1️⃣ Autor &amp; doba</td><td class="cell-num">4</td></tr>
+      <tr><td>2️⃣ O knize (druh+žánr+vypravěč 4 + obsah úryvku 4)</td><td class="cell-num">8</td></tr>
+      <tr><td>3️⃣ Jak je napsaný (jazyk + prostředky)</td><td class="cell-num">4</td></tr>
+      <tr><td>4️⃣ Neumělecký text (styl + obsah)</td><td class="cell-num">8</td></tr>
+      <tr><td>➕ Jak mluvíš (jazyk. kultura)</td><td class="cell-num">4</td></tr>
+      <tr><td><b>Celkem</b></td><td class="cell-num"><b>28</b></td></tr>
+    </table>
+
+    <div class="warn">
+      <b>⚠️ POZOR — 3 pravidla:</b><br>
+      <b>1.</b> Z části o knize + autorovi musíš mít <b>aspoň 4 body</b> (ze 16). Jinak <b>NEPROŠEL/A</b>.<br>
+      <b>2.</b> Ze samotného rozboru úryvku knihy <b>aspoň 3 body</b> (z 12). Jinak <b>NEPROŠEL/A</b>.<br>
+      <b>3.</b> Když máš někde 0 bodů → za „jak mluvíš" dostaneš max 3 body (ne 4).
+    </div>
+
+    <h4>💡 Strategie — kolik bodů kde</h4>
+    <ul>
+      <li>Kniha + autor: cíl <b>8 b</b> (z 16 možných)</li>
+      <li>Neumělecký text: cíl <b>3–4 b</b> (z 8)</li>
+      <li>Jak mluvíš: cíl <b>2 b</b> (z 4)</li>
+      <li>= <b>13–14 b → PROŠEL/A</b> ✅</li>
+    </ul>
+
+    <h4>🧠 Vždy zmínit (kontrolka)</h4>
+    <ul>
+      <li>Druh + žánr knihy</li>
+      <li>Kdo vypráví (vypravěč)</li>
+      <li>U každého prostředku — <b>k čemu tam je</b></li>
+      <li>Literární směr + 2 další díla autora</li>
+      <li>Souvislost mezi uměl. a neuměl. textem</li>
+    </ul>
+
+  </div>
+</div>
+
+<button id="popup-reopen" class="popup-reopen" title="Zobrazit strategii zkoušky">📊 Strategie zkoušky</button>
+
+<div id="guide-popup" class="guide-popup">
+  <div class="popup-header" id="guide-header">
+    <span class="popup-title">🧭 Jak studovat stránku</span>
+    <span>
+      <button class="popup-btn" id="guide-toggle" title="Sbalit / rozbalit">−</button>
+      <button class="popup-btn" id="guide-close" title="Skrýt">×</button>
+    </span>
+  </div>
+  <div class="popup-body">
+
+    <div class="guide-block">
+      <div class="guide-step-title">🧭 Pochop děj knihy (čti nejdřív!)</div>
+      <ul>
+        <li>🎬 <b>Komiks</b> — 3 stránky × 9 scén</li>
+        <li>📜 <b>Detailní děj</b> — plný plot, abys věděl/a o čem to je</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-step-title">📖 Tahák (analytické info v pořadí mluvení)</div>
+      <ul>
+        <li><b>1️⃣</b> Lit. kontext + 👤 obrázek autora</li>
+        <li><b>2️⃣</b> Identifikace + 📖 obrázek knihy</li>
+        <li><b>2️⃣</b> I. ČÁST analýzy</li>
+        <li><b>2️⃣</b> II. ČÁST + 🧬 obrázek postav</li>
+        <li><b>3️⃣</b> III. ČÁST</li>
+        <li><b>📌</b> Pomocníci (opěrné body, úryvek, test)</li>
+      </ul>
+    </div>
+
+    <p class="guide-tip">💡 <b>Až znáš děj, analytické info ti dá smysl.</b> Bez děje to bude jen seznam slov.</p>
+
+  </div>
+</div>
+
+<button id="guide-reopen" class="guide-reopen" title="Zobrazit průvodce">🧭 Jak studovat</button>
+
+  <header class="book-header">
+    <div class="container">
+      <div class="num">KNIHA #11</div>
+      <h1>Velký Gatsby</h1>
+      <p class="author">Francis Scott Fitzgerald</p>
+      <div class="nav">
+        <a href="../index.html">← Zpět na seznam</a>
+        &nbsp;·&nbsp;
+        <a href="../funkcni-styly.html">📰 Funkční styly (neumělecký text)</a>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+
+    <div class="toc-jump">
+      <strong>Skok na:</strong>
+      <a href="#komiks">🎬 Komiks</a>
+      <a href="#dej">📜 Detailní děj</a>
+      <a href="#tahak">📖 Tahák</a>
+      <a href="#autor-img">1️⃣ Autor</a>
+      <a href="#dilo-img">2️⃣ O knize</a>
+      <a href="#postavy">🧬 Postavy</a>
+      <a href="#projev">🎙️ Skript</a>
+    </div>
+
+    
+    <section id="plot-context" class="section plot-context">
+      <h2>🧭 Pochop děj knihy (čti nejdřív!)</h2>
+      <p class="section-hint">Než pojdeš na analytické věci, ujasni si nejdřív, o čem ta kniha je.</p>
+      
+      <div id="komiks" class="embedded-komiks" style="margin-top: 0;">
+        <div class="komiks-title">🎬 Děj v komiksu (3 stránky × 3 panely = 9 scén)</div>
+        <div class="komiks-strip">
+          <div><img src="../../images/11-fitzgerald-velky-gatsby/01-komiks-1.jpg" alt="Komiks I"><div class="image-caption">I — Expozice & kolize</div></div>
+          <div><img src="../../images/11-fitzgerald-velky-gatsby/02-komiks-2.jpg" alt="Komiks II"><div class="image-caption">II — Krize & vyvrcholení</div></div>
+          <div><img src="../../images/11-fitzgerald-velky-gatsby/03-komiks-3.jpg" alt="Komiks III"><div class="image-caption">III — Rozuzlení & závěr</div></div>
+        </div>
+      </div>
+
+      <div id="dej" class="dej-block">
+        <div class="dej-title">📜 Detailní děj knihy</div>
+        <div class="tahak"><h1>Francis Scott Fitzgerald — Velký Gatsby — Detailní děj</h1>
+
+<blockquote>Společenský a psychologický román americké „ztracené generace&quot; (1925), kronika jazzového věku. <strong>9 kapitol</strong>, <strong>chronologicky</strong> s retrospektivními vsuvkami o Gatsbyho minulosti. Vypráví v <strong>ich-formě</strong> Nick Carraway — současně postava i pozorovatel. Děj se odehrává v <strong>létě 1922</strong> na Long Islandu (West Egg, East Egg), v New Yorku a v Údolí popela mezi nimi.</blockquote>
+
+<hr>
+
+<h2>Úvod (expozice) — situace před vyprávěním</h2>
+
+<p>Vypravěč <strong>Nick Carraway</strong>, asi třicetiletý absolvent <strong>Yalu</strong>, pochází ze zámožné rodiny ze <strong>Středozápadu</strong> (Minnesota). Po návratu z 1. světové války se necítí doma a v létě <strong>1922</strong> odjíždí do New Yorku, aby pracoval jako <strong>burzovní makléř</strong>. Pronajme si malý dřevěný dům ve smyšlené pobřežní vsi <strong>West Egg</strong> na <strong>Long Islandu</strong> — vedle obří palácové vily neznámého boháče.</p>
+
+<p>Román začíná jako <strong>rámcové vyprávění z odstupu</strong>: Nick píše svoji vzpomínku <strong>zpětně</strong>, poté co se vrátil rozčarován zpět na Středozápad. V úvodní reflexi vzpomíná na otcovo poučení („Než někoho začneš soudit, mysli na to, že ne každý měl stejné šance jako ty&quot;), a oznámí, že jediný, kdo si jeho úsudek nezasloužil, byl právě <strong>Gatsby</strong>.</p>
+
+<p><strong>Geografie zápletky:</strong></p>
+<ul>
+<li><strong>West Egg</strong> = noví, nedávno zbohatlí (Gatsby, Nick) — okázalé, vulgárnější bohatství.</li>
+<li><strong>East Egg</strong> = staří, dědiční boháči (Buchananovi) — kultivovanost, snobství.</li>
+<li><strong>Údolí popela (Valley of Ashes)</strong> = popelová pustina mezi Long Islandem a New Yorkem; obří billboard s <strong>brýlatýma očima doktora T. J. Eckleburga</strong> dohlíží na šedou zemi. Tady žijí <strong>Wilsonovi</strong>.</li>
+<li><strong>New York City</strong> = scéna večírků, koktejlových barů, hotelu <strong>Plaza</strong>.</li>
+</ul>
+
+<hr>
+
+<h2>Kapitola 1 — Nick u Buchananových, první spatření Gatsbyho</h2>
+
+<p>Nick se přestěhuje na <strong>West Egg</strong>. Hned na začátku jede přes záliv na <strong>East Egg</strong> k bohatým <strong>Buchananovým</strong>. <strong>Daisy Buchanan</strong> je <strong>Nickova bratranka z druhého kolena</strong>; její manžel <strong>Tom Buchanan</strong> byl Nickův spolužák na Yalu (bývalý fotbalista, brutální, arogantní starý boháč, rasistický — vykládá o knize, podle níž má „bílá rasa&quot; upadnout).</p>
+
+<p>V Buchananově nádherném domě v East Eggu Nick poprvé vidí dvě dívky ležící v bílých šatech na pohovce, jak se vznášejí v průvanu otevřených oken — <strong>Daisy</strong> a její kamarádka <strong>Jordan Baker</strong>, profesionální <strong>golfistka</strong>, cynická moderní žena jazzového věku. Daisy se chová roztomile, znuděně a teatralizovaně; její <strong>hlas je „plný peněz&quot;</strong> (Gatsby ji tak charakterizuje později).</p>
+
+<p>Během večeře zazvoní telefon. Jordan tiše Nickovi prozradí, že volá Tomova <strong>milenka z New Yorku</strong>. Daisy je nešťastná, ale zvyklá. Při loučení Daisy Nickovi naznačí, že by si přála, aby se setkal s Jordan.</p>
+
+<p>Po návratu domů na West Egg spatří Nick ve tmě svého <strong>souseda</strong> — vysokou postavu na trávníku obrácenou k temné vodě zálivu. Muž stojí sám a vztahuje ruce k drobnému, <strong>vzdálenému zelenému světlu</strong> na druhém břehu (později víme: <strong>konec Daisyina mola</strong> v East Eggu). Nick chce sousedovi zamávat, ale když se podívá znovu, soused beze zvuku zmizel. <strong>Zelené světlo</strong> = první leitmotiv románu, <strong>synekdocha amerického snu</strong> a Gatsbyho touhy.</p>
+
+<h2>Kapitola 2 — Údolí popela, Wilsonovi, Tom zlomí Myrtle nos</h2>
+
+<p>Jednoho odpoledne <strong>Tom</strong> vleče Nicka vlakem do New Yorku přes <strong>Údolí popela</strong> — popelovou pustinu, nad níž z obrovského billboardu zírají <strong>brýlaté oči doktora T. J. Eckleburga</strong> (zaniklý optometrista; symbol vyhasnuté morálky / nepřítomného Boha). Tom Nicka záměrně <strong>představí svojí milence</strong>.</p>
+
+<p>Zastaví se u <strong>Wilsonovy garáže</strong> (autoopravna). Tam Nick poprvé spatří <strong>George Wilsona</strong> — vyhublého, šedého, zlomeného mechanika — a hlavně Tomovu milenku <strong>Myrtle Wilson</strong>, jeho ženu. Myrtle je tělnatá, smyslná, touží po vzestupu z popela. Wilson zjevně netuší, co se za jeho zády děje.</p>
+
+<p>Tom vezme Myrtle vlakem do New Yorku, do <strong>bytu na Manhattanu (West 158th Street)</strong>, který si pro schůzky s ní pronajal. Pozve i Nicka. Přijede Myrtlina sestra <strong>Catherine</strong> a manželé <strong>McKee</strong> (soused fotograf s manželkou). Pijí, opíjí se, atmosféra graduje. Myrtle si stále znovu opakuje <strong>Daisyino jméno</strong> (jako kdyby si ho nesměla brát do úst). Tom ji vícekrát varuje. Když Myrtle Daisyino jméno <strong>vykřikne</strong>, Tom <strong>zlomeným pohybem dlaně rozbije Myrtle nos</strong> — krev po koberci, Myrtle ječí, Nick odchází opilý.</p>
+
+<h2>Kapitola 3 — Gatsbyho velkolepý večírek; první setkání</h2>
+
+<p>Každou sobotu v létě se v Gatsbyho paláci konají <strong>monstrózní večírky</strong>: orchestr, šampaňské, hory pomerančů a slepic, tisíce světel, lidé z celého New Yorku, kteří <strong>Gatsbyho ani neznají</strong>. Většina přichází nezvána. O hostiteli běhá milion <strong>drbů</strong>: „zabil člověka&quot;, „byl německý špion ve válce&quot;, „je synovec Kaisera Viléma&quot;.</p>
+
+<p>Nick je jediný, kdo <strong>dostane formální pozvánku</strong> doručenou šoférem. Na večírku poznává <strong>Jordan Baker</strong> a hledá s ní hostitele. Sedí u stolku s <strong>mužem s brýlemi „sovíma očima&quot;</strong> (Owl Eyes) v knihovně, který se diví, že knihy jsou skutečné, a ne jen dekorativní falsa.</p>
+
+<p>Pozdě v noci, u stolu, <strong>muž s úsměvem</strong> Nickovi řekne, že vypadají, jako by spolu sloužili v 3. divizi. Když Nick řekne, že hostitele ještě neviděl, neznámý se rozesměje: <strong>„Já jsem Gatsby.&quot;</strong> Nick je překvapen — Gatsby je mladý, štíhlý, <strong>mimořádně slušný</strong>, oslovuje muže <strong>„old sport&quot;</strong> („starouši&quot;), a jeho <strong>úsměv je výjimečný</strong>: vypravěč ho popisuje jako úsměv, který vás na okamžik <strong>chápe přesně tak, jak chcete být chápáni</strong>.</p>
+
+<p>Gatsby si během večera odvede Jordan stranou na <strong>soukromý rozhovor</strong> (obsah se Nick dozví až v kap. 4). Nick si všimne, že sám Gatsby <strong>nepije</strong> a stojí stranou — uprostřed velkoměstského karnevalu zvláštně samotný.</p>
+
+<h2>Kapitola 4 — Oběd s Wolfsheimem, Jordanino tajemství</h2>
+
+<p>Jednoho rána přijede Gatsby pro Nicka svým honosným <strong>žlutým autem</strong> (Rolls-Royce, „cremově žluté kupé&quot;). Cestou do města Gatsbymu vykládá vlastní životopis: <strong>„syn bohatých lidí ze Středozápadu, vystudoval Oxford, dědictví, sběratel klenotů, ve válce vyznamenán medailemi z malých balkánských zemí&quot;</strong>. Nick je skeptický — zní to jako z laciné brožury — dokud mu Gatsby neukáže <strong>fotografii z Oxfordu</strong> a <strong>medaili z Černé Hory</strong>. Při zastavení v New Yorku Gatsby beztrestně mine policistu, který ho pozná a zasalutuje.</p>
+
+<p>Na obědě v New Yorku Gatsby představí Nicka <strong>Meyeru Wolfsheimovi</strong> — drobnému postaršímu <strong>gangsterovi</strong>, který nosí <strong>manžetové knoflíčky z lidských stoliček</strong>. Wolfsheim je legenda podsvětí: <strong>podle Fitzgeralda zorganizoval podvod se Světovou sérií 1919</strong> („fixoval Series 1919&quot;). Po jeho odchodu Gatsby Nickovi řekne, že Wolfsheim je obchodník — Nick poprvé pochopí, <strong>odkud asi Gatsbyho peníze pocházejí</strong>.</p>
+
+<p>Téhož odpoledne Nick obědvá s <strong>Jordan Baker</strong> u Plaza Hotel. Jordan mu vyloží <strong>klíčové tajemství</strong>: v <strong>roce 1917 v Louisville (Kentucky)</strong> se mladý důstojník Jay Gatsby zamiloval do tehdy nejkrásnější dívky města — <strong>Daisy Fay</strong>. Slíbili si lásku. Gatsby šel do války. Daisy chvíli čekala, ale rodina ji odradila, a v roce <strong>1919</strong> se provdala za bohatého <strong>Toma Buchanana</strong> (svatba v Louisville, perlový náhrdelník za 350 000 dolarů). Daisy se opila a pokoušela se z <strong>vrátit Tomovi prsten</strong> ještě před svatbou, ale ráno už byla střízlivá. Gatsby od té doby celý život pracoval na tom, aby Daisy získal zpět.</p>
+
+<p>Jordan Nickovi sdělí Gatsbyho <strong>prosbu</strong>: chce, aby Nick pozval <strong>Daisy na čaj</strong> k sobě domů, <strong>aniž by jí řekl</strong>, že tam bude Gatsby. Tedy „náhodné&quot; znovushledání po <strong>5 letech</strong> (1917 → 1922). Nick souhlasí.</p>
+
+<h2>Kapitola 5 — Čaj u Nicka; znovushledání po pěti letech</h2>
+
+<p>Gatsby je před setkáním nervózní. Zařídí, aby Nickovi nechali zahradníka <strong>přesekat trávník</strong> a poslal mu nákladně <strong>uvazené květiny</strong>. Když Daisy přijede k Nickovi domů, Gatsby zmizel — ze studu — a hned se vrací promočený deštěm, opřený o krbovou římsu „jako mokrá socha&quot;. První moment je rozpačitý.</p>
+
+<p>Nick je nechá o samotě v obývacím pokoji a vyjde ven. Když se vrátí, Daisy má <strong>slzy ve tváři</strong> a Gatsby celý září; všechno <strong>roztálo</strong>.</p>
+
+<p>Gatsby je pak provede svým <strong>palácovým sídlem</strong> přes záliv. Vrcholná scéna: v ložnici Gatsby otevře skříně plné drahých <strong>košil z hedvábí a flanelu</strong> v desítkách barev a hází je před Daisy do hromady. Daisy je položí do tváře a <strong>vzlykne</strong>: „<strong>Je mi smutno — nikdy v životě jsem neviděla — tak — krásné košile.</strong>&quot; (Symbol prázdné, materiální podstaty jejího pohnutí.)</p>
+
+<p>Z okna ložnice Gatsby ukazuje na <strong>zelené světlo</strong> na konci jejich mola: „<strong>Kdyby nebylo té mlhy, viděli bychom tvůj dům na druhé straně zálivu. Vždycky na konci tvého mola svítí celou noc zelené světlo.</strong>&quot; Nick si v té chvíli uvědomí, že pro Gatsbyho <strong>zelené světlo přestalo být snem</strong> — proměnilo se v obyčejnou zelenou žárovku. <strong>Sen byl tak velký, že realita ho nemůže naplnit.</strong></p>
+
+<h2>Kapitola 6 — Pravda o Gatsbyho původu (retrospektiva)</h2>
+
+<p>Reportér se objeví u Gatsbyho dveří. Nick to bere jako záminku a vypravěč nám teď <strong>odhalí, kdo Gatsby ve skutečnosti je</strong> — flashback:</p>
+
+<p><strong>James Gatz</strong> se narodil v chudé farmářské rodině v <strong>Severní Dakotě</strong>. V <strong>17 letech</strong> si na pobřeží jezera Superior, kdy vidí zakotvenou jachtu <strong>boháče Dana Codyho</strong> (těžaře měďnatých a zlatých dolů), v záchvatu vůle <strong>sám sebe přejmenuje na Jay Gatsby</strong>. Cody ho na jachtu vezme jako asistenta / sluhu — pět let s ním Gatsby cestuje po celém světě, učí se vystupování boháčů. Když Cody zemře, Gatsby měl zdědit <strong>25 000 dolarů</strong>, ale Codyho milenka <strong>Ella Kayeová</strong> mu o dědictví podvodem připraví. Gatsbymu zbude jen <strong>vzdělání</strong> a <strong>vůle</strong>.</p>
+
+<p>Pak: válka, důstojnická hodnost, <strong>Louisville 1917</strong>, setkání s Daisy Fay. Po válce krátký pobyt na <strong>Oxfordu</strong> (jako veterán — pět měsíců, nikoli plnohodnotné studium). Návrat — Daisy se mezitím provdala za Toma. Gatsby zbohatne <strong>pašováním alkoholu (boot-leggingem) za prohibice</strong> a temnými obchody (Wolfsheim). Kupuje sídlo v West Eggu <strong>přímo proti</strong> Daisyině domě v East Eggu a začne pořádat večírky <strong>v naději, že se Daisy jednou objeví</strong>.</p>
+
+<p>V druhé části kapitoly: <strong>Tom přijede s přáteli na koních</strong> ke Gatsbymu domů a Gatsby ho ze zdvořilosti pozve dovnitř. Tom je naštvaný — netuší, kdo Gatsby vlastně je, a začíná tušit, že má něco s Daisy. Sám Tom přijde s Daisy na <strong>Gatsbyho večírek</strong>, ale Daisy se tam <strong>necítí dobře</strong>: její východní třída se s nově zbohatlým světem West Eggu nesnáší. Tom slíbí Daisy, že si zjistí, <strong>odkud Gatsbyho peníze pocházejí</strong>.</p>
+
+<p>Po večírku Gatsby Nickovi prozradí svoji <strong>fundamentální iluzi</strong>: chce, aby Daisy řekla Tomovi, že ho <strong>nikdy nemilovala</strong>, a aby se vrátili do Louisville 1917, kde to skončilo. Když Nick namítne, že <strong>„minulost se nedá vrátit&quot;</strong>, Gatsby zařve: <strong>„Can&#x27;t repeat the past? Why of course you can!&quot;</strong> („Nedá se vrátit? Ale samozřejmě že se dá!&quot;) — klíčová věta o Gatsbyho <strong>tragickém hybris</strong>.</p>
+
+<h2>Kapitola 7 — Klíčová kapitola: Plaza, srážka, smrt Myrtle</h2>
+
+<p><strong>Nejteplejší den léta.</strong> Gatsby propustí všechny své sluhy (chce mít doma soukromí kvůli Daisy) a večírky končí.</p>
+
+<p>Nick a Gatsby přijdou na <strong>oběd k Buchananovým</strong> v East Eggu. Daisy políbí Gatsbyho v okamžiku, kdy je Tom mimo místnost. Tom zaregistruje <strong>pohled mezi nimi</strong> a začíná žárlit. Daisy navrhne, ať vyrazí všichni do <strong>New Yorku</strong>.</p>
+
+<p>Vyjedou ve dvou autech: Tom řídí <strong>Gatsbyho žluté auto</strong>, vezme s sebou <strong>Jordan a Nicka</strong>. <strong>Gatsby řídí Tomovo modré kupé</strong> s <strong>Daisy</strong>. Cestou Tom v Gatsbyho žlutém autě <strong>zastaví u Wilsonovy garáže</strong> doplnit benzín. <strong>George Wilson</strong> je zlomený — zjistil, že ho <strong>žena podvádí</strong> (s kým, neví), a hodlá s ní okamžitě odjet na Západ. Tom ve Wilsonovi vidí dvojnásobnou hrozbu (manželka i milenka mu odjíždí pryč). <strong>Myrtle Wilson</strong> z patra nad garáží <strong>přes okno vidí žluté auto</strong> a v Jordan, která sedí vedle Toma, si myslí, že vidí <strong>Tomovu manželku</strong>.</p>
+
+<p>V hotelu <strong>Plaza</strong> si nahoře v apartmá objednají whisky (přes prohibici) a začne <strong>klíčová konfrontace</strong>:</p>
+
+<ul>
+<li><strong>Tom</strong> zaútočí: „<strong>Pan Gatsby vám může povědět, kdo je. Pan Nikdo z Nikam.</strong>&quot; Odhalí, že Gatsbyho peníze pocházejí z <strong>pašování alkoholu</strong> a obchodů s Wolfsheimem (boot-legging, lékárny prodávající přes pult alkohol).</li>
+<li><strong>Gatsby</strong> přerušuje Toma a křičí na Daisy: <strong>„Daisy, řekni mu pravdu! Řekni, že jsi ho nikdy nemilovala!&quot;</strong></li>
+<li><strong>Daisy</strong> mezi dvěma muži <strong>kolísá</strong> — chvíli říká, že Toma nikdy nemilovala, ale pak: <strong>„Milovala jsem ho — a tebe taky.&quot;</strong> Tato dvojakost rozdrtí Gatsbyho idealistický sen — Daisy nedokáže říct, že <strong>nikdy</strong> Toma nemilovala.</li>
+<li>Tom triumfálně dovolí, aby <strong>Daisy jela domů s Gatsbym</strong> ve žlutém autě. Sám si vezme zpět své modré kupé s Nickem a Jordan.</li>
+</ul>
+
+<p><strong>Cestou zpět přes Údolí popela</strong>: Myrtle Wilson, která se právě pohádala s manželem (Wilson ji zamkl v patře), uvidí pohybující se žluté auto a v domnění, že v něm sedí Tom, <strong>vyběhne na silnici</strong>. Auto ji <strong>prudce srazí a usmrtí</strong> — <strong>přejede ji a ujede z místa</strong>. Myrtle „leží na vozovce jako balík hadrů&quot;, <strong>prsa jí kape krev</strong>, <strong>levé prso uvolněno</strong> (drsný naturalistický detail). Za volantem ve žlutém autě <strong>seděla Daisy</strong>. Gatsby ji nezastavil.</p>
+
+<p>Tom dorazí o pár minut později druhým autem, zjistí mrtvolu — <strong>myslí si, že řidičem byl Gatsby</strong> (auto poznají, ale ne kdo řídil). Wilson je zničený. Tom Daisy odvede domů.</p>
+
+<p>Doma u Buchananových (East Egg) Nick vyjde ven a najde <strong>Gatsbyho schovaného v keřích pod oknem Daisyiny ložnice</strong> — drží <strong>„posvátnou stráž&quot;</strong>, aby ji Tom „kdyby chtěl zbít, neublížil mu jí&quot;. Nick z okna vidí Toma s Daisy u stolu — sedí tiše, drží se za ruce nad zbytky studeného kuřete a piva — <strong>„konspirují spolu&quot;</strong>. Tah, který Daisy zradu Gatsbyho předznamenává.</p>
+
+<p>Gatsby prozradí Nickovi, že <strong>řídila Daisy</strong>, ale <strong>vinu vezme na sebe</strong>.</p>
+
+<h2>Kapitola 8 — Zaspalá vražda; George zastřelí Gatsbyho v bazénu</h2>
+
+<p>Gatsby celou noc bdí před domem Buchananových. Nick mu radí, aby zmizel z města — Wolfsheim mu sežene jiné místo. Gatsby odmítá. Čeká, že <strong>Daisy zavolá</strong>.</p>
+
+<p>Gatsby Nickovi v noci vypráví <strong>další podrobnosti o tom, jak v Louisville 1917 poznal Daisy</strong>, a vyznívá to <strong>bezbarvě, oloupaně</strong> (na rozdíl od kapitoly 4 a 6 už nevěříme — sen je rozbitý).</p>
+
+<p>Ráno <strong>Gatsby propustí šoféra</strong>, <strong>chce si poprvé za celé léto plavat ve svém bazénu</strong> (rozpis: vyfouknutou matraci na vodu, drink, koupání). Nick odjede do města — telefonuje Daisy, ale <strong>Buchananovi už odjeli neznámo kam</strong>. Nick vyrazí zpět.</p>
+
+<p>Mezitím v Údolí popela: <strong>George Wilson</strong> přesvědčen, že žluté auto, které srazilo Myrtle, <strong>patří jejímu milenci</strong>. Celou noc nad mrtvou ženou monologuje, ráno ukáže oknu na <strong>obří billboardové oči doktora T. J. Eckleburga</strong> a řekne sousedovi: <strong>„Bůh všechno vidí.&quot;</strong> (Vrchol symbolu — pro Wilsona se reklama optometristy stane <strong>Bohem</strong>, jediným zbylým morálním dohlížitelem nad zkaženou Amerikou.)</p>
+
+<p>Wilson vyrazí pěšky přes Údolí popela. Cestou se zastaví na pumpě, jde do East Egg za Tomem. Tom mu <strong>potvrdí, že žluté auto patří Gatsbymu</strong> — a směruje Wilsona k Gatsbyho sídlu. <em>(Pozn.: Tom mu o tom, kdo skutečně řídil, neřekne; sám si myslí, že to byl Gatsby. Tom je tedy spíš zbabělec než zlovolný, ale prakticky <strong>poštve Wilsona</strong> na Gatsbyho.)</em></p>
+
+<p>Gatsby leží na <strong>matraci v bazénu</strong>. Šofér uslyší výstřely. Když Nick přijede, najdou v bazénu <strong>Gatsbyho mrtvolu</strong> plovoucí na nafouklé matraci a <strong>George Wilsona</strong> mrtvého v křoví — <strong>zastřelil Gatsbyho a hned poté sebe</strong>. Na vodě „<strong>drobný rudý kruh</strong>&quot; krve.</p>
+
+<blockquote><em>„… plula matrace s Gatsbym pomalu po vodě, na hladině se ztratil drobný rudý kruh.&quot;</em></blockquote>
+
+<h2>Kapitola 9 — Pohřeb; návrat na Středozápad; závěr</h2>
+
+<p>Po Gatsbyho smrti se Nick <strong>dva roky</strong> zpětně dívá na události a píše vyprávění (rámec).</p>
+
+<p>Snaží se zorganizovat pohřeb. Volá Daisy — <strong>odjela s Tomem na cestu, nezanechali adresu</strong>. Volá Wolfsheimovi — Wolfsheim napíše, že <strong>nemůže přijet</strong> (vyhýbá se policii a publicitě); slavná formulace: <strong>„byl to muž zlomený životem, ale velký svým snem.&quot;</strong> (Wolfsheimovo doznání, že Gatsbyho stvořil — drobné odhalení provenience peněz.) Volá hosty Gatsbyho večírků — <strong>nikdo nepřijde</strong>. Jeden si dokonce telefonicky stěžuje, že tam zapomněl tenisky.</p>
+
+<p>Přijede <strong>Henry Gatz</strong>, Gatsbyho otec — prostý, hrdý farmář ze Severní Dakoty. Ukazuje Nickovi synovo dětské vydání knihy <strong>Hopalong Cassidy</strong> s vlastnoručně napsaným <strong>rozpisem sebezdokonalování</strong> Jamese Gatze — vstávat v 6, cvičit, učit se elektřinu, šetřit 3 dolary týdně. Klíčový důkaz, jak strašlivě dlouho a brzy Gatsby pracoval na svém <strong>americkém snu</strong>.</p>
+
+<p>Na <strong>pohřeb</strong> v dešti dorazí jen <strong>Nick, Gatsbyho otec, pár sluhů, kněz</strong> a — překvapivě — <strong>„muž se sovíma očima&quot;</strong> z knihovny z kapitoly 3 (jediný host večírků). Sundá si brýle a šeptne známé: <strong>„Ten ubohý zkurvysyn&quot;</strong> (<em>The poor son-of-a-bitch</em>).</p>
+
+<p>Před odjezdem Nick <strong>rozejde s Jordan Baker</strong> (cynický, neupřímný vztah). Náhodou na <strong>5. avenue</strong> v New Yorku potkává <strong>Toma</strong>, který se přizná, že <strong>řekl Wilsonovi, kdo je majitel žlutého auta</strong>, a obhajuje se: „Ten chlap byl chudák — sebevýhněly Myrtli, jako bys přejel psa.&quot; Nick si podá s Tomem ruku — uvědomí si, že Tom je morálně beznadějný — a Tom odkráčí do klenotnictví. <strong>Tom a Daisy odjedou pryč a nepřímo nepotrestáni</strong>, „<strong>byli to lhostejní lidé — rozbili věci a tvory a pak uháněli zpátky do svých peněz a své obrovské lhostejnosti, a nechali jiné, ať jim po nich uklidí.&quot;</strong></p>
+
+<p>Nick se vrací <strong>na Středozápad</strong>, rozčarován. V poslední noci v West Eggu sedí na pláži před Gatsbyho prázdným domem a uvažuje, jak holandští mořeplavci kdysi poprvé spatřili „<strong>zelený panenský pás Nového světa</strong>&quot; — a my, Američané, dodnes vztahujeme ruce po zeleném světle daleké budoucnosti, která <strong>každý rok ustupuje před námi</strong>.</p>
+
+<p><strong>Slavná závěrečná věta:</strong></p>
+
+<blockquote><strong>„So we beat on, boats against the current, borne back ceaselessly into the past.&quot;</strong></blockquote>
+<blockquote></blockquote>
+<blockquote><strong>„Tak jdeme dál, lodě proti proudu, neustále unášené zpět do minulosti.&quot;</strong></blockquote>
+
+<p>Kruhová kompozice — uzavírá se motivem <strong>zeleného světla</strong> z konce kapitoly 1; americký sen jako věčné, marné natahování po nedosažitelné minulosti.</p>
+
+<hr>
+
+<h2>Vrchol (krize) — shrnutí</h2>
+
+<p><strong>Klíčová kapitola: 7.</strong> V apartmá hotelu <strong>Plaza</strong> se sejdou Tom + Daisy + Gatsby + Nick + Jordan. <strong>Tom usvědčí</strong> Gatsbyho z pašování alkoholu a temných obchodů s Wolfsheimem. <strong>Daisy zaváhá</strong> — neřekne, že Toma „nikdy nemilovala&quot;, a její dvojakost zničí Gatsbyho sen. Tom triumfuje a posílá Daisy domů ve žlutém autě s Gatsbym. Cestou Daisy (řídící Gatsbyho <strong>žluté auto</strong>) <strong>přejede Myrtle Wilson</strong> v Údolí popela a ujede z místa. Vinu Gatsby vědomě bere na sebe.</p>
+
+<h2>Rozuzlení a konec</h2>
+
+<p>Kapitola 8: George Wilson, přesvědčen Tomem, že <strong>žluté auto patří Gatsbymu</strong>, dojde k jeho domu a <strong>zastřelí Gatsbyho plovoucího v bazénu</strong>. Pak zastřelí sebe. — Kapitola 9: Na <strong>pohřeb nepřijde nikdo</strong> kromě Nicka, Gatsbyho otce a „muže se sovíma očima&quot;. <strong>Daisy s Tomem odjedou pryč</strong> beze stopy a nepotrestaní. Nick se vrací na <strong>Středozápad</strong>, rozčarován bohatým Východem. Vyznění je <strong>tragické a meditativní</strong> — Gatsbyho sen byl velký, ale neslučitelný s realitou.</p>
+
+<hr>
+
+<h2>Klíčové pasáže pro maturitu (pravděpodobné úryvky)</h2>
+
+<h3>A) Gatsby u zeleného světla (závěr kap. 1)</h3>
+<p><strong>Děj:</strong> Nick spatří souseda v noci na trávníku, jak vztahuje ruce přes záliv k drobnému zelenému světlu na druhém břehu.</p>
+<p><strong>Repliky:</strong> Bez dialogu — lyrická pasáž.</p>
+<p><strong>Prostředky:</strong> <strong>symbol</strong> (zelené světlo = americký sen, Daisy), <strong>apostrofa</strong> (Gatsby oslovuje nepřítomnou Daisy přes vodu), <strong>personální vypravěč</strong> (Nick — popis zezadu), <strong>lyrizovaná próza</strong>.</p>
+<p><strong>Funkce:</strong> uvede <strong>leitmotiv touhy a nedosažitelnosti</strong> celého románu.</p>
+
+<h3>B) Velkolepý večírek u Gatsbyho (kap. 3)</h3>
+<p><strong>Děj:</strong> Sobotní hostina, stovky hostů, šampaňské, jazz, hvězdy.</p>
+<p><strong>Repliky:</strong> Gatsby s úsměvem: <strong>„I&#x27;m Gatsby. — Já jsem Gatsby.&quot;</strong> + oslovení <strong>„old sport&quot;</strong>.</p>
+<p><strong>Prostředky:</strong> <strong>metafora</strong>, <strong>přirovnání</strong>, <strong>hyperbola</strong> (hory pomerančů); <strong>kontrast</strong> mezi davem a hostitelovou samotou; <strong>ironie</strong> (hostitele nikdo neznám).</p>
+<p><strong>Funkce:</strong> odhaluje <strong>prázdnotu lesku</strong> jazzového věku — víc lesku = víc samoty.</p>
+
+<h3>C) Konfrontace v hotelu Plaza (kap. 7)</h3>
+<p><strong>Děj:</strong> Tom odhalí Gatsbyho minulost (pašování alkoholu), Daisy zakolísá, Gatsbyho sen praskne.</p>
+<p><strong>Repliky:</strong></p>
+<ul>
+<li>Tom: <strong>„Pan Gatsby vám může povědět, kdo je. Pan Nikdo z Nikam.&quot;</strong></li>
+<li>Gatsby: <strong>„Daisy, řekni mu pravdu! Řekni, že jsi ho nikdy nemilovala!&quot;</strong></li>
+<li>Daisy (lámaným hlasem): <strong>„Milovala jsem ho — a tebe taky.&quot;</strong></li>
+</ul>
+<p><strong>Prostředky:</strong> <strong>dialog</strong>, <strong>gradace</strong>, <strong>vrchol kompozice</strong>, <strong>kontrast</strong> starých × nových peněz, <strong>tragická ironie</strong>.</p>
+<p><strong>Funkce:</strong> zlom celého románu — Gatsbyho idealistický sen v jediné větě praskne.</p>
+
+<h3>D) Smrt Myrtle (kap. 7)</h3>
+<p><strong>Děj:</strong> V Údolí popela srazí žluté auto (řídí Daisy) vyběhnuvší Myrtle Wilson; auto ujede.</p>
+<p><strong>Prostředky:</strong> <strong>symbol</strong> žlutého auta (peníze + smrt), oči Eckleburga shora; <strong>naturalistický detail</strong> (mrtvola), <strong>tragická ironie</strong> (řidičkou je Daisy, vinu nese Gatsby).</p>
+<p><strong>Funkce:</strong> spouštěcí mechanismus tragédie — Gatsbyho oběť.</p>
+
+<h3>E) Gatsbyho smrt v bazénu (kap. 8)</h3>
+<p><strong>Děj:</strong> Wilson zastřelí Gatsbyho plovoucího na matraci v bazénu, hned poté sebe.</p>
+<p><strong>Citace:</strong> <strong>„… plula matrace s Gatsbym pomalu po vodě, na hladině se ztratil drobný rudý kruh.&quot;</strong></p>
+<p><strong>Prostředky:</strong> <strong>symbol</strong> bazénu (Gatsby ho celé léto nepoužil — první a zároveň poslední ponoření = smrt); <strong>chladný, věcný styl</strong> (kontrast s lyrickým patosem zbytku knihy) → <strong>ironie</strong>.</p>
+<p><strong>Funkce:</strong> rituální poprava nositele snu.</p>
+
+<h3>F) Pohřeb (kap. 9)</h3>
+<p><strong>Děj:</strong> Na pohřeb dorazí jen Nick, Gatsbyho otec <strong>Henry Gatz</strong>, kněz a „muž se sovíma očima&quot;. Daisy, Tom, Wolfsheim ani hosté večírků nepřijdou.</p>
+<p><strong>Citace „sovíma očima&quot;</strong>: <strong>„Ten ubohý zkurvysyn.&quot;</strong></p>
+<p><strong>Prostředky:</strong> <strong>kontrast</strong> se scénou velkolepého večírku z kap. 3 (stovky hostů × prázdný pohřeb); <strong>tragická ironie</strong>.</p>
+<p><strong>Funkce:</strong> definitivní odhalení, že „přátelé&quot; byli kupci večírků, ne lidé.</p>
+
+<h3>G) Závěrečná pasáž (kap. 9)</h3>
+<p><strong>Citace:</strong> <strong>„Gatsby věřil v zelené světlo, v orgastickou budoucnost, která rok co rok ustupuje před námi. (...) Tak jdeme dál, lodě proti proudu, neustále unášené zpět do minulosti.&quot;</strong></p>
+<p><strong>Prostředky:</strong> <strong>anafora</strong>, <strong>paralelismus</strong>, <strong>personifikace</strong> budoucnosti, <strong>metafora</strong> lodí proti proudu, <strong>kruhová kompozice</strong> (návrat k zelenému světlu z kap. 1), <strong>filozofická pointa</strong>.</p>
+<p><strong>Funkce:</strong> povýší příběh na <strong>mýtus o věčné lidské touze</strong> — americký sen jako tragická iluze celé generace.</p>
+
+<hr>
+
+<h2>Časté chyby a záměny</h2>
+
+<ul>
+<li><strong>Kdo přejel Myrtle?</strong> <strong>Daisy</strong> řídila, <strong>Daisy přejela Myrtle</strong> ve žlutém autě. Gatsby pouze vinu <strong>vzal na sebe</strong> a nezastavil. <em>(Časté chybné tvrzení: „Gatsby přejel Myrtle.&quot;)</em></li>
+<li><strong>Kdo zastřelil Gatsbyho?</strong> <strong>George Wilson</strong> (manžel Myrtle), který si po rozhovoru s Tomem myslel, že Gatsby byl jak řidič, tak Myrtlin milenec. Wilson <strong>poté zastřelil sebe</strong>.</li>
+<li><strong>Kdo skutečně řídil v okamžiku srážky?</strong> <strong>Daisy.</strong> Ne Gatsby, ne Tom. <em>(Tom žluté auto řídil <strong>do</strong> New Yorku; <strong>z</strong> New Yorku jelo s Daisy za volantem.)</em></li>
+<li><strong>Barva auta:</strong> <strong>žluté</strong> (cream-colored, krémově žluté). Ne červené, ne stříbrné. <strong>Tomovo auto</strong> je <strong>modré kupé</strong>.</li>
+<li><strong>Daisy je Nickova kdo?</strong> <strong>Bratranka z druhého kolena</strong> (second cousin once removed). Tom byl Nickův <strong>spolužák z Yalu</strong>.</li>
+<li><strong>Jméno před přejmenováním:</strong> <strong>James Gatz</strong> → Jay Gatsby. (Severní Dakota, chudý farmářský původ; mentor <strong>Dan Cody</strong>.)</li>
+<li><strong>West Egg × East Egg:</strong> <strong>West Egg</strong> = noví, nedávno zbohatlí (<strong>Gatsby, Nick</strong>); <strong>East Egg</strong> = staré rodinné peníze (<strong>Buchananovi</strong>). Mezi nimi záliv s <strong>Daisyiným zeleným světlem na molu</strong>.</li>
+<li><strong>Doktor T. J. Eckleburg:</strong> <strong>není postava</strong> — je to <strong>billboardová reklama</strong> zaniklého optometristy nad Údolím popela; obří modré brýlaté oči. Symbol nepřítomného Boha / vyhasnuté morálky.</li>
+<li><strong>Meyer Wolfsheim:</strong> Gatsbyho gangsterský patron, <strong>„fixoval&quot; baseballovou Světovou sérii 1919</strong> (Black Sox Scandal — reálná událost zapracovaná do fikce). Nosí manžetové knoflíčky z lidských stoliček. <strong>Na pohřeb nepřijde.</strong></li>
+<li><strong>„Old sport&quot;:</strong> Gatsbyho charakteristické oslovení (čes. překlady někdy „starouši&quot;, „kamaráde&quot;, „panáčku&quot; — drží se rozpoznatelně oxfordský / aristokratický anglicismus, kterým Gatsby maskuje svůj nízký původ).</li>
+<li><strong>Rok prvního setkání Gatsby × Daisy:</strong> <strong>1917 v Louisville (Kentucky)</strong>, kde byl Gatsby důstojník před odjezdem do Evropy. Setkání po 5 letech = <strong>1922</strong> (rok hlavního děje).</li>
+<li><strong>Owl Eyes (sovíma očima):</strong> drobná, ale klíčová postava — host knihovny z kap. 3, <strong>jediný z hostů</strong>, který přijde na pohřeb.</li>
+<li><strong>Henry Gatz</strong> vs. <strong>James Gatz</strong>: <strong>Henry</strong> je Gatsbyho <strong>otec</strong> (přijede na pohřeb se synovým dětským deníkem); <strong>James</strong> je jméno samotného Gatsbyho před přejmenováním.</li>
+<li><strong>Soused Catherine, McKee:</strong> druhotné postavy z bytu na Manhattanu (kap. 2). U zkoušky nepodstatné — ale Catherine je Myrtlina sestra.</li>
+<li><strong>Wilsonův důvod k vraždě:</strong> kombinace dvou věcí: (1) myslí, že žluté auto zabilo Myrtle, (2) myslí, že Gatsby byl Myrtlin <strong>milenec</strong> (omyl — milenec byl Tom). Tom <strong>úmyslně</strong> odpovědnost přesměruje na Gatsbyho.</li>
+<li><strong>Daisy se nejmenuje „Buchananová&quot; v původním smyslu — rozená Fay</strong>; v některých českých překladech psáno <strong>Fayová</strong>.</li>
+</ul>
+
+<hr>
+
+<h2>Zdroje (ověřeno)</h2>
+
+<ul>
+<li><a href="https://rozbor-dila.cz/velky-gatsby-rozbor-dila-k-maturite/" target="_blank" rel="noopener">Velký Gatsby — rozbor díla k maturitě (rozbor-dila.cz)</a></li>
+<li><a href="https://www.cesky-jazyk.cz/ctenarsky-denik/francis-scott-fitzgerald/velky-gatsby-rozbor.html" target="_blank" rel="noopener">Francis Scott Fitzgerald — Velký Gatsby — rozbor (cesky-jazyk.cz)</a></li>
+<li><a href="https://cs.wikipedia.org/wiki/Velk%C3%BD_Gatsby" target="_blank" rel="noopener">Velký Gatsby — Wikipedie</a></li>
+<li><a href="https://studijni-svet.cz/velky-gatsby-rozbor-dila/" target="_blank" rel="noopener">Velký Gatsby — rozbor díla (studijni-svet.cz)</a></li>
+<li><a href="https://www.definus.cz/magazin/velky-gatsby-rozbor-dila/" target="_blank" rel="noopener">Velký Gatsby — rozbor díla (definus.cz)</a></li>
+<li><a href="https://www.edufix.cz/clanky/maturita/cestina/velky-gatsby" target="_blank" rel="noopener">F. S. Fitzgerald — Velký Gatsby (edufix.cz)</a></li>
+</ul>
+</div>
+      </div>
+
+    </section>
+
+
+    <section id="tahak" class="section">
+      <h2>📖 Kompletní maturitní tahák (v pořadí mluvení)</h2>
+      <p class="section-hint">Analytické info v pořadí, jak budeš mluvit u zkoušky. Obrázky jsou hned u sekce, ke které patří.</p>
+      <div class="tahak">
+        <h1>11. Francis Scott Fitzgerald — Velký Gatsby (<em>The Great Gatsby</em>)</h1>
+
+<blockquote><strong>Vrcholný román americké „ztracené generace&quot; a kronika jazzového věku</strong> (1925). Skrze ich-formu vypravěče Nicka Carrawaye sleduje osud tajemného boháče Jaye Gatsbyho, který se posedle upíná k nedosažitelnému ideálu (Daisy = ztělesnění amerického snu). Fitzgeraldova kritika <strong>amerického snu</strong>: peníze nepřinášejí lásku ani identitu, minulost se nedá vrátit. Klíčové symboly — <strong>zelené světlo</strong> na Daisyině molu, <strong>oči doktora T. J. Eckleburga</strong>, <strong>údolí popela</strong>. Slavná závěrečná věta: <em>„So we beat on, boats against the current, borne back ceaselessly into the past.&quot;</em></blockquote>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">1️⃣ Mluvíš v 1. části</span><span class="badge-hint">Autor &amp; lit. kontext · 3 min · 4 b</span></div><h2 id="cast-4">4) LITERÁRNĚHISTORICKÝ KONTEXT (0–4 b)</h2>
+<div id="autor-img" class="embedded-image">
+  <a href="../../images/11-fitzgerald-velky-gatsby/00-author.jpg" target="_blank"><img src="../../images/11-fitzgerald-velky-gatsby/00-author.jpg" alt="Karta autora"></a>
+  <div class="image-caption">👤 Autor · biografie · slavná díla · směr · kontext</div>
+</div>
+
+<p><strong>Autor — Francis Scott Fitzgerald (1896–1940)</strong></p>
+<ul>
+<li>Narozen v <strong>St. Paul, Minnesota</strong>; pojmenován po vzdáleném příbuzném Francisi Scottu <strong>Key</strong>ovi (autor americké hymny).</li>
+<li>Studoval na <strong>Princetonu</strong>, nedokončil. Po vstupu USA do 1. světové války sloužil v armádě, ale <strong>nebyl nasazen na frontě</strong>.</li>
+<li>1920 — sláva po <em>Této straně ráje</em> (<em>This Side of Paradise</em>); svatba se <strong>Zeldou Sayre</strong> — extravagantní pár jazzového věku.</li>
+<li>Žili střídavě v New Yorku, Paříži a na Riviéře (přátelství s <strong>Hemingwayem</strong>, <strong>Gertrude Steinovou</strong>, Picassem). Životní styl s velkou spotřebou alkoholu a kabaretů.</li>
+<li>Zelda postupně <strong>psychicky onemocněla</strong> (schizofrenie), skončila v psychiatrickém ústavu (zemřela 1948 při požáru nemocnice).</li>
+<li>30. léta — pokles popularity, <strong>alkoholismus</strong>, dluhy, scenáristická práce v <strong>Hollywoodu</strong>.</li>
+<li>Zemřel <strong>1940 na infarkt v Hollywoodu</strong>, ve 44 letech, v přesvědčení, že je literární neúspěch. Sláva přišla <strong>posmrtně</strong> (50. léta) — dnes je <em>Velký Gatsby</em> považován za <strong>vrcholný americký román 20. století</strong>.</li>
+</ul>
+
+<p><strong>Další díla</strong></p>
+<ul>
+<li><em>This Side of Paradise</em> (<em>Tato strana ráje</em>, 1920) — generační román.</li>
+<li><em>The Beautiful and Damned</em> (<em>Krásní a prokletí</em>, 1922).</li>
+<li><em>The Great Gatsby</em> (<em>Velký Gatsby</em>, 1925) — vrchol.</li>
+<li><em>Tender Is the Night</em> (<em>Něžná je noc</em> / <em>Něžnost noci</em>, 1934) — částečně autobiografický (Zelda v ústavu).</li>
+<li><em>The Love of the Last Tycoon</em> (<em>Poslední magnát</em>, 1941, nedokončeno).</li>
+<li>Povídky: <em>The Curious Case of Benjamin Button</em> (Podivuhodný případ Benjamina Buttona).</li>
+</ul>
+
+<p><strong>Literární a historický kontext</strong></p>
+<ul>
+<li><strong>Jazz age</strong> (<strong>jazzový věk</strong>, 1918/1920–1929) — vlastní termín Fitzgeraldův (sborník <em>Tales of the Jazz Age</em>, 1922). Poválečný hospodářský <strong>boom</strong>, kultura kabaretů, jazzové hudby, automobilů, módy, sexuálního uvolnění, <strong>prohibice</strong> (1920–1933, zákaz alkoholu → vznik pašerácké mafie, Al Capone) a <strong>emancipace žen</strong> (vlapper, krátké šaty, krátké vlasy).</li>
+<li><strong>Krach na newyorské burze (Black Tuesday, 29. 10. 1929)</strong> ukončuje jazzový věk a začíná <strong>Velká hospodářská krize</strong>.</li>
+<li><strong>Ztracená generace</strong> (Lost Generation) — termín <strong>Gertrude Steinové</strong>: generace umělců, kteří zažili 1. světovou válku, ztratili víru v tradiční hodnoty a často žili v emigraci v Paříži.</li>
+<li>Členové: <strong>F. S. Fitzgerald</strong>, <strong>Ernest Hemingway</strong> (<em>Komu zvoní hrana</em>, <em>Sbohem armádo</em>, <em>Stařec a moře</em>), <strong>John Dos Passos</strong> (<em>Manhattan Transfer</em>, <em>USA</em>), <strong>John Steinbeck</strong> (<em>Hrozny hněvu</em>, <em>O myších a lidech</em>), <strong>William Faulkner</strong>, <strong>E. E. Cummings</strong>, <strong>Sherwood Anderson</strong>, <strong>T. S. Eliot</strong>, <strong>Ezra Pound</strong>.</li>
+<li><strong>Americký sen</strong> (American Dream) — víra, že kdokoli může z chudoby povstat k bohatství vlastní pílí; Fitzgerald ho odhaluje jako iluzi.</li>
+<li><strong>Modernismus</strong> — literární směr 1. poloviny 20. stol.; rozbití tradiční formy, vnitřní svět postav, symbolismus, ironie, fragmentace.</li>
+<li><strong>Souvislost s českou literaturou:</strong> stejné období v ČR — meziválečná avantgarda (Wolker, Nezval, Vančura, Čapek), proletářská poezie, poetismus. <strong>Karel Čapek</strong> a <strong>Bratři Čapkové</strong> vydávají <em>R.U.R.</em> (1920), <em>Krakatit</em>, <em>Bílá nemoc</em> — také reagují na poválečnou krizi modernity. Současně v Evropě tvoří <strong>Hašek</strong> (<em>Švejk</em>), <strong>Kafka</strong>, <strong>Brecht</strong>.</li>
+<li><strong>Adaptace:</strong> filmy 1949 (Alan Ladd), <strong>1974</strong> (Robert Redford &amp; Mia Farrow), <strong>2013</strong> (Leonardo DiCaprio &amp; Carey Mulligan, režie Baz Luhrmann).</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — základ</span><span class="badge-hint">O díle: druh, žánr</span></div><h2 id="cast-0">0) ZÁKLADNÍ IDENTIFIKACE</h2>
+<div id="dilo-img" class="embedded-image">
+  <a href="../../images/11-fitzgerald-velky-gatsby/00-book-info.jpg" target="_blank"><img src="../../images/11-fitzgerald-velky-gatsby/00-book-info.jpg" alt="Karta díla"></a>
+  <div class="image-caption">📖 Žánr · doba · kompozice · motivy · prostředky</div>
+</div>
+
+<ul>
+<li><strong>Autor:</strong> Francis Scott Key Fitzgerald, 1896–1940, USA (Minnesota → Princeton → New York → Paříž → Hollywood)</li>
+<li><strong>Dílo:</strong> <em>Velký Gatsby</em> (<em>The Great Gatsby</em>), 1925, USA</li>
+<li><strong>Literární druh:</strong> <strong>epika</strong></li>
+<li><strong>Literární žánr:</strong> <strong>román</strong> — společenský / psychologický / lyrizovaný román, kratšího rozsahu (cca 9 kapitol, ~150 stran)</li>
+<li><strong>Směr / proud:</strong> <strong>modernismus</strong>, americká próza 20. let, literatura <strong>ztracené generace</strong> (lost generation)</li>
+<li><strong>Doba a místo děje:</strong> léto <strong>1922</strong>, Long Island (smyšlené pobřežní vsi <strong>West Egg</strong> a <strong>East Egg</strong>), <strong>New York City</strong>, <strong>údolí popela</strong> (Valley of Ashes) mezi NY a Long Islandem</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — I.</span><span class="badge-hint">Druh + žánr · výstavba · vypravěč (4 b)</span></div><h2 id="cast-1">1) I. ČÁST ANALÝZY (0–4 b)</h2>
+
+<p><strong>Literární druh a žánr</strong></p>
+<ul>
+<li><strong>Epika</strong> — vyprávěný text s vypravěčem, dějem, postavami, prostorem a časem.</li>
+<li><strong>Román</strong> — rozsáhlejší prozaický útvar s více postavami a dějovými liniemi.</li>
+<li><strong>Psychologický / společenský román</strong> — důraz na vnitřní svět postav (Gatsby, Nick) a zároveň ostrá kritika americké společnosti 20. let.</li>
+<li><strong>Lyrizovaná próza</strong> — silný básnický nádech jazyka (metafory, rytmus, refrény), místy přechází do meditativní reflexe.</li>
+</ul>
+
+<p><strong>Výstavba díla / kompozice</strong></p>
+<ul>
+<li><strong>9 kapitol</strong>, <strong>chronologická</strong> s <strong>retrospektivními vsuvkami</strong> (flashbacky o Gatsbyho minulosti — James Gatz, válka, první setkání s Daisy v Louisville 1917).</li>
+<li><strong>Rámcová kompozice:</strong> Nick vypráví příběh <strong>zpětně</strong>, z odstupu (na úvod oznámí, že odjel z Východu rozčarován, a teprve potom vypráví, co se stalo).</li>
+<li><strong>Vrcholná scéna</strong> — konfrontace v hotelu <strong>Plaza</strong> (kap. 7), kdy Tom odhalí Gatsbyho minulost.</li>
+<li><strong>Katastrofa</strong> — Wilsonova vražda Gatsbyho v bazénu (kap. 8), pohřeb (kap. 9), Nickův odjezd.</li>
+<li><strong>Kruhová / rámcová pointa:</strong> román začíná Nickovým komentářem (rok 1922 byl pro něj zlomovým) a končí proslulou pasáží o zeleném světle a člunech proti proudu — uzavírá kruh.</li>
+<li>Próza, <strong>bez kapitolových názvů</strong> (jen čísla).</li>
+</ul>
+
+<p><strong>Veršová výstavba</strong></p>
+<ul>
+<li>N/A — psáno <strong>prózou</strong>, ale <strong>lyrizovanou</strong> (rytmické věty, anafory, opakování, básnické přívlastky).</li>
+</ul>
+
+<p><strong>Vypravěč / typ promluvy</strong></p>
+<ul>
+<li><strong>Ich-forma</strong> — vypráví <strong>Nick Carraway</strong> v 1. osobě jednotného čísla.</li>
+<li><strong>Personální vypravěč</strong> — vidíme svět skrze Nickovy oči a jeho hodnocení.</li>
+<li><strong>Nepřímý hrdina / pozorovatel</strong> — Nick je sice postavou děje (Daisyin bratranec, Gatsbyho soused, Jordanin přítel), ale do hlavního konfliktu jen okrajově zasahuje. Hraje roli <strong>kritického, morálně neutrálního, ale nikoli zcela spolehlivého</strong> svědka.</li>
+<li><strong>Reflektor:</strong> Nick zároveň komentuje, hodnotí, filozofuje — vypravěč spojuje <strong>vyprávění + úvahu</strong>.</li>
+<li>Převažuje <strong>vyprávění</strong>, vyskytují se <strong>dialogy</strong> (večírky, hádka v Plaze), <strong>úvahy / meditace</strong> Nicka (úvod, závěr), <strong>vnitřní monolog</strong> (Nickovy reflexe).</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — II.</span><span class="badge-hint">Zasazení do děje · postavy · téma · motivy (4 b)</span></div><h2 id="cast-2">2) II. ČÁST ANALÝZY (0–4 b)</h2>
+<div id="postavy" class="embedded-image">
+  <a href="../../images/11-fitzgerald-velky-gatsby/04-postavy.jpg" target="_blank"><img src="../../images/11-fitzgerald-velky-gatsby/04-postavy.jpg" alt="Postavy a jejich vztahy"></a>
+  <div class="image-caption">🧬 Mapa postav · rodinné vazby · láska · konflikty</div>
+</div>
+
+<p><strong>Zasazení výňatku do kontextu díla</strong> (uprav podle úryvku, který ti dají)</p>
+
+<p>Pravděpodobné scény, které u zkoušky uvidíš:</p>
+
+<ul>
+<li><strong>Úvodní reflexe</strong> (kap. 1) — Nick vzpomíná na otcovo poučení („Než někoho začneš soudit, mysli na to, že ne každý měl stejné šance jako ty&quot;); představení West Egg a East Egg.</li>
+<li><strong>Gatsby u zeleného světla</strong> (závěr kap. 1) — Nick poprvé spatří souseda Gatsbyho v noci na trávníku, jak natahuje ruce k zelenému světlu na druhém břehu zálivu (Daisyino molo).</li>
+<li><strong>Údolí popela a oči Dr. Eckleburga</strong> (kap. 2) — popis šedé pustiny mezi NY a Long Islandem, obří billboard s brýlemi optometristy (symbol ztracené morálky, vyprahlého boha).</li>
+<li><strong>Velkolepý večírek</strong> (kap. 3) — první Gatsbyho hostina, fámy o hostiteli, Nick poprvé pozná Gatsbyho („Old sport&quot;).</li>
+<li><strong>Shledání po pěti letech</strong> (kap. 5) — Gatsby se přes Nicka konečně setká s Daisy. Slavná scéna v Gatsbyho ložnici s <strong>košilemi</strong> — Daisy pláče do hromady drahých košil.</li>
+<li><strong>Gatsbyho pravá identita</strong> (kap. 6) — flashback: chlapec James Gatz z farmářské Severní Dakoty, který si v 17 letech přejmenuje jméno na Jay Gatsby; setkání s Danem Codym; válka; první setkání s Daisy v Louisville.</li>
+<li><strong>Konfrontace v Plaze</strong> (kap. 7) — Tom usvědčí Gatsbyho z pašování alkoholu (boot-legging) a kontaktů s Wolfsheimem; Daisy couvá a vrací se k Tomovi.</li>
+<li><strong>Smrt Myrtle</strong> (kap. 7) — cestou zpět Daisy řídí Gatsbyho <strong>žluté auto</strong>, srazí Myrtle Wilson v údolí popela a ujede. Gatsby kryje Daisy.</li>
+<li><strong>Tom štve Wilsona</strong> (kap. 8) — Tom Wilsonovi řekne, že žluté auto je Gatsbyho.</li>
+<li><strong>Vražda v bazénu</strong> (kap. 8) — George Wilson přijde do Gatsbyho sídla, zastřelí Gatsbyho plovoucího v bazénu a pak sám sebe.</li>
+<li><strong>Pohřeb (kap. 9)</strong> — na pohřeb nepřijde nikdo z bohatých „přátel&quot;, jen Nick, Gatsbyho otec a kněz.</li>
+<li><strong>Závěr (kap. 9)</strong> — Nick odjíždí na Středozápad rozčarován; medituje o zeleném světle a slavná závěrečná věta.</li>
+</ul>
+
+<p><strong>Téma</strong></p>
+<ul>
+<li><strong>Hlavní téma:</strong> kritika <strong>amerického snu</strong> — peníze a společenský vzestup nepřinášejí lásku, identitu ani štěstí.</li>
+<li><strong>Vedlejší témata:</strong></li>
+<li><strong>minulost se nedá vrátit</strong> (Gatsbyho posedlost rokem 1917, kdy poznal Daisy);</li>
+<li><strong>deziluze, vystřízlivění</strong> — americký sen je iluze, pozlátko bez obsahu;</li>
+<li><strong>morální prázdnota</strong> vyšší společnosti, <strong>přetvářka</strong>;</li>
+<li><strong>třídní rozdíly</strong> — staří boháči (East Egg) × nově zbohatlí (West Egg) × chudina (údolí popela);</li>
+<li><strong>láska × peníze</strong>, <strong>idealismus × cynismus</strong>;</li>
+<li><strong>ztracená generace</strong> — generace po 1. světové válce ztrácí víru v hodnoty.</li>
+</ul>
+
+<p><strong>Motivy</strong></p>
+<ul>
+<li><strong>Zelené světlo</strong> na konci Daisyina mola — Gatsbyho <strong>sen</strong> o lásce a budoucnosti, <strong>americký sen</strong> v jednom symbolu.</li>
+<li><strong>Oči doktora T. J. Eckleburga</strong> — obří reklamní billboard nad údolím popela: brýle bez tváře. Symbol <strong>ztraceného Boha</strong>, vyhaslé morálky, neosobního „dohlížitele&quot; nad zkaženou společností (Wilson na konci říká, že Bůh všechno vidí — a ukáže na billboard).</li>
+<li><strong>Údolí popela</strong> (Valley of Ashes) — popelová pustina mezi New Yorkem a Long Islandem, kde žijí chudí (Wilsonovi). Symbol <strong>odvrácené strany</strong> amerického snu — popel snů, bída pod leskem.</li>
+<li><strong>Žluté auto</strong> — Gatsbyho křiklavý Rolls-Royce. Symbol okázalého bohatství i <strong>nástroj smrti</strong> Myrtle.</li>
+<li><strong>Velkolepé večírky</strong> — symbol prázdnoty: stovky lidí, ale Gatsby zůstává sám.</li>
+<li><strong>Bílá</strong> (Daisy, Jordan) × <strong>žlutá/zlatá</strong> (peníze, smrt) × <strong>zelená</strong> (sen) × <strong>šedá</strong> (popel, beznaděj) — barevná symbolika.</li>
+<li><strong>Daisyin hlas</strong> — „its voice is full of money&quot; (Gatsby o Daisy: „má hlas plný peněz&quot;) — Daisy ztělesňuje peníze.</li>
+<li><strong>Bazén</strong> — Gatsby ho celé léto nepoužil; první (a poslední) ponoření = smrt.</li>
+<li><strong>Pero a hodiny</strong> — drobnější motivy: Gatsby měl jako chlapec rozpis sebezdokonalování (deník Jamese Gatze).</li>
+</ul>
+
+<p><strong>Postavy</strong></p>
+<ul>
+<li><strong>Jay Gatsby</strong> (vl. jm. <strong>James Gatz</strong>) — tajemný mladý boháč, <strong>idealistický snílek</strong>, fanaticky upnutý k Daisy. Pochází z chudé farmářské rodiny ze Severní Dakoty, v 17 letech si dal nové jméno. Zbohatl pašováním alkoholu (prohibice) a temnými obchody s Wolfsheimem. Pořádá honosné večírky <strong>kvůli Daisy</strong> — doufá, že ho jednou navštíví. Tragický hrdina, <strong>„velký&quot; právě svou neústupnou vírou ve sen</strong>.</li>
+<li><strong>Nick Carraway</strong> — vypravěč, <strong>30letý</strong> absolvent Yalu ze <strong>Středozápadu</strong>. Burzovní makléř v NY. Daisyin bratranec, Tom byl jeho spolužák, Gatsby je jeho <strong>soused</strong> v West Egg. <strong>Kritický pozorovatel</strong>, morálně neutrální až rozčarovaný. Nakonec se z Východu vrací domů.</li>
+<li><strong>Daisy Buchanan</strong> (rozená Fay) — Nickova bratranka. Krásná, <strong>povrchní</strong>, znuděná, přelétavá. Před válkou milovala Gatsbyho, ale vzala si bohatého Toma. <strong>Hlas plný peněz.</strong> Nakonec <strong>couvne</strong> — vrátí se k Tomovi a Gatsbyho obětuje. Předloha: Fitzgeraldova žena <strong>Zelda</strong>.</li>
+<li><strong>Tom Buchanan</strong> — Daisyin manžel, <strong>brutální, arogantní, rasistický</strong> starý boháč. Bývalý fotbalista Yalu. Podvádí Daisy s Myrtle. Přesně ten typ „starých peněz&quot; (East Egg), které Gatsby nikdy nedostihne.</li>
+<li><strong>Jordan Baker</strong> — profesionální <strong>golfistka</strong>, Daisyina kamarádka, Nickova přítelkyně. <strong>Cyničná, sportovní moderní žena</strong> jazzového věku. Podvádí v golfu — typ amorálního cynika.</li>
+<li><strong>Myrtle Wilson</strong> — Tomova milenka, manželka chudáka George Wilsona z údolí popela. Touží po vzestupu. <strong>Srazí ji Daisy v Gatsbyho voze.</strong></li>
+<li><strong>George Wilson</strong> — chudý mechanik, Myrtlin manžel. Po smrti ženy zlomený. Tom mu řekne, kdo je majitel auta; Wilson <strong>zastřelí Gatsbyho a pak sebe</strong>.</li>
+<li><strong>Meyer Wolfsheim</strong> — Gatsbyho kontakt v podsvětí, <strong>židovský gangster</strong>, podle Fitzgeralda zařídil podvody se Světovou sérií 1919. Symbol <strong>temného původu Gatsbyho peněz</strong>. Na pohřeb nepřijde.</li>
+<li><strong>Henry Gatz</strong> — Gatsbyho otec, prostý farmář; přijede na pohřeb a ukáže Nickovi synův dětský deník s rozpisem sebezdokonalování.</li>
+</ul>
+
+<p><strong>Typy promluv</strong></p>
+<ul>
+<li>Převažuje <strong>vyprávění</strong> (Nickovo) s prokládanými <strong>úvahami / reflexí</strong>.</li>
+<li><strong>Dialogy</strong> — zvláště v scénách večírků a v Plaze.</li>
+<li><strong>Vnitřní monolog</strong> — Nickovy myšlenky, jeho hodnocení postav.</li>
+<li><strong>Retrospektiva</strong> — kapitoly 6 a 8 obsahují flashbacky.</li>
+</ul>
+
+<p><strong>Jiné typické prvky</strong></p>
+<ul>
+<li><strong>Symbolismus</strong> (zelené světlo, oči, údolí popela, žluté auto) je nosný — román lze číst jako moderní <strong>alegorii amerického snu</strong>.</li>
+<li><strong>Kontrast</strong> lesku × prázdnoty, snu × reality, idealismu × cynismu.</li>
+<li><strong>Nespolehlivý vypravěč?</strong> — Nick se prohlašuje za „jedinou poctivou osobu&quot;, ale o sobě sám lže (vztah s Jordan).</li>
+<li><strong>Motiv času</strong> — hodiny, kalendáře, „nedá se vrátit zpátky&quot;, a přesto Gatsby věří, že <strong>„the past can be repeated&quot;</strong> („minulost se dá zopakovat&quot;).</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">3️⃣ Mluvíš v 3. části</span><span class="badge-hint">Jazyk + umělecké prostředky &amp; funkce · 4 b</span></div><h2 id="cast-3">3) III. ČÁST ANALÝZY (0–4 b)</h2>
+
+<p><strong>Jazykové prostředky</strong></p>
+<ul>
+<li><strong>Spisovný, literární jazyk</strong> — vznešený, <strong>lyrický, poetický, metaforický</strong>.</li>
+<li>Časté <strong>dlouhé souvětí</strong> s rytmickou stavbou, gradací, paralelismy.</li>
+<li><strong>Jazz-age slang</strong> v dialozích postav (zvl. Jordan, Tom, Daisy: „old sport&quot;, „swell&quot;, „jazz&quot;, „cocktail&quot;).</li>
+<li><strong>Kontrast vysoké a nízké roviny</strong> — patetické pasáže (Nickovy úvahy o zeleném světle, závěr) × prozaické / vulgární repliky Toma; hovorová mluva chudých z údolí popela.</li>
+<li><strong>Cizí jazyk</strong> — anglicismy (oxfordský přízvuk Gatsbyho), italské a jidišské vsuvky (Wolfsheim).</li>
+<li><strong>Civilizační reálie</strong> — značky aut, šaty, jazzové písně, koktejly, prohibice — autentická atmosféra <strong>20. let</strong>.</li>
+</ul>
+
+<p><strong>Umělecké prostředky (tropy a figury)</strong></p>
+<ul>
+<li><strong>Symbol</strong> — <strong>zelené světlo</strong> (sen), <strong>oči doktora T. J. Eckleburga</strong> (zaniklá morálka, Bůh, který se odvrátil), <strong>údolí popela</strong> (skryté oběti pokroku), <strong>žluté auto</strong> (peníze + smrt).</li>
+<li><strong>Synekdocha</strong> — <strong>zelené světlo</strong> zastupuje <strong>celý americký sen</strong>; část za celek.</li>
+<li><strong>Metafora</strong> — <em>„her voice is full of money&quot;</em> (Daisyin hlas plný peněz); <em>„boats against the current&quot;</em> (lodě proti proudu).</li>
+<li><strong>Personifikace</strong> — <em>„the orgastic future that year by year recedes before us&quot;</em> (orgastická budoucnost se před námi rok co rok vzdaluje).</li>
+<li><strong>Apostrofa</strong> — Gatsby vztahuje ruce k zelenému světlu (oslovení nepřítomné Daisy přes vodu).</li>
+<li><strong>Kontrast (antiteze)</strong> — staré × nové peníze; East Egg × West Egg; lesk × prázdnota; sen × realita; bílá Daisy × šedá údolí popela; <strong>kruhová kompozice „bije v proudu&quot;</strong>.</li>
+<li><strong>Anafora a paralelismus</strong> ve slavném závěrečném odstavci (<em>„Gatsby believed in the green light… So we beat on…&quot;</em>).</li>
+<li><strong>Hyperbola</strong> — popisy večírků, pohádkové bohatství Gatsbyho domu, hory pomerančů a slepic.</li>
+<li><strong>Ironie</strong> (situační i tragická) — Gatsby umírá za zločin, který nespáchal; na pohřeb „nejštědřejšího&quot; hostitele nikdo nepřijde; Tom (vrah) chodí beztrestně dál.</li>
+<li><strong>Symbolika barev</strong> — bílá (Daisy = zdánlivá čistota), zlatá / žlutá (peníze, smrt), zelená (sen), šedá (popel), modrá (Gatsbyho zahrada).</li>
+</ul>
+
+<p><strong>Funkce prostředků:</strong></p>
+<ul>
+<li><strong>Lyrické pasáže</strong> mytizují Gatsbyho touhu — povyšují ho z gangstera na <strong>tragického snílka</strong>.</li>
+<li><strong>Symboly</strong> umožňují číst román jako <strong>kritickou alegorii americké společnosti</strong>.</li>
+<li><strong>Kontrasty</strong> odhalují <strong>prázdnotu jazzového věku</strong>: čím větší lesk, tím větší vnitřní propast.</li>
+<li><strong>Kruhová kompozice + anafora v závěru</strong> dávají románu <strong>filozofický rozměr</strong> — člověk navěky pluje proti proudu, marně se chce vrátit do minulosti.</li>
+</ul>
+
+<p><strong>Slavná závěrečná věta (NAUČIT NAZPAMĚŤ):</strong></p>
+
+<blockquote><em>„So we beat on, boats against the current, borne back ceaselessly into the past.&quot;</em></blockquote>
+<blockquote></blockquote>
+<blockquote><strong>„Tak jdeme dál, lodě proti proudu, neustále unášené zpátky do minulosti.&quot;</strong></blockquote>
+
+<p>(Symbol nezvratnosti času — americký sen nelze dohnat, minulost nelze obnovit.)</p>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Opěrné body — mnemoniky k zapamatování</span></div><h2 id="cast-5">5) OPĚRNÉ BODY DO HLAVY (NAUČIT SE NAZPAMĚŤ)</h2>
+
+<p><strong>Definitorická věta:</strong> <em>Velký Gatsby je román Francise Scotta Fitzgeralda z roku 1925, vrcholné dílo americké ztracené generace a kronika jazzového věku. V ich-formě vypráví Nick Carraway tragický příběh tajemného boháče Jaye Gatsbyho, jehož posedlost nedosažitelnou Daisy Buchanan slouží Fitzgeraldovi jako podobenství o iluzornosti amerického snu.</em></p>
+
+<p><strong>3 postavy, co stačí znát:</strong> <strong>Jay Gatsby</strong> (snílek, boháč, pašerák — miluje Daisy), <strong>Nick Carraway</strong> (vypravěč, kritický pozorovatel), <strong>Daisy Buchanan</strong> (povrchní, vrátí se k Tomovi, srazí Myrtle).</p>
+
+<p><strong>Téma 1 větou:</strong> <em>Americký sen je iluze — peníze nepřinášejí lásku, identitu ani štěstí, a minulost se nedá vrátit.</em></p>
+
+<p><strong>3 symboly se zdůvodněním:</strong></p>
+<ul>
+<li><strong>zelené světlo</strong> = synekdocha amerického snu, Gatsbyho nedosažitelná Daisy;</li>
+<li><strong>oči doktora T. J. Eckleburga</strong> = nepřítomný Bůh, vyhořelá morálka jazzového věku;</li>
+<li><strong>údolí popela</strong> = oběti pokroku, popel snů pod leskem velkoměsta.</li>
+</ul>
+
+<p><strong>Slavná věta nazpaměť:</strong> <em>„Tak jdeme dál, lodě proti proudu, neustále unášené zpátky do minulosti.&quot;</em></p>
+
+<p><strong>Jazzový věk heslovitě:</strong> 1920–1929 USA, prohibice, kabarety, jazz, automobily, emancipace, krach 1929.</p>
+
+<p><strong>Ztracená generace heslovitě:</strong> Fitzgerald, Hemingway, Dos Passos, Steinbeck, Faulkner — Gertrude Steinová, Paříž, deziluze po 1. světové válce.</p>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Častý úryvek u zkoušky</span></div><h2 id="cast-6">6) ČASTÝ ÚRYVEK U ZKOUŠKY</h2>
+
+<p>Nejpravděpodobnější výňatky v maturitních pracovních listech:</p>
+
+<h3>A) Gatsby u zeleného světla (závěr kap. 1)</h3>
+<blockquote><em>„… rozeznal jsem na konci jejího mola zelené světlo, drobné a vzdálené, jakou snad mívá konec mola u přístavu… Gatsby vztáhl ruce k temné vodě podivně chvějivým gestem, a třebaže jsem od něj byl daleko, byl bych přísahal, že se chvěje.&quot;</em></blockquote>
+
+<ul>
+<li><strong>Co poznáš:</strong> zelené světlo = <strong>symbol amerického snu / Daisy</strong>; <strong>apostrofa</strong> (Gatsby oslovuje nepřítomnou Daisy přes vodu); <strong>personální vypravěč</strong> Nick; <strong>lyrizovaný jazyk</strong>.</li>
+<li><strong>Funkce:</strong> uvádí motiv touhy a nedosažitelnosti — leitmotiv celého románu.</li>
+</ul>
+
+<h3>B) Velkolepý večírek (kap. 3)</h3>
+<blockquote><em>„V jeho modrých zahradách se mužové a dívky pohybovali mezi šeptem, šampaňským a hvězdami jako noční můry…&quot;</em></blockquote>
+
+<ul>
+<li><strong>Co poznáš:</strong> <strong>metafora</strong>, <strong>přirovnání</strong>, <strong>hyperbola</strong> popisu hostiny; <strong>kontrast</strong> lesku × prázdnoty (Gatsby sám uprostřed davu); ironie — hostitel je pro hosty neznámý.</li>
+</ul>
+
+<h3>C) Konfrontace v Plaze (kap. 7)</h3>
+<blockquote>Tom: <em>„Pan Gatsby vám může povědět, kdo je. Pan Nikdo z Nikam.&quot;</em></blockquote>
+<blockquote>Gatsby: <em>„Daisy, řekni mu pravdu! Řekni, že jsi ho nikdy nemilovala!&quot;</em></blockquote>
+
+<ul>
+<li><strong>Co poznáš:</strong> <strong>dialog</strong>, <strong>gradace</strong> konfliktu, <strong>vrchol kompozice</strong> (Daisy couvá), <strong>kontrast</strong> Tom (staré peníze) × Gatsby (nové peníze, podsvětí).</li>
+<li><strong>Funkce:</strong> zlom — americký sen se hroutí v jediné větě.</li>
+</ul>
+
+<h3>D) Smrt Myrtle (kap. 7)</h3>
+<blockquote><em>„Žluté auto vyjelo ze tmy… a srazilo ji jako balík hadrů.&quot;</em></blockquote>
+
+<ul>
+<li><strong>Co poznáš:</strong> <strong>symbol žlutého auta</strong> (peníze + smrt), <strong>údolí popela</strong>, <strong>oči Eckleburga</strong> dohlížejí. <strong>Tragická ironie</strong> — řidičkou je Daisy, vinu nese Gatsby.</li>
+</ul>
+
+<h3>E) Gatsbyho smrt v bazénu (kap. 8)</h3>
+<blockquote><em>„Šofér uslyšel výstřely… když přišli, plula matrace s Gatsbym pomalu po vodě, na hladině se ztratil drobný rudý kruh…&quot;</em></blockquote>
+
+<ul>
+<li><strong>Co poznáš:</strong> <strong>symbol bazénu</strong> (Gatsby ho celé léto nepoužil — první a poslední ponoření = smrt); <strong>personifikace</strong> vody; <strong>chladný, věcný styl</strong> kontrastuje s patosem zbytku knihy → <strong>ironie</strong>.</li>
+</ul>
+
+<h3>F) Pohřeb (kap. 9)</h3>
+<blockquote><em>„Nikdo nepřišel… jen Nick, Gatsbyho otec a kněz.&quot;</em></blockquote>
+
+<ul>
+<li><strong>Co poznáš:</strong> <strong>kontrast</strong> se scénou velkolepého večírku z kap. 3 (stovky hostů × prázdný pohřeb); <strong>tragická ironie</strong> — všichni Gatsbyho „přátelé&quot; byli kupci večírků, ne lidé.</li>
+</ul>
+
+<h3>G) Závěrečná pasáž (kap. 9)</h3>
+<blockquote><em>„Gatsby věřil v zelené světlo, v orgastickou budoucnost, která rok co rok ustupuje před námi. Tehdy nám unikla, ale nic naplat — zítra poběžíme rychleji, vztáhneme ruce dál… A tak jdeme dál, lodě proti proudu, neustále unášené zpátky do minulosti.&quot;</em></blockquote>
+
+<ul>
+<li><strong>Co poznáš:</strong> <strong>anafora</strong>, <strong>paralelismus</strong>, <strong>personifikace</strong> budoucnosti, <strong>metafora</strong> lodí proti proudu, <strong>kruhová kompozice</strong> (vrací nás k zelenému světlu z kap. 1), <strong>filozofická pointa</strong>.</li>
+<li><strong>Funkce:</strong> mýtus o věčné lidské touze; americký sen jako tragická iluze celé generace.</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Test pro sebe (autokontrola)</span></div><h2 id="cast-7">7) RYCHLÝ TEST PRO SEBE</h2>
+
+<p class="numbered"><strong>1.</strong> Kolik kapitol román má a kdo vypráví? <strong>9 kapitol, vypráví Nick Carraway v ich-formě.</strong></p>
+<p class="numbered"><strong>2.</strong> Co symbolizuje zelené světlo? <strong>Daisyino molo / nedosažitelný americký sen.</strong></p>
+<p class="numbered"><strong>3.</strong> Co je „údolí popela&quot; a kdo nad ním dohlíží? <strong>Šedá pustina mezi NY a Long Islandem; obří billboard s očima dr. T. J. Eckleburga (symbol vyhasnuté morálky / nepřítomného Boha).</strong></p>
+<p class="numbered"><strong>4.</strong> Kdo skutečně zabil Myrtle a kdo za to nakonec zaplatí? <strong>Sraží ji Daisy v Gatsbyho žlutém autě, ale zaplatí za to Gatsby — Wilson ho zastřelí v bazénu.</strong></p>
+<p class="numbered"><strong>5.</strong> Vysvětli rozdíl mezi West Egg a East Egg. <strong>West Egg = noví, nedávno zbohatlí (Gatsby, Nick); East Egg = staré, dědičné peníze (Buchananovi). Mezi nimi nepřekročitelná sociální propast.</strong></p>
+<p class="numbered"><strong>6.</strong> Co znamená termín „ztracená generace&quot; a kdo do ní patří? <strong>Generace amerických spisovatelů (Fitzgerald, Hemingway, Dos Passos, Steinbeck, Faulkner), kteří zažili 1. světovou válku, ztratili víru v tradiční hodnoty, často žili v emigraci v Paříži; termín razila Gertrude Steinová.</strong></p>
+
+<hr>
+
+<p><strong>Zdroje:</strong></p>
+<ul>
+<li><a href="https://rozbor-dila.cz/velky-gatsby-rozbor-dila-k-maturite/" target="_blank" rel="noopener">Velký Gatsby — rozbor díla k maturitě (rozbor-dila.cz)</a></li>
+<li><a href="https://www.cesky-jazyk.cz/ctenarsky-denik/francis-scott-fitzgerald/velky-gatsby-rozbor.html" target="_blank" rel="noopener">Francis Scott Fitzgerald — Velký Gatsby (rozbor) (cesky-jazyk.cz)</a></li>
+<li><a href="https://cs.wikipedia.org/wiki/Francis_Scott_Fitzgerald" target="_blank" rel="noopener">Francis Scott Fitzgerald — Wikipedie</a></li>
+</ul>
+
+      </div>
+    </section>
+
+    
+    <section id="projev" class="section projev-section">
+      <h2>🎙️ Co říct u zkoušky — mluvený skript</h2>
+      <p class="section-hint">Plynulý text — to, co bys přímo říkal/a u maturity. Přečti si ho nahlas několikrát.</p>
+      <div class="tahak">
+        <h1>Co říct u zkoušky — Francis Scott Fitzgerald: Velký Gatsby</h1>
+
+<blockquote>Mluvený skript v pořadí mluvení (4 části). Čti si ho nahlas. Po 2–3 přečteních zjistíš, že už ho víc-méně umíš.</blockquote>
+
+<hr>
+
+<h2>1️⃣ ČÁST: Autor a literárněhistorický kontext (3 min · 4 b)</h2>
+
+<p>Autorem této knihy je Francis Scott Fitzgerald, americký prozaik narozený v roce 1896 v Saint Paulu ve státě Minnesota. Jeho plné jméno je Francis Scott Key Fitzgerald — pojmenovali ho po vzdáleném příbuzném Francisi Scottu Keyovi, který je mimochodem autorem americké hymny. Studoval na prestižním Princetonu, ale studia nedokončil. Po vstupu Spojených států do první světové války sloužil v armádě, ale na frontu se nakonec nedostal. Žil v letech 1896 až 1940.</p>
+
+<p>Velký Gatsby vyšel v roce 1925 a je to vrcholné dílo takzvané ztracené generace, tedy americké literární generace, která zažila první světovou válku a po ní ztratila víru v tradiční hodnoty. Termín ztracená generace, anglicky lost generation, razila americká spisovatelka Gertrude Steinová. Patří sem kromě Fitzgeralda také Ernest Hemingway, autor knih Komu zvoní hrana, Sbohem armádo a Stařec a moře, dále John Dos Passos, John Steinbeck s Hrozny hněvu a O myších a lidech, a také William Faulkner. Mnozí z nich žili v emigraci v Paříži, kde se scházeli v salonech Gertrude Steinové.</p>
+
+<p>Co se týče literárního směru, jde o modernismus, tedy o prózu první poloviny dvacátého století, která rozbíjí tradiční formu, soustředí se na vnitřní svět postav, používá symbolismus, ironii a fragmentaci. A tady je dobré zmínit, že se jedná zároveň o kroniku takzvaného jazzového věku, anglicky jazz age. Sám Fitzgerald tento termín jako první použil ve své sbírce povídek Tales of the Jazz Age z roku 1922. Jazzový věk je období zhruba od roku 1920 do roku 1929 ve Spojených státech — bylo to období poválečného hospodářského boomu, kabaretů, jazzové hudby, automobilů, prohibice, tedy zákazu alkoholu, který paradoxně dal vzniknout pašerácké mafii v čele s Al Caponem, a také období emancipace žen. Toto období končí krachem na newyorské burze 29. října 1929, kdy začíná Velká hospodářská krize.</p>
+
+<p>Fitzgerald se v roce 1920 oženil se Zeldou Sayre. Spolu tvořili extravagantní pár jazzového věku, žili střídavě v New Yorku, v Paříži a na francouzské Riviéře, kde se přátelili s Hemingwayem, Gertrude Steinovou a Picassem. Zelda postupně psychicky onemocněla, byla diagnostikována se schizofrenií a skončila v psychiatrickém ústavu. Sám Fitzgerald propadl alkoholu, zadlužil se a ve třicátých letech pracoval jako scenárista v Hollywoodu, kde také v roce 1940 ve čtyřiačtyřiceti letech zemřel na infarkt. Zajímavé je, že umíral v přesvědčení, že je literární neúspěch — sláva Velkého Gatsbyho přišla až posmrtně, v padesátých letech, a dnes je tato kniha považována za vrcholný americký román dvacátého století.</p>
+
+<p>Z dalších autorových děl bych zmínil jeho románový debut Tato strana ráje z roku 1920, dále Krásní a prokletí z roku 1922, autobiograficky laděný román Něžná je noc z roku 1934, kde zpracoval Zeldinu nemoc, a také známou povídku Podivuhodný případ Benjamina Buttona.</p>
+
+<p>Posunu se k samotnému dílu.</p>
+
+<hr>
+
+<h2>2️⃣ ČÁST: O knize — druh, žánr, kompozice, postavy, téma (~4 min · 8 b)</h2>
+
+<p>Z hlediska literárního druhu se jedná o epiku, tedy vyprávěný text s vypravěčem, dějem, postavami a prostorem. Literární žánr je román, konkrétně společenský a psychologický román s prvky lyrizované prózy. Je to román kratšího rozsahu, má jen asi sto padesát stran. Vyšel v roce 1925 ve Spojených státech.</p>
+
+<p>Kompozičně je dílo rozděleno do devíti kapitol, které jsou jen číslované, bez názvů. Vyprávění je chronologické, ale obsahuje retrospektivní vsuvky, tedy flashbacky, hlavně do Gatsbyho minulosti. Důležitá je rámcová kompozice — Nick vypráví celý příběh zpětně, z odstupu, poté co odjel z Východu rozčarován. A důležitá je také kruhová kompozice — román začíná Nickovou reflexí a končí slavnou pasáží o zeleném světle a člunech proti proudu, takže se uzavírá kruh.</p>
+
+<p>Vypravěč je v ich-formě, tedy v první osobě jednotného čísla. Vypráví Nick Carraway, který je personálním vypravěčem — vidíme svět skrze jeho oči. Je to zároveň postava i pozorovatel — bratranec Daisy, soused Gatsbyho, přítel Jordan Baker — ale do hlavního konfliktu zasahuje jen okrajově. Funguje jako reflektor, který nejen vypráví, ale i komentuje, hodnotí a filozofuje.</p>
+
+<p>Hlavní téma je kritika amerického snu. Fitzgerald ukazuje, že peníze a společenský vzestup nepřinášejí lásku, identitu ani štěstí. Z dalších motivů bych zmínil minulost, která se nedá vrátit, deziluzi z amerického snu, morální prázdnotu vyšší společnosti, třídní rozdíly mezi starými a novými penězi a samozřejmě téma ztracené generace.</p>
+
+<p>A teď ke krátkému shrnutí děje. Příběh se odehrává v létě 1922 na Long Islandu, ve smyšlených pobřežních vsích West Egg a East Egg. West Egg patří novým, nedávno zbohatlým, East Egg starým rodinným penězům. Mezi nimi je zátoka a mezi New Yorkem a Long Islandem leží šedé Údolí popela. Vypravěč Nick Carraway, mladý burzovní makléř, se přistěhuje vedle obří palácové vily tajemného boháče jménem Jay Gatsby. Gatsby pořádá monstrózní večírky, ale sám stojí stranou. Postupně se ukáže, že jeho skutečné jméno je James Gatz, pochází z chudé farmářské rodiny v Severní Dakotě, zbohatl pašováním alkoholu za prohibice díky gangsterovi Meyeru Wolfsheimovi, a celý svůj vzestup zařídil kvůli jediné ženě — Daisy Buchanan, do které se zamiloval ještě v roce 1917 v Louisville. Jenže Daisy se mezitím provdala za bohatého a brutálního Toma Buchanana.</p>
+
+<p>Nick Gatsbymu zprostředkuje znovushledání s Daisy po pěti letech. Začne mezi nimi krátký poměr. Vrcholnou scénou je konfrontace v hotelu Plaza, kde Tom odhalí Gatsbyho pašerácký původ a Daisy zakolísá — nedokáže říct, že Toma nikdy nemilovala. Cestou domů Daisy řídí Gatsbyho žluté auto a v Údolí popela srazí Myrtle Wilson, Tomovu milenku. Gatsby vinu mlčky vezme na sebe. Tom poté nasměruje zoufalého manžela Myrtle, Georga Wilsona, ke Gatsbyho domu. Wilson zastřelí Gatsbyho plovoucího v bazénu a hned poté i sebe. Na Gatsbyho pohřeb nepřijde nikdo z těch stovek hostů jeho večírků — jen Nick, Gatsbyho otec, kněz a tajemný muž z knihovny. Daisy a Tom odjedou pryč a zůstávají nepotrestáni. Rozčarovaný Nick se vrací na Středozápad.</p>
+
+<p>Hlavní postavy jsou tedy: Jay Gatsby, idealistický snílek a tajemný boháč, dále Nick Carraway, kritický pozorovatel a vypravěč, Daisy Buchanan, povrchní žena s hlasem plným peněz, jak ji charakterizuje Gatsby, Tom Buchanan, brutální arogantní starý boháč, a Jordan Baker, cynická golfistka jazzového věku.</p>
+
+<p>Pokud bych dostal úryvek z této knihy, pravděpodobně by byl z některé z nejtypičtějších scén. Asi nejčastější je úvodní scéna, kdy Nick poprvé spatří Gatsbyho v noci na trávníku, jak vztahuje ruce přes vodu k zelenému světlu na konci Daisyina mola. Další pravděpodobný úryvek je popis velkolepého večírku ve třetí kapitole, nebo konfrontace v hotelu Plaza v sedmé kapitole. Velmi pravděpodobná je také slavná závěrečná pasáž devíti kapitoly s větou „Tak jdeme dál, lodě proti proudu, neustále unášené zpátky do minulosti.&quot;</p>
+
+<hr>
+
+<h2>3️⃣ ČÁST: Jak je napsaný — jazyk a umělecké prostředky (~3 min · 4 b)</h2>
+
+<p>Jazyk díla je spisovný a literární, ale především je výrazně lyrický, poetický a metaforický. Fitzgerald rád používá dlouhá souvětí s rytmickou stavbou, gradacemi a paralelismy, takže próza místy téměř přechází do básnické řeči. V dialozích postav najdeme jazz-age slang — typické jsou výrazy „old sport&quot;, což je Gatsbyho oslovení, kterým maskuje svůj nízký původ falešnou oxfordskou eleganci. Najdeme tu také zajímavý kontrast jazykových rovin — patetické, lyrické pasáže Nickových úvah o zeleném světle a v závěru kontrastují s prozaickými a místy až vulgárními replikami Toma Buchanana a hovorovou mluvou chudých z Údolí popela.</p>
+
+<p>Z hlediska typu promluv převažuje vyprávění s prokládanými úvahami a reflexí, dále jsou tu dialogy, zejména ve scénách večírků a v hotelu Plaza, vnitřní monolog Nickových myšlenek a retrospektiva ve formě flashbacků.</p>
+
+<p>A teď k uměleckým prostředkům. Nejdůležitější je symbol — symboly jsou v románu nosné a román se dá číst jako moderní alegorie. Zelené světlo na konci Daisyina mola je synekdocha celého amerického snu — část zastupuje celek. Gatsby k tomu zelenému světlu vztahuje ruce, a Fitzgerald tím vyjadřuje, že americký sen je něco vzdáleného, drobného a vlastně nedosažitelného. Oči doktora T. J. Eckleburga jsou obří billboardová reklama zaniklého optometristy nad Údolím popela — symbolizují nepřítomného Boha a vyhasnuté morálky jazzového věku. Funkce je jasná — když Wilson na konci ukáže na ten billboard a řekne „Bůh všechno vidí&quot;, Fitzgerald nám sděluje, že v této zkažené společnosti nahradila reklama Boha. Údolí popela je symbol obětí pokroku, popela snů pod leskem velkoměsta.</p>
+
+<p>Důležitá je také metafora — slavná je věta o Daisy, že „má hlas plný peněz&quot; — touto metaforou Fitzgerald vyjadřuje, že Daisy je celá ztělesněním peněz, a její přitažlivost je nakonec přitažlivostí bohatství. Najdeme tu i personifikaci — v závěru se mluví o „orgastické budoucnosti, která rok co rok ustupuje před námi&quot;. Funkce této personifikace je povýšit příběh na filozofickou meditaci o lidské touze.</p>
+
+<p>Důležitým prostředkem je kontrast neboli antiteze — staré peníze proti novým, East Egg proti West Eggu, lesk proti prázdnotě, sen proti realitě, bílá Daisy proti šedému Údolí popela. Tyto kontrasty odhalují prázdnotu jazzového věku — čím větší lesk, tím větší vnitřní propast. A v závěrečné pasáži je výrazná anafora a paralelismus, které spolu s kruhovou kompozicí dávají románu filozofický rozměr.</p>
+
+<p>Najdeme tu i tragickou ironii — Gatsby umírá za zločin, který nespáchal, na pohřeb nejštědřejšího hostitele nikdo nepřijde a vrah Tom chodí beztrestně dál. A nakonec hyperbola — popisy večírků s horami pomerančů a slepic, pohádkové bohatství Gatsbyho domu — sloužící k zdůraznění okázalosti jazzového věku.</p>
+
+<hr>
+
+<h2>4️⃣ ČÁST: Neumělecký text (~5 min · 8 b)</h2>
+
+<blockquote>Po prostudování neuměleckého textu řeknu zhruba toto (vyplním podle konkrétního textu):</blockquote>
+<blockquote></blockquote>
+<blockquote>Tento neumělecký text patří k <strong>[funkčnímu stylu — vyber: prostěsdělovací / publicistický / odborný / administrativní / řečnický / umělecký]</strong>. Konkrétně se jedná o <strong>[útvar — článek, recenzi, esej, zprávu, dopis, návod, vědecký článek, reportáž, fejeton...]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>Typické prvky tohoto stylu, které tu nacházím: <strong>[konkrétně 2–3 prvky — např. odborná terminologie, expresivní výrazy, řečnické otázky, statistiky, citáty, neformální oslovení adresáta]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>Hlavní myšlenka textu je <strong>[téma]</strong>. Autor se k němu staví <strong>[informativně / kriticky / přesvědčovacně / popisně]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>Jazykové prostředky, které jsou v textu zajímavé:</blockquote>
+<blockquote>- <strong>[Prostředek 1]</strong> — funkce: <strong>[k čemu slouží]</strong></blockquote>
+<blockquote>- <strong>[Prostředek 2]</strong> — funkce: <strong>[k čemu slouží]</strong></blockquote>
+<blockquote></blockquote>
+<blockquote>Komunikační situace: text je psán pro <strong>[adresát — odborná veřejnost / laici / specifická skupina]</strong> s cílem <strong>[účel — informovat / přesvědčit / pobavit / poučit]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>A na závěr — souvislost s naším uměleckým textem: pokud text pojednává o americkém snu, mezilidských vztazích, společenských rozdílech, deziluzi z bohatství nebo třeba o období dvacátých let, najdu zde tematickou paralelu s Velkým Gatsbym. Mohu zmínit, že Fitzgeraldův román kriticky odhaluje iluzornost amerického snu — peníze nepřinášejí lásku ani štěstí — a podobnou tezi nebo naopak protichůdnou tezi pak najdu v neuměleckém textu. Pokud text souvisí s prohibicí, jazzovým věkem, americkou prózou nebo ztracenou generací, mohu rozšířit kontext o Hemingwaye, Dos Passose či Steinbecka.</blockquote>
+
+<hr>
+
+<h2>💡 Tipy k mluvení</h2>
+
+<ul>
+<li>Mluv pomalu a srozumitelně — máš 15 minut, nemusíš spěchat</li>
+<li>Když si na něco nemůžeš vzpomenout, řekni: <em>„Vrátím se k tomu za chvíli&quot;</em> a jdi dál</li>
+<li>Komise oceňuje <strong>strukturovanou mluvu</strong> — slovní pauzy mezi částmi typu „Posunu se k...&quot; / „A teď k jazykovým prostředkům...&quot; pomáhají</li>
+<li>Dej si <strong>vodu</strong> před sebe, doušek pomáhá srovnat myšlenky</li>
+<li>Slavnou závěrečnou větu <strong>„Tak jdeme dál, lodě proti proudu, neustále unášené zpátky do minulosti&quot;</strong> se nauč nazpaměť — komise to ocení</li>
+<li>Pamatuj si tři klíčové symboly: <strong>zelené světlo</strong> (americký sen), <strong>oči doktora Eckleburga</strong> (nepřítomný Bůh), <strong>Údolí popela</strong> (oběti pokroku)</li>
+<li>Neplést si: <strong>Daisy</strong> přejela Myrtle, <strong>Gatsby</strong> vinu vzal na sebe; <strong>Wilson</strong> zastřelil Gatsbyho v bazénu a pak sebe</li>
+</ul>
+
+      </div>
+    </section>
+
+
+    <div class="nav-bottom">
+      <a href="10.html">← #10 O myších a lidech</a><a href="../index.html" class="home">← Domů (všech 20)</a><a href="12.html">#12 Pygmalion →</a>
+    </div>
+  </div>
+  <footer>
+    Vizuální studijní materiály pro maturitu 2026 · Kniha 11 / 20
+  </footer>
+  
+<script>
+(function() {
+  const popup = document.getElementById('exam-popup');
+  const header = document.getElementById('popup-header');
+  const toggleBtn = document.getElementById('popup-toggle');
+  const closeBtn = document.getElementById('popup-close');
+  const reopenBtn = document.getElementById('popup-reopen');
+
+  // Load saved position
+  try {
+    const savedPos = localStorage.getItem('examPopupPos');
+    if (savedPos) {
+      const pos = JSON.parse(savedPos);
+      if (pos.left) { popup.style.left = pos.left; popup.style.right = 'auto'; }
+      if (pos.top)  { popup.style.top = pos.top; }
+    }
+  } catch(e) {}
+
+  // Restore minimized / closed state
+  if (localStorage.getItem('examPopupMinimized') === '1') {
+    popup.classList.add('minimized');
+    toggleBtn.textContent = '+';
+  }
+  if (localStorage.getItem('examPopupClosed') === '1') {
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+  }
+
+  // Drag — mouse
+  let isDragging = false, ox = 0, oy = 0;
+  function startDrag(clientX, clientY) {
+    isDragging = true;
+    const rect = popup.getBoundingClientRect();
+    ox = clientX - rect.left;
+    oy = clientY - rect.top;
+  }
+  function doDrag(clientX, clientY) {
+    if (!isDragging) return;
+    let l = clientX - ox;
+    let t = clientY - oy;
+    // Keep on screen
+    l = Math.max(0, Math.min(window.innerWidth - 60, l));
+    t = Math.max(0, Math.min(window.innerHeight - 40, t));
+    popup.style.left = l + 'px';
+    popup.style.top = t + 'px';
+    popup.style.right = 'auto';
+  }
+  function endDrag() {
+    if (isDragging) {
+      isDragging = false;
+      localStorage.setItem('examPopupPos', JSON.stringify({
+        top: popup.style.top, left: popup.style.left
+      }));
+    }
+  }
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    startDrag(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', endDrag);
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    const t = e.touches[0];
+    startDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    doDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchend', endDrag);
+
+  // Toggle minimize
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.classList.toggle('minimized');
+    const min = popup.classList.contains('minimized');
+    toggleBtn.textContent = min ? '+' : '−';
+    localStorage.setItem('examPopupMinimized', min ? '1' : '0');
+  });
+
+  // Close
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+    localStorage.setItem('examPopupClosed', '1');
+  });
+
+  // Reopen
+  reopenBtn.addEventListener('click', function() {
+    popup.style.display = 'flex';
+    reopenBtn.style.display = 'none';
+    localStorage.setItem('examPopupClosed', '0');
+  });
+})();
+
+// GUIDE POPUP — same mechanics, different IDs and storage keys
+(function() {
+  const popup = document.getElementById('guide-popup');
+  const header = document.getElementById('guide-header');
+  const toggleBtn = document.getElementById('guide-toggle');
+  const closeBtn = document.getElementById('guide-close');
+  const reopenBtn = document.getElementById('guide-reopen');
+  if (!popup || !header) return;
+
+  try {
+    const savedPos = localStorage.getItem('guidePopupPos');
+    if (savedPos) {
+      const pos = JSON.parse(savedPos);
+      if (pos.left) { popup.style.left = pos.left; popup.style.right = 'auto'; }
+      if (pos.top)  { popup.style.top = pos.top; }
+    }
+  } catch(e) {}
+
+  if (localStorage.getItem('guidePopupMinimized') === '1') {
+    popup.classList.add('minimized');
+    toggleBtn.textContent = '+';
+  }
+  if (localStorage.getItem('guidePopupClosed') === '1') {
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+  }
+
+  let isDragging = false, ox = 0, oy = 0;
+  function startDrag(clientX, clientY) {
+    isDragging = true;
+    const rect = popup.getBoundingClientRect();
+    ox = clientX - rect.left;
+    oy = clientY - rect.top;
+    popup.style.zIndex = 1001;
+  }
+  function doDrag(clientX, clientY) {
+    if (!isDragging) return;
+    let l = clientX - ox;
+    let t = clientY - oy;
+    l = Math.max(0, Math.min(window.innerWidth - 60, l));
+    t = Math.max(0, Math.min(window.innerHeight - 40, t));
+    popup.style.left = l + 'px';
+    popup.style.top = t + 'px';
+    popup.style.right = 'auto';
+  }
+  function endDrag() {
+    if (isDragging) {
+      isDragging = false;
+      localStorage.setItem('guidePopupPos', JSON.stringify({
+        top: popup.style.top, left: popup.style.left
+      }));
+    }
+  }
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    startDrag(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', endDrag);
+
+  header.addEventListener('touchstart', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    const t = e.touches[0];
+    startDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    doDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchend', endDrag);
+
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.classList.toggle('minimized');
+    const min = popup.classList.contains('minimized');
+    toggleBtn.textContent = min ? '+' : '−';
+    localStorage.setItem('guidePopupMinimized', min ? '1' : '0');
+  });
+
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+    localStorage.setItem('guidePopupClosed', '1');
+  });
+
+  reopenBtn.addEventListener('click', function() {
+    popup.style.display = 'flex';
+    reopenBtn.style.display = 'none';
+    localStorage.setItem('guidePopupClosed', '0');
+  });
+})();
+
+// POP-OUT IMAGES — click "⤢ Popoutnout" on any embedded image to detach as draggable+resizable window
+(function() {
+  // All images that should get a pop-out button
+  const candidates = document.querySelectorAll(
+    '.embedded-image > a > img, .embedded-image > img, ' +
+    '.embedded-postavy > a > img, .embedded-postavy > img, ' +
+    '.embedded-komiks .komiks-strip > div > img, ' +
+    '.single-card > a > img, .single-card > img'
+  );
+
+  let popoutZ = 2000;
+
+  candidates.forEach(function(img) {
+    // Find the container that should host the trigger button
+    const container = img.closest(
+      '.embedded-image, .embedded-postavy, .komiks-strip > div, .single-card'
+    );
+    if (!container) return;
+    if (container.querySelector(':scope > .popout-trigger')) return; // already added
+
+    const btn = document.createElement('button');
+    btn.className = 'popout-trigger';
+    btn.title = 'Otevřít jako popup (lze přesouvat a měnit velikost)';
+    btn.innerHTML = '⤢ Popoutnout';
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      createPopout(img);
+    });
+    container.appendChild(btn);
+  });
+
+  function createPopout(srcImg) {
+    const popout = document.createElement('div');
+    popout.className = 'img-popout';
+
+    let caption = srcImg.alt || 'Obrázek';
+    const nearbyCaption = srcImg.closest('div')?.querySelector('.image-caption');
+    if (nearbyCaption && nearbyCaption.textContent.trim()) {
+      caption = nearbyCaption.textContent.trim();
+    }
+    const safeCaption = caption.replace(/[<>"'&]/g, function(c) {
+      return {'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','&':'&amp;'}[c];
+    });
+
+    popout.innerHTML = (
+      '<div class="img-popout-header">' +
+        '<span class="img-popout-title">' + safeCaption + '</span>' +
+        '<div class="img-popout-controls">' +
+          '<button class="popout-btn pop-zoom-out" title="Zmenšit obrázek">−</button>' +
+          '<button class="popout-btn pop-zoom-in" title="Zvětšit obrázek">+</button>' +
+          '<button class="popout-btn pop-zoom-reset" title="Reset zoomu (1:1)">⊡</button>' +
+          '<button class="popout-btn pop-close" title="Zavřít">×</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="img-popout-body">' +
+        '<img src="' + srcImg.src + '" alt="' + safeCaption + '" />' +
+        '<div class="img-popout-zoom-hint">Klikni = lupa · drag = posun · scroll = zoom</div>' +
+      '</div>' +
+      '<div class="img-popout-resize"></div>'
+    );
+    document.body.appendChild(popout);
+
+    // ====== POPOUT POSITION (transform-based for smooth dragging) ======
+    const existingCount = document.querySelectorAll('.img-popout').length;
+    let popX = 60 + (existingCount - 1) * 28;
+    let popY = 60 + (existingCount - 1) * 28;
+    function applyPopoutPos() {
+      popout.style.transform = 'translate3d(' + popX + 'px,' + popY + 'px,0)';
+    }
+    applyPopoutPos();
+    popout.style.zIndex = ++popoutZ;
+
+    popout.addEventListener('mousedown', function() {
+      popout.style.zIndex = ++popoutZ;
+    });
+
+    // ====== DRAG popup by header (uses transform + rAF) ======
+    const header = popout.querySelector('.img-popout-header');
+    let isDragging = false, dragStartX = 0, dragStartY = 0, dragOriginPopX = 0, dragOriginPopY = 0;
+    let dragRaf = null;
+
+    function startDrag(cx, cy) {
+      isDragging = true;
+      dragStartX = cx;
+      dragStartY = cy;
+      dragOriginPopX = popX;
+      dragOriginPopY = popY;
+    }
+    function doDrag(cx, cy) {
+      if (!isDragging) return;
+      if (dragRaf) return;
+      dragRaf = requestAnimationFrame(function() {
+        dragRaf = null;
+        const dx = cx - dragStartX;
+        const dy = cy - dragStartY;
+        popX = Math.max(0, Math.min(window.innerWidth - 60, dragOriginPopX + dx));
+        popY = Math.max(0, Math.min(window.innerHeight - 40, dragOriginPopY + dy));
+        applyPopoutPos();
+      });
+    }
+    let lastMouseX = 0, lastMouseY = 0;
+    function endDrag() { isDragging = false; }
+
+    function mouseMoveHandler(e) {
+      lastMouseX = e.clientX; lastMouseY = e.clientY;
+      if (isDragging) doDrag(e.clientX, e.clientY);
+      if (isResizing) doResize(e.clientX, e.clientY);
+      if (isPanning) doPan(e.clientX, e.clientY);
+    }
+    function mouseUpHandler() {
+      endDrag(); endResize(); endPan();
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
+    }
+    function attachDocListeners() {
+      document.addEventListener('mousemove', mouseMoveHandler);
+      document.addEventListener('mouseup', mouseUpHandler);
+    }
+
+    header.addEventListener('mousedown', function(e) {
+      if (e.target.closest('.popout-btn')) return;
+      startDrag(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+    });
+
+    // Touch drag
+    header.addEventListener('touchstart', function(e) {
+      if (e.target.closest('.popout-btn')) return;
+      const t = e.touches[0];
+      startDrag(t.clientX, t.clientY);
+    }, {passive: true});
+    popout.addEventListener('touchmove', function(e) {
+      const t = e.touches[0];
+      if (isDragging) doDrag(t.clientX, t.clientY);
+      if (isResizing) doResize(t.clientX, t.clientY);
+      if (isPanning) doPan(t.clientX, t.clientY);
+    }, {passive: true});
+    popout.addEventListener('touchend', function() {
+      endDrag(); endResize(); endPan();
+    });
+
+    // ====== RESIZE popup via corner ======
+    const resizeHandle = popout.querySelector('.img-popout-resize');
+    let isResizing = false, rsW = 0, rsH = 0, rsX = 0, rsY = 0;
+    let resizeRaf = null;
+
+    function startResize(cx, cy) {
+      isResizing = true;
+      const rect = popout.getBoundingClientRect();
+      rsW = rect.width; rsH = rect.height;
+      rsX = cx; rsY = cy;
+    }
+    function doResize(cx, cy) {
+      if (!isResizing) return;
+      if (resizeRaf) return;
+      resizeRaf = requestAnimationFrame(function() {
+        resizeRaf = null;
+        const dx = cx - rsX;
+        const dy = cy - rsY;
+        popout.style.width = Math.max(260, rsW + dx) + 'px';
+        popout.style.height = Math.max(180, rsH + dy) + 'px';
+      });
+    }
+    function endResize() { isResizing = false; }
+
+    resizeHandle.addEventListener('mousedown', function(e) {
+      startResize(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    resizeHandle.addEventListener('touchstart', function(e) {
+      const t = e.touches[0];
+      startResize(t.clientX, t.clientY);
+    }, {passive: true});
+
+    // ====== IMAGE ZOOM + PAN inside body ======
+    const bodyEl = popout.querySelector('.img-popout-body');
+    const imgEl = bodyEl.querySelector('img');
+    const zoomHint = bodyEl.querySelector('.img-popout-zoom-hint');
+    let zoomScale = 1;
+    let zoomTX = 0, zoomTY = 0;
+    const ZOOM_STEP = 1.5;
+    const ZOOM_MIN = 1;
+    const ZOOM_MAX = 8;
+    let zoomRaf = null;
+
+    function applyImgTransform() {
+      if (zoomRaf) return;
+      zoomRaf = requestAnimationFrame(function() {
+        zoomRaf = null;
+        imgEl.style.transform = 'translate3d(' + zoomTX + 'px,' + zoomTY + 'px,0) scale(' + zoomScale + ')';
+        if (zoomScale > 1) bodyEl.classList.add('zoomed');
+        else bodyEl.classList.remove('zoomed');
+        if (zoomScale > 1.01 && zoomHint) zoomHint.style.display = 'none';
+      });
+    }
+
+    function clampOffsets() {
+      // Allow panning at any scale (including 1:1). Keep at least some of image visible.
+      const bw = bodyEl.clientWidth;
+      const bh = bodyEl.clientHeight;
+      const iw = imgEl.naturalWidth || imgEl.clientWidth || bw;
+      const ih = imgEl.naturalHeight || imgEl.clientHeight || bh;
+      // Effective rendered size at scale 1 (object-fit: contain semantics):
+      const bodyAspect = bw / Math.max(1, bh);
+      const imgAspect = iw / Math.max(1, ih);
+      let dispW, dispH;
+      if (imgAspect > bodyAspect) {
+        dispW = bw;
+        dispH = bw / imgAspect;
+      } else {
+        dispH = bh;
+        dispW = bh * imgAspect;
+      }
+      const scaledW = dispW * zoomScale;
+      const scaledH = dispH * zoomScale;
+      // Keep at least this much of the image visible (so user can't completely lose it)
+      const visibleMargin = Math.min(80, scaledW * 0.25, scaledH * 0.25);
+      zoomTX = Math.max(-scaledW + visibleMargin, Math.min(bw - visibleMargin, zoomTX));
+      zoomTY = Math.max(-scaledH + visibleMargin, Math.min(bh - visibleMargin, zoomTY));
+    }
+
+    function zoomAtPoint(cx, cy, factor) {
+      // cx, cy are coords inside bodyEl (0..clientWidth, 0..clientHeight)
+      const newScale = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoomScale * factor));
+      if (Math.abs(newScale - zoomScale) < 0.001) return;
+      // Keep the point under cursor stable in image-space:
+      // imgPoint = (cx - zoomTX) / zoomScale
+      // After zoom: cx = imgPoint * newScale + new_zoomTX
+      const px = (cx - zoomTX) / zoomScale;
+      const py = (cy - zoomTY) / zoomScale;
+      zoomTX = cx - px * newScale;
+      zoomTY = cy - py * newScale;
+      zoomScale = newScale;
+      clampOffsets();
+      bodyEl.classList.add('smooth');
+      applyImgTransform();
+      setTimeout(function() { bodyEl.classList.remove('smooth'); }, 200);
+    }
+
+    function resetZoom() {
+      zoomScale = 1; zoomTX = 0; zoomTY = 0;
+      bodyEl.classList.add('smooth');
+      applyImgTransform();
+      if (zoomHint) zoomHint.style.display = '';
+      setTimeout(function() { bodyEl.classList.remove('smooth'); }, 200);
+    }
+
+    // ====== IMAGE PAN (when zoomed) ======
+    let isPanning = false, isPotentialPan = false, panStartX = 0, panStartY = 0, panOriginTX = 0, panOriginTY = 0;
+
+    function startPanCandidate(cx, cy) {
+      isPotentialPan = true;
+      panStartX = cx; panStartY = cy;
+      panOriginTX = zoomTX; panOriginTY = zoomTY;
+    }
+    function doPan(cx, cy) {
+      const dx = cx - panStartX;
+      const dy = cy - panStartY;
+      // Lower threshold for trackpad sensitivity — start panning sooner
+      if (!isPanning && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
+        isPanning = true;
+        bodyEl.classList.add('panning');
+        if (zoomHint) zoomHint.style.display = 'none';
+      }
+      if (isPanning) {
+        zoomTX = panOriginTX + dx;
+        zoomTY = panOriginTY + dy;
+        clampOffsets();
+        applyImgTransform();
+      }
+    }
+    function endPan() {
+      if (isPotentialPan && !isPanning) {
+        // It was a click — zoom in at the click point
+        const rect = bodyEl.getBoundingClientRect();
+        zoomAtPoint(lastMouseX - rect.left, lastMouseY - rect.top, ZOOM_STEP);
+      }
+      isPotentialPan = false;
+      isPanning = false;
+      bodyEl.classList.remove('panning');
+    }
+
+    bodyEl.addEventListener('mousedown', function(e) {
+      if (e.button !== 0) return;
+      lastMouseX = e.clientX; lastMouseY = e.clientY;
+      startPanCandidate(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+    });
+
+    bodyEl.addEventListener('touchstart', function(e) {
+      const t = e.touches[0];
+      lastMouseX = t.clientX; lastMouseY = t.clientY;
+      startPanCandidate(t.clientX, t.clientY);
+    }, {passive: true});
+
+    // Wheel = zoom at cursor (passive: false because we preventDefault)
+    bodyEl.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      const rect = bodyEl.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.18 : (1 / 1.18);
+      zoomAtPoint(cx, cy, factor);
+    }, {passive: false});
+
+    // Double-click = reset zoom
+    bodyEl.addEventListener('dblclick', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      resetZoom();
+    });
+
+    // Buttons
+    popout.querySelector('.pop-zoom-in').addEventListener('click', function() {
+      zoomAtPoint(bodyEl.clientWidth / 2, bodyEl.clientHeight / 2, ZOOM_STEP);
+    });
+    popout.querySelector('.pop-zoom-out').addEventListener('click', function() {
+      zoomAtPoint(bodyEl.clientWidth / 2, bodyEl.clientHeight / 2, 1 / ZOOM_STEP);
+    });
+    popout.querySelector('.pop-zoom-reset').addEventListener('click', resetZoom);
+
+    // Close
+    popout.querySelector('.pop-close').addEventListener('click', function() {
+      popout.remove();
+    });
+  }
+})();
+
+// POPUP LIST LINKS — click an item in the strategy popup → smooth scroll + flash highlight on page
+(function() {
+  document.querySelectorAll('.popup-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (!target) return;
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      document.querySelectorAll('.flash-highlight').forEach(function(el) {
+        el.classList.remove('flash-highlight');
+      });
+      void target.offsetWidth; // force reflow to re-trigger animation
+      target.classList.add('flash-highlight');
+      setTimeout(function() {
+        target.classList.remove('flash-highlight');
+      }, 2600);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

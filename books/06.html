@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#06 Kulička — Guy de Maupassant</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: #f5f1ea;
+  color: #2a2520;
+  line-height: 1.65;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+h1, h2, h3, h4, h5, h6 { color: #1a1410; line-height: 1.3; margin-top: 1.4em; margin-bottom: 0.5em; }
+h1 { font-size: 2.2em; margin-top: 0; }
+h2 { font-size: 1.55em; border-bottom: 2px solid #d4c8b8; padding-bottom: 0.3em; }
+h3 { font-size: 1.25em; color: #4a3527; }
+h4 { font-size: 1.08em; color: #4a3527; }
+a { color: #8b3a1a; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* INDEX */
+header.site-header {
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: #f5f1ea;
+  padding: 36px 24px;
+  text-align: center;
+}
+header.site-header h1 { color: #f5f1ea; font-size: 2.6em; margin: 0; }
+header.site-header p { margin: 8px 0 0 0; opacity: 0.85; font-size: 1.05em; }
+header.site-header .header-links {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+header.site-header .header-links a {
+  background: rgba(255,255,255,0.12);
+  color: #f0c486;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95em;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+header.site-header .header-links a:hover {
+  background: rgba(255,255,255,0.22);
+  text-decoration: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.18s, box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.card a { display: flex; flex-direction: column; height: 100%; color: inherit; }
+.card a:hover { text-decoration: none; }
+.card .thumb {
+  aspect-ratio: 2/3;
+  background: #ece4d5 center/cover no-repeat;
+  border-bottom: 1px solid #d4c8b8;
+}
+.card .body { padding: 14px 16px 18px 16px; }
+.card .num {
+  display: inline-block;
+  background: #8b3a1a;
+  color: white;
+  font-size: 0.75em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.card .title { font-size: 1.1em; font-weight: 600; color: #1a1410; margin: 0 0 4px 0; line-height: 1.3; }
+.card .author { font-size: 0.92em; color: #5a4d3f; margin: 0; }
+
+/* DETAIL */
+.book-header {
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: #f5f1ea;
+  padding: 36px 24px 28px 24px;
+}
+.book-header .num { color: #f0c486; font-size: 0.95em; letter-spacing: 0.1em; }
+.book-header h1 { color: white; font-size: 2.6em; margin: 4px 0 6px 0; }
+.book-header .author { color: #d4c8b8; font-size: 1.2em; margin: 0; }
+.book-header .nav { margin-top: 18px; }
+.book-header .nav a { color: #f0c486; font-weight: 600; }
+
+.section { margin: 36px 0; }
+.section > h2 { color: #4a3527; font-size: 1.55em; margin-bottom: 6px; }
+.section-hint {
+  margin: 0 0 16px 0;
+  padding: 8px 14px;
+  background: #fff3e0;
+  border-left: 4px solid #d97500;
+  border-radius: 6px;
+  color: #5a4d3f;
+  font-size: 0.95em;
+}
+.single-card {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.single-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  background: white;
+  cursor: zoom-in;
+  display: block;
+}
+
+/* Speaking step badges inside the tahák */
+.speaking-badge {
+  background: linear-gradient(135deg, #8b3a1a, #a04a26);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px 10px 0 0;
+  margin: 32px 0 0 0;
+  font-weight: 700;
+  font-size: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(139,58,26,0.2);
+}
+.speaking-badge .badge-step { font-size: 1.05em; }
+.speaking-badge .badge-hint {
+  font-weight: 400;
+  font-size: 0.85em;
+  opacity: 0.95;
+  background: rgba(255,255,255,0.18);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+.speaking-badge.helper {
+  background: linear-gradient(135deg, #4a3527, #5a4d3f);
+}
+.speaking-badge + h2 {
+  margin-top: 0 !important;
+  background: #fffaf2;
+  padding: 10px 14px;
+  border-radius: 0 0 8px 8px;
+  border-bottom: 2px solid #d4c8b8;
+}
+
+.images { display: flex; flex-direction: column; gap: 30px; }
+.images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  background: white;
+}
+.image-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 700px) {
+  .image-cards { grid-template-columns: 1fr; }
+}
+.image-cards img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 3px 14px rgba(0,0,0,0.12); cursor: zoom-in; }
+.image-caption { text-align: center; font-size: 0.9em; color: #5a4d3f; margin-top: 6px; }
+
+.tahak {
+  background: white;
+  padding: 30px 36px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.tahak h1 { display: none; }
+.tahak h2 {
+  color: #8b3a1a;
+  margin-top: 1.6em;
+  border-bottom: 2px solid #d4c8b8;
+  padding-bottom: 0.3em;
+}
+.tahak h3 { color: #4a3527; margin-top: 1.4em; }
+.tahak .table-wrap { overflow-x: auto; margin: 12px 0; }
+.tahak table { border-collapse: collapse; width: 100%; }
+.tahak th, .tahak td {
+  border: 1px solid #d4c8b8;
+  padding: 9px 13px;
+  text-align: left;
+  vertical-align: top;
+}
+.tahak th { background: #ece4d5; color: #4a3527; font-weight: 700; }
+.tahak blockquote {
+  border-left: 4px solid #8b3a1a;
+  margin: 16px 0;
+  padding: 8px 18px;
+  background: #f9f4ec;
+  font-style: italic;
+  color: #4a3527;
+}
+.tahak code {
+  background: #ece4d5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+.tahak pre {
+  background: #2a1f15;
+  color: #f5f1ea;
+  padding: 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.tahak pre code { background: transparent; color: inherit; padding: 0; }
+.tahak .numbered { margin: 6px 0; }
+.tahak hr { border: none; border-top: 1px solid #d4c8b8; margin: 28px 0; }
+.tahak ul { padding-left: 24px; }
+.tahak li { margin: 4px 0; }
+
+/* Embedded images inside the tahák — sits right after their relevant section heading */
+.embedded-image, .embedded-postavy {
+  margin: 14px 0 20px 0;
+  padding: 14px;
+  background: #f9f4ec;
+  border: 1px solid #d4c8b8;
+  border-radius: 12px;
+  scroll-margin-top: 80px;
+}
+.embedded-image img, .embedded-postavy img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  cursor: zoom-in;
+  display: block;
+}
+.embedded-image .image-caption,
+.embedded-postavy .image-caption {
+  text-align: center;
+  font-size: 0.92em;
+  color: #5a4d3f;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Plot-context block at the very top — komiks + detailní děj before analytical tahák */
+.plot-context {
+  background: #fff3e0;
+  border: 2px solid #d97500;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+.plot-context > h2 {
+  color: #8b3a1a;
+  border-bottom: none;
+  margin-top: 0;
+}
+.plot-context > .section-hint {
+  background: white;
+  border-left-color: #8b3a1a;
+}
+.dej-block {
+  background: white;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.dej-block .dej-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1.15em;
+  margin-bottom: 8px;
+}
+
+/* Mluvený skript — bottom section, distinct color */
+.projev-section {
+  background: linear-gradient(135deg, #f0f7fb, #e8f1f7);
+  border: 2px solid #2d6a8c;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+.projev-section > h2 {
+  color: #2d6a8c;
+  border-bottom: none;
+  margin-top: 0;
+}
+.projev-section .section-hint {
+  background: white;
+  border-left-color: #2d6a8c;
+}
+.projev-section .tahak {
+  background: white;
+}
+.projev-section .tahak h2 {
+  color: #2d6a8c;
+  border-bottom-color: #b8d4e3;
+}
+.projev-section .tahak h3 {
+  color: #1d556f;
+}
+
+/* Komiks (3 panels) — used inside plot-context AND embedded inside tahák */
+.embedded-komiks {
+  margin: 18px 0 24px 0;
+  padding: 16px;
+  background: #f9f4ec;
+  border: 1px solid #d4c8b8;
+  border-radius: 12px;
+  scroll-margin-top: 80px;
+}
+.embedded-komiks .komiks-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1.1em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.embedded-komiks .komiks-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.embedded-komiks .komiks-strip img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  cursor: zoom-in;
+  display: block;
+}
+.embedded-komiks .komiks-strip .image-caption {
+  text-align: center;
+  font-size: 0.9em;
+  color: #5a4d3f;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.nav-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 20px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-bottom a {
+  background: #8b3a1a;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+}
+.nav-bottom a:hover { background: #6b2a10; text-decoration: none; }
+.nav-bottom a.home { background: #4a3527; }
+
+.toc-jump {
+  background: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  font-size: 0.92em;
+}
+.toc-jump a { margin-right: 14px; color: #8b3a1a; font-weight: 600; }
+
+footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24px 50px 24px; }
+
+/* DRAGGABLE EXAM POPUP */
+.exam-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 340px;
+  max-height: 82vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 1000;
+  font-size: 0.85em;
+  overflow: hidden;
+  border: 2px solid #8b3a1a;
+  display: flex;
+  flex-direction: column;
+}
+.popup-header {
+  background: #8b3a1a;
+  color: white;
+  padding: 10px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+}
+.popup-title { font-size: 0.95em; }
+.popup-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+.popup-btn:hover { background: rgba(255,255,255,0.25); }
+.popup-body {
+  padding: 12px 14px;
+  overflow-y: auto;
+  background: #fffaf2;
+  flex: 1;
+}
+.popup-body h4 {
+  color: #8b3a1a;
+  margin: 10px 0 4px 0;
+  font-size: 0.95em;
+  border-bottom: 1px solid #ddd0bc;
+  padding-bottom: 2px;
+}
+.popup-body h4:first-child { margin-top: 0; }
+.popup-body ol, .popup-body ul {
+  padding-left: 20px;
+  margin: 4px 0 8px 0;
+}
+.popup-body li { margin: 3px 0; line-height: 1.4; }
+.popup-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  margin: 4px 0 6px 0;
+}
+.popup-body th, .popup-body td {
+  border: 1px solid #d4c8b8;
+  padding: 3px 6px;
+  text-align: left;
+}
+.popup-body th { background: #ece4d5; font-weight: 600; }
+.popup-body td.cell-num { text-align: center; font-weight: 600; color: #8b3a1a; }
+.popup-body b { color: #4a3527; }
+.popup-body .warn {
+  background: #fff3e0;
+  border-left: 3px solid #d97500;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-size: 0.95em;
+  border-radius: 4px;
+  line-height: 1.5;
+}
+.popup-body .step-block {
+  background: #ece4d5;
+  border-radius: 8px;
+  padding: 8px 10px 6px 10px;
+  margin: 6px 0;
+}
+.popup-body .step-title {
+  font-weight: 700;
+  color: #4a3527;
+  font-size: 1em;
+  margin-bottom: 3px;
+}
+.popup-body .step-meta {
+  font-size: 0.8em;
+  color: #8b3a1a;
+  background: white;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.popup-body .step-list {
+  margin: 4px 0;
+  padding-left: 22px;
+  font-size: 0.95em;
+}
+.popup-body .step-intro {
+  margin: 6px 0 2px 0;
+  color: #4a3527;
+  font-size: 0.92em;
+}
+.popup-body .bonus-info {
+  background: #e8f5e9;
+  border-left: 3px solid #4a7d4a;
+  padding: 6px 10px;
+  margin: 8px 0;
+  font-size: 0.92em;
+  border-radius: 4px;
+}
+
+/* Clickable popup list items — scroll to anchor + flash highlight on page */
+.popup-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-radius: 4px;
+  border-left: 2px solid transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.popup-link:hover {
+  background: rgba(139, 58, 26, 0.08);
+  border-left-color: #8b3a1a;
+  color: #8b3a1a;
+  text-decoration: none;
+}
+.popup-link::after {
+  content: " ↗";
+  opacity: 0.4;
+  font-size: 0.85em;
+}
+.popup-link:hover::after { opacity: 1; }
+
+.popup-external-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #8b3a1a;
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+.popup-external-link:hover {
+  background: #6b2a10;
+  text-decoration: none;
+}
+
+/* Flash highlight when a popup link scrolls to a section */
+.flash-highlight {
+  animation: flash-pulse 2.6s ease-out;
+  scroll-margin-top: 20px;
+}
+@keyframes flash-pulse {
+  0%   { background-color: rgba(240, 196, 134, 0.95); box-shadow: 0 0 0 6px rgba(240, 196, 134, 0.6), 0 0 30px rgba(240, 196, 134, 0.5); }
+  35%  { background-color: rgba(240, 196, 134, 0.85); box-shadow: 0 0 0 4px rgba(240, 196, 134, 0.4), 0 0 24px rgba(240, 196, 134, 0.4); }
+  100% { background-color: transparent; box-shadow: 0 0 0 0 transparent, 0 0 0 transparent; }
+}
+
+/* Make all scroll targets have a comfortable offset from top so they don't hug the edge */
+.tahak h2[id^="cast-"], #autor-img, #dilo-img, #postavy, #komiks, #dej {
+  scroll-margin-top: 16px;
+}
+.exam-popup.minimized {
+  height: auto !important;
+  max-height: none;
+}
+.exam-popup.minimized .popup-body { display: none; }
+.popup-reopen {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #8b3a1a;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1010;
+  font-weight: 700;
+  font-size: 0.95em;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  display: none;
+  animation: popup-reopen-pulse 2.5s ease-in-out infinite;
+}
+.popup-reopen:hover {
+  background: #6b2a10;
+  transform: scale(1.05);
+}
+@keyframes popup-reopen-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 4px 22px rgba(139,58,26,0.7); }
+}
+
+/* GUIDE POPUP — second draggable popup, left side, blue/teal */
+.guide-popup {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 320px;
+  max-height: 75vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 999;
+  font-size: 0.85em;
+  overflow: hidden;
+  border: 2px solid #2d6a8c;
+  display: flex;
+  flex-direction: column;
+}
+.guide-popup .popup-header {
+  background: #2d6a8c;
+  color: white;
+  padding: 10px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+}
+.guide-popup .popup-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+.guide-popup .popup-btn:hover { background: rgba(255,255,255,0.25); }
+.guide-popup .popup-body {
+  padding: 14px 16px;
+  overflow-y: auto;
+  background: #f0f7fb;
+  flex: 1;
+}
+.guide-block {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-left: 4px solid #2d6a8c;
+}
+.guide-block .guide-step-title {
+  color: #1d556f;
+  margin: 0 0 8px 0;
+  font-size: 1.02em;
+  font-weight: 700;
+}
+.guide-block ul {
+  margin: 4px 0 0 0;
+  padding-left: 22px;
+}
+.guide-block li {
+  margin: 5px 0;
+  line-height: 1.4;
+}
+.guide-tip {
+  background: #fff3e0;
+  border-left: 3px solid #d97500;
+  padding: 10px 12px;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 0.92em;
+  line-height: 1.4;
+}
+.guide-reopen {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #2d6a8c;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1010;
+  font-weight: 700;
+  font-size: 0.95em;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  display: none;
+  animation: guide-reopen-pulse 2.5s ease-in-out infinite;
+}
+.guide-reopen:hover {
+  background: #1d556f;
+  transform: scale(1.05);
+}
+@keyframes guide-reopen-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 4px 22px rgba(45,106,140,0.7); }
+}
+.guide-popup.minimized { height: auto !important; max-height: none; }
+.guide-popup.minimized .popup-body { display: none; }
+@media (max-width: 700px) {
+  .guide-popup { width: 270px; font-size: 0.78em; left: 10px; top: 10px; }
+}
+
+/* POP-OUT IMAGE — small button on every embedded image to detach it as a movable+resizable window */
+.popout-trigger {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(42,31,21,0.78);
+  color: white;
+  border: none;
+  padding: 6px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.popout-trigger:hover {
+  background: rgba(42,31,21,1);
+  transform: scale(1.05);
+}
+.embedded-image, .embedded-postavy, .embedded-komiks .komiks-strip > div, .single-card {
+  position: relative;
+}
+
+.img-popout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 480px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid #4a3527;
+  min-width: 260px;
+  min-height: 180px;
+  max-width: 95vw;
+  max-height: 90vh;
+  will-change: transform, width, height;
+}
+.img-popout-header {
+  background: linear-gradient(135deg, #4a3527, #2a1f15);
+  color: white;
+  padding: 8px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  flex-shrink: 0;
+  gap: 8px;
+}
+.img-popout-title {
+  font-size: 0.88em;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.img-popout-controls {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.img-popout .popout-btn {
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 0.95em;
+  line-height: 1;
+  font-weight: 700;
+}
+.img-popout .popout-btn:hover { background: rgba(255,255,255,0.38); }
+.img-popout-body {
+  flex: 1;
+  overflow: hidden;
+  background: #f9f4ec;
+  position: relative;
+  cursor: zoom-in;
+  user-select: none;
+}
+.img-popout-body.zoomed { cursor: grab; }
+.img-popout-body.panning { cursor: grabbing; }
+.img-popout-body img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transform-origin: 0 0;
+  will-change: transform;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.img-popout-body.smooth img { transition: transform 0.18s ease-out; }
+.img-popout-zoom-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(42,31,21,0.78);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78em;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.img-popout-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, rgba(74,53,39,0.55) 50%);
+  border-radius: 0 0 8px 0;
+  z-index: 6;
+}
+@media (max-width: 700px) {
+  .exam-popup { width: 280px; font-size: 0.78em; top: 10px; right: 10px; }
+}
+</style>
+</head>
+<body>
+  
+<div id="exam-popup" class="exam-popup">
+  <div class="popup-header" id="popup-header">
+    <span class="popup-title">📊 Co říct u zkoušky</span>
+    <span>
+      <button class="popup-btn" id="popup-toggle" title="Sbalit / rozbalit">−</button>
+      <button class="popup-btn" id="popup-close" title="Skrýt">×</button>
+    </span>
+  </div>
+  <div class="popup-body">
+
+    <h4>🎯 4 části mluvení (15 min)</h4>
+
+    <div class="step-block">
+      <div class="step-title">1️⃣ Autor &amp; doba <span class="step-meta">3 min · 4 b</span></div>
+      <ul class="step-list">
+        <li><a href="#autor-img" class="popup-link">Kdo to napsal, kdy žil, odkud</a></li>
+        <li><a href="#cast-4" class="popup-link">Jaký to byl literární směr (klasicismus, realismus, antiutopie…)</a></li>
+        <li><a href="#cast-4" class="popup-link">Co dalšího autor napsal (2–3 díla)</a></li>
+        <li><a href="#cast-4" class="popup-link">Co se v té době dělo (krátký kontext)</a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">2️⃣ O knize <span class="step-meta">~4 min · 8 b</span></div>
+      <p class="step-intro">Nejdřív <b>co to je za knihu:</b></p>
+      <ul class="step-list">
+        <li><a href="#dilo-img" class="popup-link">Druh: <b>próza / drama / poezie</b></a></li>
+        <li><a href="#dilo-img" class="popup-link">Žánr: román / komedie / novela / báseň…</a></li>
+        <li><a href="#cast-1" class="popup-link">Kolik kapitol / jednání, <b>kdo vypráví</b> (vypravěč)</a></li>
+        <li><a href="#cast-2" class="popup-link">Hlavní téma + 2–3 motivy</a></li>
+      </ul>
+      <p class="step-intro">Pak <b>co se v úryvku děje:</b></p>
+      <ul class="step-list">
+        <li><a href="#dej" class="popup-link">Kde v knize úryvek je (která kapitola / jednání)</a></li>
+        <li><a href="#postavy" class="popup-link">Kdo v něm vystupuje a jaké jsou vztahy</a></li>
+        <li><a href="#dej" class="popup-link">Co se konkrétně v úryvku odehrává</a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">3️⃣ Jak je napsaný <span class="step-meta">~3 min · 4 b</span></div>
+      <ul class="step-list">
+        <li><a href="#cast-3" class="popup-link">Jaký jazyk: <b>spisovný / hovorový / archaický / nářečí</b></a></li>
+        <li><a href="#cast-3" class="popup-link">2–3 umělecké prostředky a <b>PROČ jsou tam</b><br>
+            <small>Třeba: „Hyperbola — autor přehání, aby vyvolal smích."<br>„Ironie — autor říká opak toho, co myslí, aby zesměšnil postavu."</small></a></li>
+      </ul>
+    </div>
+
+    <div class="step-block">
+      <div class="step-title">4️⃣ Neumělecký text <span class="step-meta">5 min · 8 b</span></div>
+      <ul class="step-list">
+        <li>Funkční styl: <b>publicistický / odborný / administrativní / umělecký…</b></li>
+        <li>Útvar: článek, recenze, zpráva, esej, návod…</li>
+        <li>O čem text je, k čemu slouží</li>
+        <li><b>Pro koho je napsaný</b> (adresát)</li>
+        <li>Jazykové prostředky (a k čemu)</li>
+        <li><b>Jak souvisí s uměleckým textem</b></li>
+      </ul>
+      <a href="../funkcni-styly.html" target="_blank" class="popup-external-link">↗ Otevřít tahák funkčních stylů</a>
+    </div>
+
+    <p class="bonus-info">➕ <b>Jak mluvíš = 4 b navíc.</b> Mluv spisovně, srozumitelně, plynule, bez vulgarismů.</p>
+
+    <h4>📊 Bodování</h4>
+    <p>Celkem <b>28 bodů</b>. Stačí získat <b>13 bodů (44 %)</b> a prošel/a jsi.</p>
+    <table>
+      <tr><th>Část mluvení</th><th class="cell-num">max</th></tr>
+      <tr><td>1️⃣ Autor &amp; doba</td><td class="cell-num">4</td></tr>
+      <tr><td>2️⃣ O knize (druh+žánr+vypravěč 4 + obsah úryvku 4)</td><td class="cell-num">8</td></tr>
+      <tr><td>3️⃣ Jak je napsaný (jazyk + prostředky)</td><td class="cell-num">4</td></tr>
+      <tr><td>4️⃣ Neumělecký text (styl + obsah)</td><td class="cell-num">8</td></tr>
+      <tr><td>➕ Jak mluvíš (jazyk. kultura)</td><td class="cell-num">4</td></tr>
+      <tr><td><b>Celkem</b></td><td class="cell-num"><b>28</b></td></tr>
+    </table>
+
+    <div class="warn">
+      <b>⚠️ POZOR — 3 pravidla:</b><br>
+      <b>1.</b> Z části o knize + autorovi musíš mít <b>aspoň 4 body</b> (ze 16). Jinak <b>NEPROŠEL/A</b>.<br>
+      <b>2.</b> Ze samotného rozboru úryvku knihy <b>aspoň 3 body</b> (z 12). Jinak <b>NEPROŠEL/A</b>.<br>
+      <b>3.</b> Když máš někde 0 bodů → za „jak mluvíš" dostaneš max 3 body (ne 4).
+    </div>
+
+    <h4>💡 Strategie — kolik bodů kde</h4>
+    <ul>
+      <li>Kniha + autor: cíl <b>8 b</b> (z 16 možných)</li>
+      <li>Neumělecký text: cíl <b>3–4 b</b> (z 8)</li>
+      <li>Jak mluvíš: cíl <b>2 b</b> (z 4)</li>
+      <li>= <b>13–14 b → PROŠEL/A</b> ✅</li>
+    </ul>
+
+    <h4>🧠 Vždy zmínit (kontrolka)</h4>
+    <ul>
+      <li>Druh + žánr knihy</li>
+      <li>Kdo vypráví (vypravěč)</li>
+      <li>U každého prostředku — <b>k čemu tam je</b></li>
+      <li>Literární směr + 2 další díla autora</li>
+      <li>Souvislost mezi uměl. a neuměl. textem</li>
+    </ul>
+
+  </div>
+</div>
+
+<button id="popup-reopen" class="popup-reopen" title="Zobrazit strategii zkoušky">📊 Strategie zkoušky</button>
+
+<div id="guide-popup" class="guide-popup">
+  <div class="popup-header" id="guide-header">
+    <span class="popup-title">🧭 Jak studovat stránku</span>
+    <span>
+      <button class="popup-btn" id="guide-toggle" title="Sbalit / rozbalit">−</button>
+      <button class="popup-btn" id="guide-close" title="Skrýt">×</button>
+    </span>
+  </div>
+  <div class="popup-body">
+
+    <div class="guide-block">
+      <div class="guide-step-title">🧭 Pochop děj knihy (čti nejdřív!)</div>
+      <ul>
+        <li>🎬 <b>Komiks</b> — 3 stránky × 9 scén</li>
+        <li>📜 <b>Detailní děj</b> — plný plot, abys věděl/a o čem to je</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-step-title">📖 Tahák (analytické info v pořadí mluvení)</div>
+      <ul>
+        <li><b>1️⃣</b> Lit. kontext + 👤 obrázek autora</li>
+        <li><b>2️⃣</b> Identifikace + 📖 obrázek knihy</li>
+        <li><b>2️⃣</b> I. ČÁST analýzy</li>
+        <li><b>2️⃣</b> II. ČÁST + 🧬 obrázek postav</li>
+        <li><b>3️⃣</b> III. ČÁST</li>
+        <li><b>📌</b> Pomocníci (opěrné body, úryvek, test)</li>
+      </ul>
+    </div>
+
+    <p class="guide-tip">💡 <b>Až znáš děj, analytické info ti dá smysl.</b> Bez děje to bude jen seznam slov.</p>
+
+  </div>
+</div>
+
+<button id="guide-reopen" class="guide-reopen" title="Zobrazit průvodce">🧭 Jak studovat</button>
+
+  <header class="book-header">
+    <div class="container">
+      <div class="num">KNIHA #06</div>
+      <h1>Kulička</h1>
+      <p class="author">Guy de Maupassant</p>
+      <div class="nav">
+        <a href="../index.html">← Zpět na seznam</a>
+        &nbsp;·&nbsp;
+        <a href="../funkcni-styly.html">📰 Funkční styly (neumělecký text)</a>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+
+    <div class="toc-jump">
+      <strong>Skok na:</strong>
+      <a href="#komiks">🎬 Komiks</a>
+      <a href="#dej">📜 Detailní děj</a>
+      <a href="#tahak">📖 Tahák</a>
+      <a href="#autor-img">1️⃣ Autor</a>
+      <a href="#dilo-img">2️⃣ O knize</a>
+      <a href="#postavy">🧬 Postavy</a>
+      <a href="#projev">🎙️ Skript</a>
+    </div>
+
+    
+    <section id="plot-context" class="section plot-context">
+      <h2>🧭 Pochop děj knihy (čti nejdřív!)</h2>
+      <p class="section-hint">Než pojdeš na analytické věci, ujasni si nejdřív, o čem ta kniha je.</p>
+      
+      <div id="komiks" class="embedded-komiks" style="margin-top: 0;">
+        <div class="komiks-title">🎬 Děj v komiksu (3 stránky × 3 panely = 9 scén)</div>
+        <div class="komiks-strip">
+          <div><img src="../../images/06-maupassant-kulicka/01-komiks-1.jpg" alt="Komiks I"><div class="image-caption">I — Expozice & kolize</div></div>
+          <div><img src="../../images/06-maupassant-kulicka/02-komiks-2.jpg" alt="Komiks II"><div class="image-caption">II — Krize & vyvrcholení</div></div>
+          <div><img src="../../images/06-maupassant-kulicka/03-komiks-3.jpg" alt="Komiks III"><div class="image-caption">III — Rozuzlení & závěr</div></div>
+        </div>
+      </div>
+
+      <div id="dej" class="dej-block">
+        <div class="dej-title">📜 Detailní děj knihy</div>
+        <div class="tahak"><h1>Guy de Maupassant — Kulička — Detailní děj</h1>
+
+<blockquote>Novela (1880), francouzský kritický realismus s prvky naturalismu. Souvislý text bez kapitol, lineární chronologie. Děj se odehrává v zimě 1870/71 během prusko-francouzské války v okupované Normandii. Symetrická trojdílná kompozice: cesta tam → zadržení v Tôtes → cesta zpět. Pointa zrcadlí úvod (scéna jídla dávaného × scéna jídla odepřeného).</blockquote>
+
+<hr>
+
+<h2>Úvod (expozice) — okupovaný Rouen</h2>
+
+<p>Po porážce francouzské armády obsadili Prusové <strong>Normandii</strong>. Vypravěč otevírá novelu rozsáhlým popisem zbytků poražené francouzské armády táhnoucí dezorganizovaně přes <strong>Rouen</strong> — vojáci jsou špinaví, vyčerpaní, demoralizovaní; důstojníci v rozcuchaných uniformách neudrží pořádek. Po nich přichází sama okupace: pruští vojáci pochodují městem, ubytovávají se v domech měšťanů, kteří se jim podřízeně klaní. Vypravěč popisuje, jak se ze začátku „vážení občané&quot; báli, čekali masakr; pak ale zjistili, že Prusové jsou „dobře vycvičení&quot; a nebezpečí spočívá spíš v poníženosti soužití s nepřítelem než ve fyzickém násilí. Atmosféra okupace je atmosféra <strong>mrazu, mlčení, ponížení</strong>.</p>
+
+<p>Pruští důstojníci si žijí v reklamovaných pokojích, francouzské hospodyně jim vaří, francouzské služebné je obsluhují. Maupassant ironicky popisuje, jak se každodenní život zaběhl do nového rytmu — Francouzi přivykli okupantovi a okupant si zvykl na pohodlí. <strong>Vlastenecký vzdor existuje jen u některých jedinců</strong> (vypravěč naznačí epizodu rybáře, který shazoval mrtvoly Prusů do Seiny — anonymní odboj).</p>
+
+<p>V této situaci se několik <strong>„vážených obyvatel&quot; Rouenu</strong> rozhodne uprchnout do Le Havre přes Dieppe (a dále případně do Anglie), protože okupace ohrožuje jejich obchody a majetek. Získají povolení pruského velitele a najmou si <strong>dostavník (diligenci)</strong> pro <strong>deset cestujících</strong>. Odjezd je naplánován <strong>na čtvrtou ráno</strong> v zasněženém ránu, aby unikli pozornosti.</p>
+
+<hr>
+
+<h2>Část I — Cesta z Rouenu (odjezd)</h2>
+
+<h3>Odjezd ve čtyři ráno</h3>
+
+<p>Dostavník stojí v ulicích Rouenu v noční tmě, koně jsou zapřažení, kočí proklíná zimu. Postupně přicházejí cestující — všichni zachumlaní do kožešin a šál, s kufry plnými cenností. Sníh padá hustě, mráz štípe. Konečně se rozjíždí, ale <strong>koně se sotva vlečou</strong> zasněženými cestami; postup je extrémně pomalý.</p>
+
+<h3>Postupné představení 10 cestujících</h3>
+
+<p>Maupassant cestující představuje jednoho po druhém, podle <strong>sociálního postavení od nejnižšího k nejvyššímu</strong> — tím už od počátku ironicky komentuje hierarchii:</p>
+
+<p class="numbered"><strong>1.</strong> <strong>Manželé Loiseauovi</strong> — <strong>drobná buržoazie / nižší obchodní vrstva</strong>.</p>
+<ul>
+<li><strong>Pan Loiseau</strong> — velkoobchodník s vínem v Rouenu, malé postavy, <strong>velké břicho</strong>, červený obličej, šedivé licousy. Vychytralý šejdíř, prodává laciné víno za drahé. Jméno „Loiseau&quot; zní jako francouzské <em>l&#x27;oiseau</em> („pták&quot;) — slovní hříčka. Šprýmař, sklon k obhroublým vtipům a dvojsmyslům.</li>
+<li><strong>Paní Loiseauová</strong> — vysoká, statná, rázná žena s rozhodným hlasem; v obchodě je „mužem v sukni&quot;; pragmatická, počítavá, dominantní.</li>
+</ul>
+
+<p class="numbered"><strong>2.</strong> <strong>Manželé Carré-Lamadonovi</strong> — <strong>velká průmyslová buržoazie</strong>.</p>
+<ul>
+<li><strong>Pan Carré-Lamadon</strong> — majitel <strong>bavlnářských manufaktur</strong> (tří přádelen), člen městské rady, vážený, opatrný, <strong>prefekturní rada</strong>; politicky hraje na obě strany.</li>
+<li><strong>Paní Carré-Lamadonová</strong> — výrazně <strong>mladší</strong> než její manžel, hezká, drobná, zabalená v drahých kožešinách; známá tím, že byla „útěchou&quot; pro důstojníky rouenské posádky. Rafinovaná a chladně vypočítavá.</li>
+</ul>
+
+<p class="numbered"><strong>3.</strong> <strong>Hrabě a hraběnka de Bréville</strong> — <strong>stará aristokracie</strong>, nejvyšší vrstva v dostavníku.</p>
+<ul>
+<li><strong>Hrabě Hubert de Bréville</strong> — starobylý šlechtický rod, oholené strniště ve stylu <strong>Jindřicha IV.</strong> (rodinná legenda tvrdí, že Jindřich IV. svedl jednu Brévilleovu předchůdkyni); zachovává vznešené způsoby, distinguovaná zdvořilost. Ve formě nejvybranější — ve své podstatě však pokrytec.</li>
+<li><strong>Hraběnka de Bréville</strong> — pochází z měšťanské rodiny, ale dokonale si osvojila aristokratický šarm; má <strong>mateřsky vlídný hlas</strong>, dokáže být milá tak, aby svou laskavostí zlomila každého. Stane se <strong>hlavní strůjkyní pokryteckého nátlaku</strong> na Kuličku.</li>
+</ul>
+
+<p class="numbered"><strong>4.</strong> <strong>Dvě jeptišky (řeholnice)</strong> — církev.</p>
+<ul>
+<li><strong>Starší jeptiška</strong> — postarší, <strong>obličej poďobaný od neštovic</strong>, drsná tvář; zbožná, mlčenlivá.</li>
+<li><strong>Mladší jeptiška</strong> — slabá, <strong>krásná, drobná, nemocná vzezřením</strong>, s velkýma očima. Tiše se modlí, oddává se osudu. Obě představují „mlčící morální autoritu&quot;.</li>
+</ul>
+
+<p class="numbered"><strong>5.</strong> <strong>Cornudet</strong> — <strong>demokrat, republikán, falešný revolucionář</strong>.</p>
+<ul>
+<li>Dlouhá <strong>rezavá brada</strong>, velký pivař, syn pohotového obchodníka; promrhal otcovo dědictví v hospodách s revolucionáři. <strong>Známá postava v rouenských kavárnách</strong>, kde řečnil proti císaři a o republice; když Prusové přišli, organizoval „obranu&quot; — vykopal pár příkopů, a když nepřítel skutečně dorazil, <strong>rychle se stáhl zpět do města</strong>. Vlastenec slovem, ne činem.</li>
+</ul>
+
+<p class="numbered"><strong>6.</strong> <strong>Kulička — Élisabeth Roussetová (Boule de Suif)</strong> — <strong>prostitutka z Rouenu</strong>.</p>
+<ul>
+<li>Nastupuje <strong>poslední</strong>, mírně se chvěje. <strong>Malá, kulaťoučká, baculatá</strong> („tlustá jak koule sádla&quot; — odtud přezdívka). Svěží, růžová, s <strong>černýma očima jako dvě kapky inkoustu</strong> a dlouhými řasami. Pleť hladká, ústa malá a šťavnatá. Když si ji ostatní v polotmě prohlédnou, <strong>dámy si začnou šeptat</strong>, manželky si vyměňují pohrdlivé pohledy a slova jako „nestyda&quot;, „veřejná hanba&quot;, „prodejná ženština&quot;. Hraběnka přiblíží hlavu k paní Carré-Lamadonové a ony se shodnou, že je „skandální&quot;, aby s nimi jela taková žena. Diskrétně se proti ní spojí v jakousi „aristokracii <strong>počestných žen</strong>&quot; oproti té „nečisté&quot;.</li>
+</ul>
+
+<h3>Hlad v dostavníku</h3>
+
+<p>Postupují krokem zasněženou krajinou. Mráz je krutý. Po několika hodinách všem začíná docházet, že <strong>odjeli ve spěchu a nevzali si jídlo na cestu</strong>. Plánovali zastavit někde k obědu, ale dostavník postupuje tak pomalu, že do žádné vesnice nedojedou. Hlad se mění v utrpení.</p>
+
+<p><strong>Kulička jako jediná si jídlo připravila.</strong> Po nějaké chvíli se sehne pod sedadlo a vytahuje <strong>velký košík</strong> přikrytý ubrouskem. Vyndává <strong>kuře v aspiku</strong> (rosolu), které sama upekla, <strong>paštiky</strong>, <strong>vařená vajíčka</strong>, <strong>chléb</strong>, <strong>hrušky</strong>, <strong>hrozny</strong>, sýr, klobásy, a <strong>čtyři lahve vína</strong>. Vůně jídla naplní vůz.</p>
+
+<p>Cestující ji nejprve s pohrdáním pozorují, ale <strong>hlad přemůže ostudu</strong>. Loiseau se neudrží: „Sláva paní, která myslela na všechny.&quot; Po počátečních zdvořilostech ji Loiseau požádá o sousto. Kulička hned ochotně <strong>nabízí jídlo všem</strong>. Postupně si bere každý: Loiseauovi nejdřív, pak Carré-Lamadonovi (paní Carré-Lamadonová se nejprve zdráhá, pak ji manžel naléhavě požádá, ať si vezme — „v zájmu sil&quot;), nakonec i <strong>hrabě a hraběnka</strong> <strong>s elegantním předstíraným nezájmem</strong> přijmou kousek. <strong>Jeptišky</strong> přežehnají pokrm a pomodlí se nad ním; <strong>Cornudet</strong> přijímá s buržoazní úsměškem k „pádlu společnosti&quot;. Všichni jedí, <strong>všichni piji její víno</strong>. Atmosféra ve voze se uvolní. Hovor se rozjede.</p>
+
+<p><strong>Kulička začíná vyprávět o sobě</strong>: že je <strong>bonapartistka</strong> (přívrženkyně císaře Napoleona III.), že nenávidí Prusy a že <strong>musela uprchnout z Rouenu</strong>, protože — jak vypráví — když pruský důstojník zaklepal na její dveře, <strong>chytla ho pod krkem a chtěla ho uškrtit</strong>. Cestující jí potlesku tají úsměv, hraběnka pochvalně přikyvuje, jeptišky se modlí. Loiseau se baví, Cornudet souhlasně huláká „<strong>ať žije Francie!</strong>&quot;. Kulička je dojatá, <strong>každý ji ujistí, že je „statečná vlastenka&quot;</strong>. Vůz se sblíží.</p>
+
+<p>Diskutuje se o politice. <strong>Loiseau, Carré-Lamadon, Bréville a Cornudet</strong> se hádají o vládě a republice — <strong>Cornudet jako jediný hájí republiku</strong>, ostatní jsou pro pořádek a monarchii. Hraběnka a paní Carré-Lamadonová si povídají s Kuličkou jako kdyby byla jejich rovna. <strong>Spojuje je společný strach a hlad.</strong></p>
+
+<hr>
+
+<h2>Část II — Tôtes: zadržení v hostinci</h2>
+
+<h3>Příjezd do Tôtes</h3>
+
+<p>Po <strong>dlouhých hodinách</strong> strastiplného postupu (cesta z Rouenu měla normálně trvat několik hodin, jim trvala podstatně déle — jeli celý den a ještě se nedopravili tak daleko jako měli) dostavník konečně <strong>navečer dorazí do vesnice Tôtes</strong> (přibližně <strong>40 km</strong> od Rouenu, na cestě do Dieppe). Zastavuje před <strong>hostincem „U obchodu&quot;</strong> (Hôtel du Commerce), kde mají přespat.</p>
+
+<p>U dveří hostince je čeká <strong>pruská hlídka</strong>. Z dostavníku <strong>vystoupí pruský důstojník</strong>, který zkontroluje jejich pasy a doklady. Pak je <strong>všechny pošle do hostince</strong>.</p>
+
+<h3>Pruský důstojník</h3>
+
+<p><strong>Důstojník je mladý, vzpřímený, hubený</strong>, blonďatý, s <strong>monoklem</strong>, v dokonale vyžehlené uniformě. Mluví lámanou francouzštinou s tvrdým <strong>pruským „r&quot;</strong>. Je formální, <strong>chladný, suchý</strong> — žádná vášeň, žádná zlost. Ztělesnění <strong>arogance okupanta</strong>, který ví, že má moc.</p>
+
+<p>Cestující se ubytují, <strong>dostavník zůstane stát</strong> před hostincem, koně jsou ustájeni. Hostinský <strong>Follenvie</strong> (a jeho manželka <strong>paní Follenvieová</strong>) je obslouží — paní Follenvieová je tlustá astmatická žena, která mluví bez dechu a <strong>otevřeně nenávidí Prusy</strong>.</p>
+
+<p>Večeří v hostinci. <strong>Druhý den ráno</strong> chtějí pokračovat — ale <strong>kočí Loiseauovi sděluje, že důstojník odmítá vystavit povolení k výjezdu</strong>. Dostavník nesmí dál.</p>
+
+<h3>Pruský důstojník si žádá Kuličku</h3>
+
+<p><strong>Důstojník si pošle pro Kuličku</strong>. Audience v jeho pokoji proběhne narychlo a Kulička se vrací s tváří <strong>planoucí vzteky</strong>. Cestující ji ihned obklopí. <strong>Kulička jim sdělí, co se stalo</strong>: pruský důstojník <strong>požaduje, aby s ním strávila noc</strong> — výměnou za to <strong>propustí dostavník</strong> dál. Ona <strong>z vlastenectví odmítla</strong>.</p>
+
+<p>Cestující jsou v první chvíli <strong>rozhořčeni</strong>. <strong>Hraběnka, paní Carré-Lamadonová, paní Loiseauová</strong> projevují solidaritu: „<strong>To je nestoudné!</strong>&quot; „Takové násilí!&quot; „Prušáci jsou barbaři!&quot; Cornudet hřímá proti okupantovi, Loiseau spílá Prusům. <strong>Všichni s ní soucítí</strong>.</p>
+
+<p>Důstojník však trvá na svém. <strong>Den za dnem</strong> dostavník nedostává povolení k odjezdu. Cestující sedí v hostinci v Tôtes, nudí se, ztrácejí trpělivost. <strong>Carré-Lamadon má strach o své obchody v Le Havre</strong>, <strong>Loiseau se obává, že nedoručí zboží svým odběratelům</strong>, <strong>Bréville chtějí do Dieppe</strong> k příbuzným. <strong>Každý den ztráty = peníze</strong>. Jejich solidarita s Kuličkou postupně chladne.</p>
+
+<h3>Změna nálady — postupné přesvědčování</h3>
+
+<p>Po <strong>třech dnech</strong> marného čekání už cestující šeptem reptají. Začínají si <strong>uvědomovat, že to vlastně Kulička jim brání odjet</strong>. Začnou s ní mluvit jinak — místo soucitu <strong>výčitky</strong>. Postupně se mění na <strong>kuplíře</strong>.</p>
+
+<p><strong>Hraběnka de Bréville</strong> vede operaci. Postupně, <strong>velmi jemně a mateřsky</strong>, začne Kuličce vysvětlovat:</p>
+<ul>
+<li>že <strong>„oběť pro vlast&quot; je něco vznešeného</strong>,</li>
+<li>že <strong>nikdo na ni za to nebude pohlížet jinak</strong>,</li>
+<li>že je to <strong>„jen pár hodin nepříjemností&quot;</strong>,</li>
+<li>že ostatní jsou s ní <strong>„uvězněni&quot; kvůli její tvrdohlavosti</strong>.</li>
+</ul>
+
+<p><strong>Pan Carré-Lamadon</strong> jí přizvukuje, <strong>Loiseau</strong> přidává obhroublé žerty. Hraběnka mluví s noblesou, paní Loiseauová sprostě, paní Carré-Lamadonová věcně.</p>
+
+<h3>Argument jeptišek — Judita a Holofernes</h3>
+
+<p><strong>Vrchol pokrytectví:</strong> zapojí se <strong>jeptišky</strong>. <strong>Starší jeptiška</strong> (s pozoruhodným autoritativním klidem) vyloží Kuličce <strong>biblický příběh o Juditě a Holofernovi</strong>: Židovka <strong>Judita</strong> svedla a opila babylonského vojevůdce <strong>Holoferna</strong> a v noci mu <strong>uťala hlavu</strong>, aby zachránila svůj národ. Jeptiška z toho odvozuje, že <strong>„úmysl posvěcuje skutek&quot;</strong> — pokud je čin konán pro dobro vlasti, je morálně přípustný, ba ctnostný. Bůh <strong>odpouští</strong> činy, které jsou vedeny <strong>dobrým úmyslem</strong>.</p>
+
+<p><strong>Tím církev posvětí prostituci ve jménu vlastenectví.</strong> Jde o <strong>nejostřejší ironii</strong> novely — řeholnice biblickými argumenty obhajují to, k čemu by jinak měla církev odsoudit.</p>
+
+<h3>Kulička se zlomí</h3>
+
+<p><strong>Cornudet</strong> se jediný odmítá zúčastnit kuplířského tlaku a stáhne se. Zbytek pokračuje. Po dni argumentace, <strong>při společném obědě, kde jí Kuličce pozorně podávají sousta a vlídná slova</strong> (typický kontrast — předtím jí pohrdali, teď ji obskakují s úsměvy), Kulička pod tlakem <strong>podlehne</strong>.</p>
+
+<p>Wieczer <strong>odchází k důstojníkovi</strong>. Ostatní cestující slaví — <strong>šampaňské</strong>, <strong>smích</strong>, <strong>frivolní vtipy</strong>. Loiseau se neudrží a několikrát s posunky vyjmenuje <strong>dvojsmysly</strong> o tom, co se asi v patře děje. Hraběnka se rozpačitě usmívá; jeptišky se „modlí za odpuštění&quot; a usrkávají víno; Cornudet znechuceně sedí stranou. <strong>Atmosféra vítězství — nikdo si nevšimne, že právě prodali ženu.</strong></p>
+
+<p>Ráno <strong>Kulička schází ze schodů</strong> — bledá, zničená, mlčící.</p>
+
+<hr>
+
+<h2>Část III — Cesta zpět (od Tôtes do Dieppe): pointa</h2>
+
+<h3>Ranní odjezd</h3>
+
+<p><strong>Pruský důstojník vystaví povolení</strong>. Dostavník je připraven, koně zapřažení. Cestující jsou <strong>veselí, dobře naladěni</strong>, klábosí spolu. Po třech dnech čekání konečně <strong>mohou vyrazit</strong>.</p>
+
+<p><strong>Kulička přichází jako poslední</strong>, <strong>schýlená, oči zarudlé od pláče</strong>, mlčící. Když nastupuje do vozu, <strong>všichni se náhle odvrátí, jako by ji neviděli</strong>. Hraběnka odvrací hlavu, paní Loiseauová a paní Carré-Lamadonová si vyměňují <strong>pohrdavé pohledy</strong>. Kulička sedí v koutě, <strong>stydí se a krčí</strong>. Cornudet ji <strong>přivítá tichým pokývnutím</strong>.</p>
+
+<h3>Cestující vytahují jídlo — Kulička ne</h3>
+
+<p>Po několika hodinách cesty se dostavník opět vleče zasněženou krajinou. Cestující mají hlad. <strong>Tentokrát si všichni — poučení předchozí cestou — vzali zásoby s sebou</strong>:</p>
+<ul>
+<li><strong>Loiseauovi</strong> vytahují pečené kuře, sýr, chléb,</li>
+<li><strong>Carré-Lamadonovi</strong> mají sandwiche, klobásy, čokoládu,</li>
+<li><strong>Bréville</strong> balíček s paštikou a vínem,</li>
+<li><strong>Jeptišky</strong> mají chléb a klobásu od hostinského.</li>
+</ul>
+
+<p><strong>Kulička však ve spěchu odjezdu na jídlo zapomněla</strong>. Sedí v koutě, <strong>dívá se, jak ostatní jedí</strong>, ona — která je předtím nasytila — <strong>nemá nic</strong>.</p>
+
+<p><strong>Ostatní se však ani neohlédnou</strong>. <strong>Nikdo jí nenabídne ani sousto.</strong> Vypravěč to popisuje s ledovou ironií: hraběnka jí pohrdavě podá kostku cukru pro koně, paní Loiseauová si nahlas všimne, „<strong>že kdyby si Kulička aspoň jednou pomyslela na druhé</strong>&quot;, pan Carré-Lamadon o ní mluví s opovržením jako o „<strong>té osobě</strong>&quot;. Loiseau si neodpustí oplzlý žert na účet její „<strong>pracovní noci</strong>&quot;.</p>
+
+<p>Kulička zprvu <strong>cítí zlost a hořkost</strong> — <strong>vzpomene si, jak ona před třemi dny dělila své jídlo všem</strong>. <strong>Cítí, že ji použili jako prostředek a teď ji vyhodili jako špinavý hadr.</strong> Postupně ji ale <strong>přemůže pláč</strong> — <strong>tiše vzlyká</strong> v koutě dostavníku. Slzy jí tečou po tvářích, snaží se je zadržet, ale neumí.</p>
+
+<h3>Cornudet zpívá Marseillaisu</h3>
+
+<p>V poslední fázi cesty, kdy Kulička pláče v koutě, <strong>Cornudet začne pohvizdovat — pak polohlasem zpívat — Marseillaisu</strong> (francouzskou revoluční hymnu, oficiální hymnu republiky). Zpívá ji <strong>prokladně</strong>, <strong>vytrvale</strong>, <strong>dráždivě</strong> — refrén opakuje stále dokola. Ostatní cestující jsou <strong>podráždění, vztekají se</strong>, ale <strong>nemohou ho umlčet</strong> — vždyť <strong>Marseillaisa je státní hymna</strong>, vlastenecký zpěv. Loiseau zuří, hraběnka se křečovitě dívá z okna.</p>
+
+<p><strong>Cornudetova Marseillaisa je jediným gestem solidarity v celém voze</strong> — ale i to je <strong>gesto prázdné</strong>, <strong>slovem ne činem</strong>. Cornudet nezasáhl, když Kuličce vnucovali kuplířství; teď, <strong>když už je pozdě</strong>, pohvizduje hymnu. <strong>Falešný demokrat zůstává falešným demokratem do konce.</strong></p>
+
+<h3>Konec novely</h3>
+
+<p>Dostavník se dál vleče zasněženou tmou směrem k Dieppe. <strong>Kulička pláče</strong>. <strong>Marseillaisa zní</strong>. <strong>Cestující v ledovém mlčení obracejí hlavy stranou.</strong> Vypravěč scénu uzavírá obrazem <strong>plačící ženy v koutě vozu, zatímco hymna o svobodě, rovnosti a bratrství zní nad tělem prodané vlasti</strong>.</p>
+
+<p><strong>Pointa:</strong> ti, kdo se ohánějí vlastenectvím a mravností, právě prodali jedinou skutečnou vlastenku Prusům — a teď jí pohrdají. <strong>Sociální postavení a mravní hodnota jsou nepřímo úměrné.</strong></p>
+
+<hr>
+
+<h2>Vrchol / Krize</h2>
+
+<p><strong>Vrchol</strong> (= klíčový obrat) novely je <strong>noc Kuličky s pruským důstojníkem</strong> v hostinci v Tôtes. K tomu se gradace celé novely sbíhá: tři dny postupného tlaku, hraběnčiny mateřské argumenty, jeptiší biblická legitimizace (Judita a Holofernes), Loiseauovy obhroublé žerty — to vše dohromady Kuličku zlomí.</p>
+
+<p><strong>Krize</strong> se obrací v <strong>pointu</strong> — ne v rehabilitaci Kuličky, ale v <strong>odhalení pokrytectví měšťanstva</strong>. <strong>Vrchol mravního selhání společnosti</strong> přichází ne v noci s důstojníkem, ale <strong>druhý den ráno v dostavníku</strong>, kdy se „slušná společnost&quot; od své zachránkyně odvrátí a nechá ji hladovět.</p>
+
+<hr>
+
+<h2>Rozuzlení a konec</h2>
+
+<p>Novela končí <strong>otevřeně, bez vnější pointy</strong> — dostavník pokračuje k Dieppe, Kulička pláče, Cornudet pohvizduje Marseillaisu. <strong>Žádné rozsudky</strong>. Žádný hluboký dialog. <strong>Jen obraz</strong>. Maupassant nepředkládá moralitu — předkládá <strong>scénu</strong>, ze které si čtenář musí soud udělat sám.</p>
+
+<p><strong>Postavy:</strong></p>
+<ul>
+<li><strong>Kulička</strong> zůstane ponížená a zhrzená — jediná, kdo mravně něco obětoval, je jediná, kdo je zavržena.</li>
+<li><strong>Měšťanstvo</strong> ve své falešné slušnosti pokračuje dál. <strong>Žádné svědomí</strong>, žádná lítost.</li>
+<li><strong>Cornudet</strong> se omezí na symbolické gesto Marseillaisy — prázdné, neúčinné.</li>
+</ul>
+
+<p><strong>Vyznění:</strong> <strong>chmurné, ironické, ostře kritické</strong>. Maupassant neukazuje cestu k nápravě — ukazuje <strong>stav věcí</strong>, který je třeba vidět.</p>
+
+<hr>
+
+<h2>Klíčové pasáže pro maturitu (pravděpodobné úryvky)</h2>
+
+<h3>Scéna A — V dostavníku s jídlem (Část I — cesta tam)</h3>
+<p><strong>Kde v ději:</strong> několik hodin po vyjetí z Rouenu, dostavník se vleče sněhem, cestující mají hlad.</p>
+<p><strong>Co se děje:</strong> Kulička vytahuje košík s jídlem (kuře v aspiku, paštiky, chléb, vejce, ovoce, čtyři lahve vína). Postupně nabízí všem; cestující po zdráhání přijímají; atmosféra se uvolní; Kulička vypráví, že chtěla v Rouenu uškrtit pruského důstojníka, který vstoupil k ní domů.</p>
+<p><strong>Klíčové repliky:</strong> Loiseau: „<strong>Sláva paní, která myslela na všechny.</strong>&quot; Cornudet: „<strong>Ať žije Francie!</strong>&quot; Hraběnka: „<strong>Statečná žena.</strong>&quot;</p>
+<p><strong>Hlavní umělecké prostředky:</strong></p>
+<ul>
+<li><strong>kontrast</strong> (hlad cestujících × Kuličina štědrost; pohrdání × přijetí jídla),</li>
+<li><strong>ironie</strong> (vznešené dámy si servírují jídlo od prostitutky),</li>
+<li><strong>smyslový popis jídla</strong> (naturalistická detailnost — vůně, barvy, texty),</li>
+<li><strong>charakterizace mluvou</strong> (Loiseau hovorově, vulgárně; Brévilleovi vznešeně; Kulička prostě),</li>
+<li><strong>er-forma</strong>, <strong>vševědoucí vypravěč</strong>, prokládá vyprávění <strong>přímou řečí</strong>.</li>
+</ul>
+<p><strong>Funkce:</strong> expozice charakterů; ukazuje, kdo Kulička skutečně je (štědrá, vlastenka), a kontrastuje s tím, co s ní později provedou.</p>
+
+<h3>Scéna B — V hostinci v Tôtes (Část II — zadržení)</h3>
+<p><strong>Kde v ději:</strong> třetí den čekání v hostinci, cestující se rozhodují obměkčit Kuličku.</p>
+<p><strong>Co se děje:</strong> Hraběnka mateřsky vykládá, že „oběť pro vlast&quot; je vznešená; jeptišky vyloží příběh Judity a Holoferna jako morální vzor (úmysl posvěcuje skutek); Loiseau s obhroublými žerty; Cornudet se stáhne. Kulička pod tlakem v slzách souhlasí a odchází za důstojníkem.</p>
+<p><strong>Klíčové repliky:</strong> Hraběnka: „<strong>Je to jen pár hodin nepříjemností, drahá.</strong>&quot; Starší jeptiška: „<strong>I Judita zachránila svůj národ — Bůh promíjí činy konané z dobrého úmyslu.</strong>&quot; Loiseau (s úšklebkem): „<strong>Pro vlast, milá Kuličko, pro vlast.</strong>&quot;</p>
+<p><strong>Hlavní umělecké prostředky:</strong></p>
+<ul>
+<li><strong>ironie</strong> (jeptišky obhajují prostituci, hraběnka mluví jako kuplířka mateřsky),</li>
+<li><strong>kontrast</strong> (vlastenecká rétorika × osobní zbabělost a chamtivost),</li>
+<li><strong>gradace</strong> (postupný tlak — den po dni se vyhrocuje),</li>
+<li><strong>charakterizace činy</strong> (Maupassant explicitně neodsuzuje, ukazuje sled jednání),</li>
+<li><strong>dialog</strong> v přímé řeči jako zdrcující doklad pokrytectví.</li>
+</ul>
+<p><strong>Funkce:</strong> <strong>vrchol mravní kritiky</strong>; jádro tématu; čtenář vidí, že <strong>„slušná společnost&quot; funguje jako sbor kuplířů, posvěcený církví</strong>.</p>
+
+<h3>Scéna C — Cesta zpět bez jídla (Část III — pointa)</h3>
+<p><strong>Kde v ději:</strong> ráno po Kuličině noci s důstojníkem; dostavník vyjíždí z Tôtes do Dieppe.</p>
+<p><strong>Co se děje:</strong> Cestující veselí, dobře vybavení jídlem; Kulička zničená, bez jídla, v koutě. Ostatní jí nenabídnou ani sousto; otáčejí se zády, pomlouvají ji. Kulička začne tiše plakat. Cornudet <strong>pohvizduje a polohlasem zpívá Marseillaisu</strong> stále dokola — ostatní se vztekají, ale nemohou mu zakázat hymnu vlasti.</p>
+<p><strong>Klíčové repliky:</strong> Paní Loiseauová: „<strong>Kdyby si aspoň jednou pomyslela na druhé.</strong>&quot; Vypravěč popisuje její pláč: „<strong>Slzy se jí tlačily do očí.</strong>&quot; Cornudet pohvizduje refrén Marseillaisy.</p>
+<p><strong>Hlavní umělecké prostředky:</strong></p>
+<ul>
+<li><strong>kontrast se scénou A</strong> (jídlo dávané × jídlo odepřené; veselé přijímání × ledové ignorování),</li>
+<li><strong>symbolika jídla</strong> (sdílení = společenství, odepření = vyloučení),</li>
+<li><strong>ironie symbolu Marseillaisy</strong> (hymna o svobodě zní nad obětí prodanou ve jménu vlastenectví),</li>
+<li><strong>personifikace</strong> (slzy „se tlačily&quot;),</li>
+<li><strong>minimum dialogu — ticho je rétorická síla</strong>,</li>
+<li><strong>rámcová symetrie kompozice</strong> (zrcadlí scénu A).</li>
+</ul>
+<p><strong>Funkce:</strong> <strong>pointa novely</strong>; <strong>mravní soud</strong> nad měšťanstvem; čtenář si bere obraz plačící Kuličky v mlčícím voze jako definitivní svědectví dvojí morálky.</p>
+
+<hr>
+
+<h2>Časté chyby a záměny</h2>
+
+<ul>
+<li><strong>Kulička = Élisabeth Roussetová</strong> (NE „Roussel&quot;, NE „Rouset&quot; — správně <strong>Rousset</strong> s dvojitým „s&quot;). Křestní jméno: <strong>Élisabeth</strong> (česky někdy <strong>Alžběta</strong>).</li>
+<li><strong>Pruský důstojník nemá jméno</strong> — Maupassant ho schválně nepojmenovává (= <strong>typ, ne osoba</strong>; arogance okupanta jako instituce). U zkoušky neuváděj žádné konkrétní jméno.</li>
+<li><strong>Hostinec v Tôtes:</strong> <strong>„U obchodu&quot;</strong> (Hôtel du Commerce), hostinský <strong>Follenvie</strong>.</li>
+<li><strong>Tôtes</strong> (40 km od Rouenu) — <strong>ne „Totes&quot;</strong>, <strong>ne „Tôte&quot;</strong>. Cíl cesty je <strong>Dieppe</strong> (přístav), ne přímo Le Havre.</li>
+<li><strong>Cornudet</strong> zpívá <strong>Marseillaisu</strong>, NE <em>Internationale</em> (ta vznikla později, 1871/1888). Marseillaisa je francouzská <strong>národní hymna</strong>, vznikla v Revoluci 1792.</li>
+<li><strong>Kulička je BONAPARTISTKA</strong> (přívrženkyně císaře Napoleona III.), ne republikánka. Cornudet je naopak republikán/demokrat. Politicky stojí na opačných stranách, ale Kulička je z nich <strong>jediná, kdo se chová mravně</strong>.</li>
+<li><strong>Manželé Carré-Lamadonovi</strong> = <strong>továrník na bavlnu</strong>, NE „obchodník s vínem&quot; (to je Loiseau).</li>
+<li><strong>Hrabě Hubert de Bréville</strong> — křestní jméno <strong>Hubert</strong>, NE „Henri&quot;, NE „Hugo&quot;.</li>
+<li><strong>Jeptišky používají argument Judity a Holoferna</strong> — NE Davida a Goliáše, NE Esther.</li>
+<li><strong>Délka zadržení v Tôtes:</strong> <strong>tři dny</strong> (cestující čekají, postupně Kuličku přesvědčují). V některých zdrojích se uvádí „několik dní&quot; — bezpečná formulace u zkoušky.</li>
+<li><strong>Almanach Les Soirées de Médan</strong> vyšel <strong>1880</strong> — Maupassantova <em>Kulička</em> byla v něm <strong>nejvýraznější</strong> povídka. Skupina kolem <strong>Émila Zoly</strong>.</li>
+<li><strong>Vyjet z Rouenu:</strong> dostavník (diligence), <strong>NE vlak</strong> — vlak nejede, koleje jsou narušené Prusy.</li>
+</ul>
+
+<hr>
+
+<h2>Zdroje (ověřeno)</h2>
+
+<ul>
+<li><a href="https://rozbor-dila.cz/kulicka-rozbor-dila-k-maturite/" target="_blank" rel="noopener">Rozbor-dila.cz — Kulička rozbor díla k maturitě</a></li>
+<li><a href="https://www.cesky-jazyk.cz/ctenarsky-denik/guy-de-maupassant/kulicka-rozbor.html" target="_blank" rel="noopener">Český-jazyk.cz — Kulička rozbor</a></li>
+<li><a href="https://www.cesky-jazyk.cz/ctenarsky-denik/guy-de-maupassant/kulicka-7.html" target="_blank" rel="noopener">Český-jazyk.cz — Kulička (7) čtenářský deník</a></li>
+<li><a href="https://cs.wikipedia.org/wiki/Kuli%C4%8Dka_(pov%C3%ADdka" target="_blank" rel="noopener">Wikipedia — Kulička (povídka)</a>)</li>
+<li><a href="https://studyfi.com/wiki/cs/guy-de-maupassant-kulicka" target="_blank" rel="noopener">StudyFi — Guy de Maupassant: Kulička</a></li>
+<li><a href="https://www.by-boudicca.cz/2024/02/guy-de-maupassant-kulicka-maturitni.html" target="_blank" rel="noopener">By Boudicca — Kulička maturitní rozbor</a></li>
+</ul>
+</div>
+      </div>
+
+    </section>
+
+
+    <section id="tahak" class="section">
+      <h2>📖 Kompletní maturitní tahák (v pořadí mluvení)</h2>
+      <p class="section-hint">Analytické info v pořadí, jak budeš mluvit u zkoušky. Obrázky jsou hned u sekce, ke které patří.</p>
+      <div class="tahak">
+        <h1>6. Guy de Maupassant — Kulička (<em>Boule de Suif</em>)</h1>
+
+<blockquote><strong>Vrcholná novela francouzského kritického realismu s naturalistickými prvky</strong> (1880), kritizující pokrytectví měšťanské společnosti během prusko-francouzské války. Skupina „ctihodných&quot; cestujících v dostavníku přinutí prostitutku Kuličku, aby se obětovala pruskému důstojníkovi — a pak jí za to opovrhnou. Jediná „nemravná&quot; se chová mravně; všichni ostatní mají dvojí metr. Maupassantův literární debut, který ho proslavil přes noc.</blockquote>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">1️⃣ Mluvíš v 1. části</span><span class="badge-hint">Autor &amp; lit. kontext · 3 min · 4 b</span></div><h2 id="cast-4">4) LITERÁRNĚHISTORICKÝ KONTEXT (0–4 b)</h2>
+<div id="autor-img" class="embedded-image">
+  <a href="../../images/06-maupassant-kulicka/00-author.jpg" target="_blank"><img src="../../images/06-maupassant-kulicka/00-author.jpg" alt="Karta autora"></a>
+  <div class="image-caption">👤 Autor · biografie · slavná díla · směr · kontext</div>
+</div>
+
+<p><strong>Autor</strong></p>
+<ul>
+<li><strong>Guy de Maupassant</strong> (1850–1893), Francie, <strong>Normandie</strong> (zámek Miromesnil).</li>
+<li><strong>Žák Gustava Flauberta</strong> — Flaubert (autor <em>Paní Bovaryové</em>) byl rodinný přítel jeho matky a stal se Maupassantovým literárním mentorem. Učil ho <strong>přesnosti slova</strong> („le mot juste&quot;) a strohé, objektivní popisnosti.</li>
+<li>Účastnil se <strong>prusko-francouzské války 1870</strong> — vlastní zkušenost s okupací, která se přímo promítla do <em>Kuličky</em>.</li>
+<li>Pracoval jako úředník na ministerstvu námořnictva a školství; psaní se věnoval po práci.</li>
+<li><strong>Mistr novely / povídky</strong> — napsal jich <strong>přes 300</strong>, plus 6 románů.</li>
+<li><strong>Nakazil se syfilidou</strong>, která mu postupně rozkládala mozek. Trpěl halucinacemi (klasická vize: že mu <strong>mouchy/červi požírají mozek</strong>). Po pokusu o sebevraždu 1892 byl umístěn do <strong>psychiatrického ústavu doktora Blanche v Paříži</strong>, kde <strong>1893 zemřel</strong> ve věku 42 let.</li>
+<li><strong>Hlavní díla:</strong></li>
+<li><strong>Romány:</strong> <em>Miláček</em> (<em>Bel-Ami</em>, 1885) — cynický kariérista Georges Duroy se prospíchá vzhůru ve společnosti přes ženy a tisk; <em>Mont-Oriol</em> (1887) — milostný příběh v lázních; <em>Petr a Jan</em> (1888) — psychologický rodinný román; <em>Silná jako smrt</em> (1889).</li>
+<li><strong>Novely / povídky:</strong> <strong>Kulička</strong> (1880), <strong>Slečna Fifi</strong> (povídka ze stejného válečného prostředí), <strong>Náhrdelník</strong> (slavná povídka o ženě, která promarní život snahou splatit ztracený šperk, jenž byl falešný), <strong>Slunce</strong> <em>(Le Horla)</em> — fantastická povídka o šílenství, předjímá Maupassantův vlastní osud.</li>
+</ul>
+
+<p><strong>Literární / kulturní kontext</strong></p>
+<ul>
+<li><strong>Francouzský realismus 19. století</strong> — důraz na pravdivé zachycení reality, sociální typizaci, objektivitu vypravěče. <strong>Předchůdci:</strong> Stendhal (<em>Červený a černý</em>), <strong>Honoré de Balzac</strong> (<em>Lidská komedie</em> — cyklus románů mapujících společnost), Gustave Flaubert (<em>Paní Bovaryová</em>).</li>
+<li><strong>Naturalismus</strong> (od 70. let 19. stol.) — pokračování realismu „v extrému&quot;: člověk je determinován <strong>dědičností, prostředím, fyziologií</strong>; literatura jako „přírodopis člověka&quot;, inspirace přírodními vědami (Darwin, Claude Bernard). <strong>Zakladatel: Émile Zola</strong> (<em>Zabiják</em>, <em>Nana</em>, cyklus <em>Rougon-Macquartové</em>). Naturalismus tematizuje <strong>tabu</strong> (sex, alkoholismus, prostituce, choroby, chudoba) bez romantizace.</li>
+<li><strong>Maupassant patří k „medanskému kroužku&quot;</strong> kolem <strong>Émila Zoly</strong> — almanach <em>Les Soirées de Médan</em> (1880), společné válečné povídky šesti autorů, Maupassantova <em>Kulička</em> je v něm <strong>nejvýraznější</strong>. To bylo jeho první významné vydání — Flaubert ho označil za „mistrovský kus&quot; a tím Maupassantovi otevřel dveře do literatury.</li>
+<li><strong>Doba:</strong> druhá polovina 19. století, Francie po porážce v prusko-francouzské válce (1870–71), pád Napoleona III., <strong>Pařížská komuna</strong> 1871, vznik <strong>Třetí republiky</strong>. Společnost je rozpolcená — buržoazie sílí, ale zároveň se obnažují její mravní pochybnosti.</li>
+<li><strong>Postavení Kuličky:</strong> Maupassantovo <strong>literární narození</strong> — povídka ho proslavila přes noc a definovala typ jeho psaní: stručný útvar, sociální kritika, ostrá pointa.</li>
+<li><strong>Český kontext:</strong> v Čechách realismus a naturalismus reprezentují <strong>Jan Neruda</strong> (<em>Povídky malostranské</em>), <strong>Karel Václav Rais</strong>, <strong>Karel Klostermann</strong>, později <strong>bratři Mrštíkové</strong> <em>(Maryša)</em>, <strong>Josef Holeček</strong> <em>(Naši)</em>; Maupassant byl u nás brzy překládán a vlivný.</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — základ</span><span class="badge-hint">O díle: druh, žánr</span></div><h2 id="cast-0">0) ZÁKLADNÍ IDENTIFIKACE</h2>
+<div id="dilo-img" class="embedded-image">
+  <a href="../../images/06-maupassant-kulicka/00-book-info.jpg" target="_blank"><img src="../../images/06-maupassant-kulicka/00-book-info.jpg" alt="Karta díla"></a>
+  <div class="image-caption">📖 Žánr · doba · kompozice · motivy · prostředky</div>
+</div>
+<ul>
+<li><strong>Autor:</strong> Guy de Maupassant, 1850–1893, Francie (Normandie)</li>
+<li><strong>Dílo:</strong> <em>Kulička</em> (<em>Boule de Suif</em>), 1880 — vydáno v almanachu <strong>Les Soirées de Médan</strong> (Medanské večery), který vydala skupina kolem Émila Zoly</li>
+<li><strong>Literární druh:</strong> <strong>epika</strong></li>
+<li><strong>Literární žánr:</strong> <strong>novela</strong> (delší povídka) — sevřený, lineární příběh s jedním ústředním motivem a výraznou pointou</li>
+<li><strong>Směr:</strong> <strong>kritický realismus</strong> + prvky <strong>naturalismu</strong> (přesný popis, sociální kritika, determinace prostředím)</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — I.</span><span class="badge-hint">Druh + žánr · výstavba · vypravěč (4 b)</span></div><h2 id="cast-1">1) I. ČÁST ANALÝZY (0–4 b)</h2>
+
+<p><strong>Literární druh a žánr</strong></p>
+<ul>
+<li><strong>Epika</strong> — je tu vypravěč, který sděluje příběh; postavy mají vnitřní život vyjadřovaný popisem a dialogy.</li>
+<li><strong>Novela</strong> — kratší prozaický útvar s pevnou kompozicí, jedním hlavním dějovým motivem, výraznou pointou a omezeným počtem postav. Někdy též označovaná jako <strong>povídka</strong> (česká terminologie obě označení často zaměňuje, ale Kulička je svým sevřením a pointou typická <strong>novela</strong>).</li>
+<li><strong>Charakteristika novely:</strong> rychlý spád, gradace, <strong>nečekaný (ale logický) závěr — pointa</strong>, sevřené prostředí.</li>
+</ul>
+
+<p><strong>Výstavba díla / kompozice</strong></p>
+<ul>
+<li>Povídka <strong>není členěna do kapitol</strong> — souvislý text, chronologické vyprávění.</li>
+<li>Maupassant věnuje <strong>velkou část úvodu popisu</strong> (válkou zpustošená Normandie, scéna vyjíždějícího dostavníku, postavy cestujících) — teprve <strong>v druhé polovině</strong> se rozjede konflikt (zadržení v Tôtes).</li>
+<li><strong>Trojdílná kompozice — symetrický oblouk:</strong></li>
+</ul>
+<p class="numbered"><strong>1.</strong> <strong>Cesta tam</strong> (Rouen → Tôtes) — seznámení s postavami, scéna sdíleného jídla v dostavníku, Kulička se chová štědře a nezištně.</p>
+<p class="numbered"><strong>2.</strong> <strong>Zadržení v hostinci v Tôtes</strong> — pruský důstojník chce Kuličku; nátlak ostatních; Kuličina oběť.</p>
+<p class="numbered"><strong>3.</strong> <strong>Cesta zpět</strong> (Tôtes → Dieppe) — chladné odmítnutí, Kulička hladoví, pláče; ostatní pohrdají tou, která je zachránila. <strong>Výrazná pointa.</strong></p>
+<ul>
+<li>Tato kompozice je tzv. <strong>rámcová / sevřená</strong> — počátek (jídlo v dostavníku, kde Kulička dává) a konec (jídlo v dostavníku, kde Kulička hladoví) se zrcadlově odpovídají = <strong>paralela s kontrastem.</strong></li>
+</ul>
+
+<p><strong>Vypravěč / typ promluvy</strong></p>
+<ul>
+<li><strong>Er-forma</strong> (3. osoba, vypravěč mimo děj).</li>
+<li><strong>Vševědoucí (auktoriální) vypravěč</strong> — zná myšlenky postav, popisuje vnitřní stavy, charakterizuje, hodnotí ironickými poznámkami.</li>
+<li>Pozice vypravěče se zdá <strong>nezúčastněná, objektivní</strong> (typický realistický postoj), ale ve skutečnosti <strong>skrytě hodnotí</strong> — ironickými pasážemi a kontrastem řečí a činů postav je čtenář veden ke kritickému postoji vůči měšťanstvu. <strong>Realistická objektivita</strong> je tu zdánlivá — autor pracuje ironicky.</li>
+<li>Převažuje <strong>vyprávění</strong>, prokládané <strong>popisem</strong> (Normandie, dostavník, hostinec, cestující) a <strong>přímou řečí</strong> postav.</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">2️⃣ Mluvíš v 2. části — II.</span><span class="badge-hint">Zasazení do děje · postavy · téma · motivy (4 b)</span></div><h2 id="cast-2">2) II. ČÁST ANALÝZY (0–4 b)</h2>
+<div id="postavy" class="embedded-image">
+  <a href="../../images/06-maupassant-kulicka/04-postavy.jpg" target="_blank"><img src="../../images/06-maupassant-kulicka/04-postavy.jpg" alt="Postavy a jejich vztahy"></a>
+  <div class="image-caption">🧬 Mapa postav · rodinné vazby · láska · konflikty</div>
+</div>
+
+<p><strong>Zasazení výňatku do kontextu díla</strong> (uprav podle úryvku, který ti dají)</p>
+
+<ul>
+<li><strong>Dějové prostředí:</strong> <strong>Normandie</strong>, zima <strong>1870/71</strong>, během <strong>prusko-francouzské války</strong> (1870–1871, Francie ji prohrála, císařství Napoleona III. padlo, vznikla Třetí republika; Prusové obsadili sever Francie).</li>
+<li><strong>Místa:</strong> odjezd z okupovaného <strong>Rouenu</strong> v zasněženém ránu → <strong>dostavník (diligence)</strong> se 10 cestujícími → noční zastávka v <strong>hostinci v Tôtes</strong> (asi 40 km od Rouenu) → po několika dnech pokračování k <strong>Dieppe</strong> (přístav, odkud se dá uniknout přes Anglii).</li>
+</ul>
+
+<ul>
+<li><strong>Typické situace v úryvcích:</strong></li>
+<li><strong>Začátek — odjezd v noci/ráno:</strong> popis zasněženého Rouenu, mrazu, plahočících se koní, postupné představení cestujících.</li>
+<li><strong>Scéna v dostavníku s jídlem:</strong> všichni mají hlad, jen Kulička si nese plný košík; po dlouhém zdráhání se s ní začnou bavit, sní její jídlo, sblíží se s ní. <em>Patří k nejcitovanějším úryvkům.</em></li>
+<li><strong>Příjezd do Tôtes a první setkání s důstojníkem:</strong> chladné, formální, suché, popis pruského důstojníka jako typu (vzpřímený, monokl, holé pruské „r&quot;).</li>
+<li><strong>Pokrytecké přesvědčování v salonu hostince:</strong> hraběnka, jeptišky, manželka továrníka přesvědčují Kuličku „vlasteneckými&quot; argumenty (jeptišky operují příklady z dějin spásy — Judita a Holofernes).</li>
+<li><strong>Závěrečná scéna v dostavníku:</strong> všichni jedí ze zásob, na Kuličku nepromluví; ona pláče v koutě; Cornudet pohvizduje <strong>Marseillaisu</strong> (revoluční francouzskou hymnu) na potupu měšťáků. <strong>Pointa.</strong></li>
+</ul>
+
+<p><strong>Téma a motivy</strong></p>
+<ul>
+<li><strong>Hlavní téma:</strong> <strong>pokrytectví měšťanstva, dvojí morálka „slušné&quot; společnosti</strong>. Ti, kdo se ohánějí morálkou a vlastenectvím, jsou ti, kteří nakonec vesměs Kuličku znásilní rukama Prusova — jen ne přímo. <strong>Jediná „nemravná&quot; se chová mravně.</strong> Společenské postavení a morálka jsou nepřímo úměrné.</li>
+<li><strong>Vedlejší / dílčí motivy:</strong></li>
+<li><strong>Jídlo a hlad</strong> — opakovaný motiv, symbol jak materiálních potřeb, tak vztahů (kdo s kým jí, kdo komu dává).</li>
+<li><strong>Peníze</strong> — všichni „vyšší&quot; cestující utíkají kvůli majetku, ne kvůli vlastenectví; <strong>úprk je motivován ziskem</strong>.</li>
+<li><strong>Falešné vlastenectví</strong> — všichni mluví o vlasti, jen Kulička pro ni něco udělá (odmítá Prusa). Cornudet „demokrat&quot; vlastenčí slovem, ne činem.</li>
+<li><strong>Sociální třída</strong> — aristokracie (Bréville), buržoazie velká (Carré-Lamadon) i drobná (Loiseau), církev (jeptišky), demokrat (Cornudet), prostitutka (Kulička) — celý průřez společností v jednom voze.</li>
+<li><strong>Tělesnost a sex</strong> — Kulička jako „tělo&quot;, které je nejprve odmítáno, pak žádáno, pak prodáno.</li>
+<li><strong>Válka, okupace, mráz, zima</strong> — vnější rámec, atmosféra ponížení a strádání.</li>
+<li><strong>Cesta jako zkouška charakteru</strong> — klasický motiv literatury, tady doveden k mravnímu odhalení.</li>
+</ul>
+
+<p><strong>Postavy</strong> (10 cestujících v dostavníku + pruský důstojník)</p>
+
+<ul>
+<li><strong>Kulička / Élisabeth Roussetová (Boule de Suif)</strong> — prostitutka z Rouenu, <strong>bonapartistka, vlastenka</strong>, baculatá („baculatá jak koule sádla&quot; — odtud přezdívka), svěží, hezká, hodná, citlivá, štědrá. <strong>Jediná opravdu mravně jednající postava.</strong> Odmítne Prusa z patriotismu. Když ji ostatní zlomí, obětuje se. Za odměnu se dočká pohrdání. Plakající v koutě dostavníku — typický obraz <strong>oběti měšťácké morálky</strong>.</li>
+</ul>
+
+<ul>
+<li><strong>Manželé Loiseauovi</strong> — <strong>drobná buržoazie</strong>.</li>
+<li><strong>Pan Loiseau</strong> — velkoobchodník s vínem, jméno „Loiseau&quot; znamená francouzsky „pták&quot; (ironie — <em>l&#x27;oiseau vole</em> = pták krade, slovní hříčka). Vychytralý, šejdíř, prodavač laciného vína, malé postavy s velkým břichem, šprýmař, nemravně vtipkuje.</li>
+<li><strong>Paní Loiseauová</strong> — vysoká, statná, rázná, rozhodná, „má hlavu v obchodě&quot;. Pragmatická a chamtivá.</li>
+</ul>
+
+<ul>
+<li><strong>Manželé Carré-Lamadonovi</strong> — <strong>velká průmyslová buržoazie</strong>.</li>
+<li><strong>Pan Carré-Lamadon</strong> — majitel bavlnářských manufaktur, vážený muž z městské rady, opatrný, hraje na všechny strany.</li>
+<li><strong>Paní Carré-Lamadonová</strong> — mladá, hezká, zaobalená do kožešin, „útěcha&quot; pro důstojníky v posádce; rafinovaná, ale chladná.</li>
+</ul>
+
+<ul>
+<li><strong>Hrabě a hraběnka de Bréville</strong> — <strong>aristokracie, nejvyšší vrstva</strong>.</li>
+<li><strong>Hrabě Hubert de Bréville</strong> — starobylý šlechtický rod, vzhled a způsoby Jindřicha IV., ztělesnění „dobrých mravů&quot;. Z formy nejvybranější — z podstaty nejpokryteclejší.</li>
+<li><strong>Hraběnka de Bréville</strong> — dáma s mateřskou laskavostí v hlase, hlavní strůjkyně pokryteckého nátlaku na Kuličku.</li>
+</ul>
+
+<ul>
+<li><strong>Dvě jeptišky (řeholnice)</strong> — církev. Starší s tváří poďobanou neštovicemi, mladší slabá a krásná. Tichá morální autorita. Aktivně se zapojí do přesvědčování Kuličky — citací <strong>Judity a Holoferna</strong> (= biblický příběh, kde Judita svedla a zabila vojevůdce, aby zachránila svůj národ) <strong>legitimizují</strong> Kuličinu „oběť&quot;. Vrchol pokrytectví — církev posvětí prostituci ve jménu vlasti.</li>
+</ul>
+
+<ul>
+<li><strong>Cornudet</strong> — <strong>demokrat, republikán, falešný revolucionář</strong>. Pije pivo, má rezavou bradku, mluví o revoluci, ale když jde do tuhého (boj proti Prusům, obrana Kuličky), nezvedne ani prst. <strong>Vlastenec slovem, ne činem.</strong> V závěru pohvizduje <em>Marseillaisu</em> — jediné gesto solidarity, ale prázdné, beze vší síly proti tomu, co se kolem děje.</li>
+</ul>
+
+<ul>
+<li><strong>Pruský důstojník</strong> — chladný, formální, vzpřímený, suchý. Mluví lámanou francouzštinou s „pruským r&quot;. Není to démon — je to typ, <strong>arogance okupanta</strong>. Vydírá Kuličku svou mocí, ne vášní. Naprostá emocionální chladnost.</li>
+</ul>
+
+<p><strong>Typy promluv</strong></p>
+<ul>
+<li>Převažuje <strong>vyprávění</strong> vševědoucího vypravěče v <strong>er-formě</strong>.</li>
+<li><strong>Popisné pasáže</strong> (Normandie, dostavník, jídlo, postavy) — naturalisticky detailní, smyslové.</li>
+<li><strong>Přímá řeč</strong> postav charakterizuje sociální vrstvu (Loiseauovi mluví hovorověji, Brévilleovi vznešeně, Kulička prostě).</li>
+<li><strong>Vnitřní monolog</strong> se objevuje minimálně, ale vypravěč přibližuje pocity postav v er-formě (polopřímá řeč / nepřímá charakterizace).</li>
+</ul>
+
+<p><strong>Jiné typické prvky</strong></p>
+<ul>
+<li><strong>Realistická detailnost</strong> — přesný popis jídla (paštiky, klobásy, kuře, hroznové víno), oblečení, krajiny, postav. Smyslové, „filmové&quot; záběry.</li>
+<li><strong>Naturalistická upřímnost o tabuizovaných tématech</strong> — prostituce, válečné vydírání, tělesnost; bez moralizujícího filtru.</li>
+<li><strong>Sociální typizace</strong> — každá postava reprezentuje sociální vrstvu; <strong>plejáda společnosti v jednom voze</strong> je metafora celé Francie.</li>
+<li><strong>Symetrie kompozice</strong> — scéna jídla na začátku × scéna jídla na konci.</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge"><span class="badge-step">3️⃣ Mluvíš v 3. části</span><span class="badge-hint">Jazyk + umělecké prostředky &amp; funkce · 4 b</span></div><h2 id="cast-3">3) III. ČÁST ANALÝZY (0–4 b)</h2>
+
+<p><strong>Jazykové prostředky</strong></p>
+<ul>
+<li><strong>Spisovný jazyk</strong> vypravěče — bohatý, kultivovaný, s naturalistickou popisností.</li>
+<li><strong>Diferenciace mluvy postav podle sociální vrstvy:</strong></li>
+<li>Brévilleovi — vznešeně, formálně, opatrná zdvořilost.</li>
+<li>Loiseauovi — hovorověji, prostě, s <strong>vulgárními a obhroublými žerty</strong> (Loiseau si neodpustí pikantní vtipy o Kuličce a důstojníkovi).</li>
+<li>Kulička — prostě, civilně, často <strong>emocionálně</strong> (pláč, vykřiknutí, prosby).</li>
+<li>Pruský důstojník — <strong>lámaná francouzština</strong>, krátké věty, suchý úřední tón.</li>
+<li><strong>Charakterizace mluvou</strong> je jedním z hlavních prostředků — z toho, <strong>jak postava mluví</strong>, poznáš její třídu i charakter.</li>
+<li><strong>Krátké, dynamické věty</strong> v dialozích × <strong>dlouhé popisné věty</strong> ve vyprávění (typické realistické rytmické střídání).</li>
+</ul>
+
+<p><strong>Umělecké prostředky</strong> (s funkcí)</p>
+
+<ul>
+<li><strong>Ironie (slovní i situační)</strong> — celá novela je vlastně <strong>jediná velká ironie</strong>. Slovní: vypravěč popisuje postavy s falešnou vážností a zdvořilostí, čímž odhaluje jejich směšnost. Situační: ti, kdo se ohánějí mravností, jednají nejnemravněji. <strong>Funkce:</strong> demaskuje pokrytectví, vede čtenáře k mravnímu úsudku, aniž by autor moralizoval přímo.</li>
+</ul>
+
+<ul>
+<li><strong>Satira</strong> — ostrá kritika měšťácké morálky. <strong>Funkce:</strong> zesměšňuje a obviňuje celou vrstvu, ne jednotlivce.</li>
+</ul>
+
+<ul>
+<li><strong>Kontrast</strong> — ústřední prostředek:</li>
+<li><strong>Slovo × čin</strong> (mluvíme o cti, jednáme bez cti).</li>
+<li><strong>Sociální status × mravní hodnota</strong> (čím výš společensky, tím níž mravně).</li>
+<li><strong>Začátek × konec</strong> (Kulička dává × Kulička hladoví; všichni jí pohrdají × všichni se s ní baví; všichni se baví × všichni jí pohrdají).</li>
+<li><strong>Vznešený × prostý</strong> (Brévilleovi × Kulička).</li>
+<li><strong>Funkce:</strong> zostřuje vyznění, dělá ho exemplárním.</li>
+</ul>
+
+<ul>
+<li><strong>Charakterizace činů (přímá i nepřímá)</strong> — Maupassant <strong>nehodnotí postavy explicitně</strong>, ukazuje jejich činy a nechá čtenáře, ať si udělá závěr. <strong>Funkce:</strong> realistická objektivita, čtenář aktivně soudí.</li>
+</ul>
+
+<ul>
+<li><strong>Symbolika jídla</strong> — jídlo není jen jídlo. Sdílení jídla = společenství. Odepření jídla = vyloučení. Kuličin košík plný jídla na začátku = její štědrost; její prázdný klín na konci = její opuštění. <strong>Funkce:</strong> nese ideovou linii v hmotné podobě.</li>
+</ul>
+
+<ul>
+<li><strong>Personifikace</strong> — sníh „padá hustě&quot;, zima „svírá&quot;, slzy „se tlačily&quot;, „voda prosakuje ze skály&quot;. <strong>Funkce:</strong> zhuštění atmosféry, citový tlak.</li>
+</ul>
+
+<ul>
+<li><strong>Přirovnání</strong> — bohatá, smyslová („baculatá jako koule sádla&quot;, „obličej červený jako rajské jablko&quot;, oči „dvě kapky inkoustu&quot;). <strong>Funkce:</strong> vizualizace, charakterizace.</li>
+</ul>
+
+<ul>
+<li><strong>Metonymie</strong> — postavy jsou označovány po sociální roli (hrabě, továrník, demokrat). <strong>Funkce:</strong> typizace, generalizace na celou vrstvu.</li>
+</ul>
+
+<ul>
+<li><strong>Epiteton constans</strong> — opakované stálé přívlastky (hraběnka „milostivá&quot;, důstojník „pruský&quot;, Kulička v různých variantách tělesných). <strong>Funkce:</strong> rytmus, sociální identifikace.</li>
+</ul>
+
+<ul>
+<li><strong>Hyperbola, gradace</strong> — postupné zostřování situace, opakování nátlaku, vrcholící v Kuličině zlomení. <strong>Funkce:</strong> vede k vyvrcholení a pointě.</li>
+</ul>
+
+<ul>
+<li><strong>Symbol Marseillaisy v závěru</strong> — Cornudetův pohvizdovaný refrén se v poslední scéně stává <strong>politickým komentářem</strong> — francouzská hymna zní v dostavníku, kde právě byla podruhé prodána ženská čest. <strong>Funkce:</strong> ironický zámek příběhu.</li>
+</ul>
+
+<p><strong>Funkce prostředků souhrnně:</strong> odhalit pokrytectví měšťanstva, ukázat absurditu sociální hierarchie, vést čtenáře k mravnímu úsudku přes konkrétní obraz, ne přes moralizování.</p>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Opěrné body — mnemoniky k zapamatování</span></div><h2 id="cast-5">5) OPĚRNÉ BODY DO HLAVY (NAUČIT SE NAZPAMĚŤ)</h2>
+
+<p><strong>Definitorická věta:</strong> <em>Kulička je novela francouzského kritického realismu s naturalistickými prvky, vydaná 1880 v almanachu Les Soirées de Médan. Skupina měšťanů během prusko-francouzské války donutí prostitutku Kuličku, aby se obětovala pruskému důstojníkovi — a pak jí za to pohrdne. Jediná „nemravná&quot; se chová mravně.</em></p>
+
+<p><strong>Postavy stačí znát 5:</strong> Kulička (Élisabeth Roussetová — prostitutka, vlastenka), manželé Loiseauovi (drobná buržoazie, vinař), Carré-Lamadonovi (továrník), Brévilleovi (aristokracie), Cornudet (falešný demokrat). Plus 2 jeptišky a pruský důstojník.</p>
+
+<p><strong>Téma 1 větou:</strong> <em>Sociální postavení a mravní hodnota člověka jsou v měšťácké společnosti nepřímo úměrné — čím výš společensky, tím níž lidsky.</em></p>
+
+<p><strong>3 prostředky se zdůvodněním:</strong></p>
+<ul>
+<li><strong>Ironie</strong> (slovní i situační — odhaluje rozpor mezi řečí a činy měšťanstva).</li>
+<li><strong>Kontrast</strong> (sociální status × mravní hodnota; začátek × konec; jídlo dávané × odepřené).</li>
+<li><strong>Symbolika jídla</strong> (sdílení = společenství, odepření = vyloučení; nese ideovou osu).</li>
+</ul>
+
+<p><strong>Kompozice heslovitě:</strong> <strong>cesta tam → zadržení → cesta zpět</strong>; symetrická, sevřená, <strong>rámcová s pointou</strong>.</p>
+
+<p><strong>Vypravěč heslovitě:</strong> <strong>er-forma, vševědoucí, zdánlivě nezúčastněný</strong>, ve skutečnosti <strong>skrytě ironický</strong>.</p>
+
+<p><strong>Realismus × naturalismus heslovitě:</strong> realismus = pravdivý obraz společnosti, sociální typizace, objektivita; naturalismus = realismus v extrému, determinace prostředím a dědičností, tabu (sex, choroby, chudoba) bez filtru. Maupassant používá oboje.</p>
+
+<p><strong>Maupassant heslovitě:</strong> žák <strong>Flauberta</strong>, <strong>300+ povídek</strong>, <em>Miláček</em>, <em>Náhrdelník</em>, <em>Slunce</em>, <strong>prusko-francouzská válka</strong> (vlastní zkušenost), <strong>syfilis → halucinace → ústav Blanche → smrt v 42 letech</strong>.</p>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Častý úryvek u zkoušky</span></div><h2 id="cast-6">6) ČASTÝ ÚRYVEK U ZKOUŠKY</h2>
+
+<p>V maturitních pracovních listech se objevují typicky <strong>tři klíčové scény</strong>:</p>
+
+<h3>Scéna A — V dostavníku s jídlem (z <strong>cesty tam</strong>, kapitola po vyjetí z Rouenu)</h3>
+<p>Cestující sedí hodiny v zasněženém dostavníku, mají hlad. Kulička jediná má košík s jídlem (kuře v aspiku, paštiky, chléb, hrušky, hroznové víno, čtyři lahve vína). Po zdráhání se s ní začnou bavit, jíst, sdílet. Loiseau si neodpustí dvojsmysly. Hraběnka přivře oči nad „pádlem&quot; společnosti, ale jíst neodmítá.</p>
+
+<p><strong>Co u takového úryvku poznáš:</strong></p>
+<ul>
+<li>typ promluvy → <strong>vyprávění v er-formě</strong> prokládané <strong>přímou řečí</strong> postav,</li>
+<li>prostředky → <strong>kontrast</strong> (hlad × Kuličina štědrost; pohrdání × přijetí jídla), <strong>ironie</strong> (vznešené dámy přijímají jídlo od prostitutky), <strong>smyslový popis jídla</strong> (naturalistická detailnost), <strong>charakterizace mluvou</strong> (Loiseau vulgárně, Brévilleovi zdvořile),</li>
+<li>funkce → <strong>expozice charakterů</strong>, příprava na zradu — čtenář vidí, kdo Kulička je (štědrá), a co s ní udělají.</li>
+</ul>
+
+<h3>Scéna B — V hostinci v Tôtes (z <strong>zadržení</strong>, ústřední pasáž)</h3>
+<p>Pruský důstojník si žádá Kuličku, jinak nikdo neprojede. Kulička z vlastenectví odmítá. Ostatní jí nejdřív tleskají, pak ji několik dní obměkčují. Hraběnka mateřsky, jeptišky teologicky (Judita a Holofernes), Loiseauovi obhroublými narážkami. Nakonec Kulička v pláči podlehne.</p>
+
+<p><strong>Co u takového úryvku poznáš:</strong></p>
+<ul>
+<li>typ promluvy → <strong>vyprávění</strong> s vrcholnou <strong>dialogickou</strong> vrstvou; <strong>přímá řeč</strong> v argumentaci postav je zdrcujícím dokladem charakteru,</li>
+<li>prostředky → <strong>ironie</strong> (jeptišky obhajují prostituci ve jménu vlasti), <strong>kontrast</strong> (vlastenecká rétorika × osobní zbabělost), <strong>gradace</strong> (postupný tlak), <strong>charakterizace činy</strong> (Maupassant neříká „jsou pokrytci&quot;, ukáže je při tom),</li>
+<li>funkce → <strong>vrchol mravní kritiky</strong>, definice tématu díla; čtenář vidí, že <strong>„slušná společnost&quot; funguje jako sbor kuplířů</strong>.</li>
+</ul>
+
+<h3>Scéna C — Cesta zpět bez jídla (z <strong>finále</strong>, pointa)</h3>
+<p>Cestující ráno spokojeně nastupují. Kulička přichází sklesle. V dostavníku všichni vytahují zásoby — naučili se. Kulička v ranním spěchu nestihla nic. Nikdo jí nenabídne ani sousto. Pláče v koutě. Cornudet si pohvizduje <strong>Marseillaisu</strong>.</p>
+
+<p><strong>Co u takového úryvku poznáš:</strong></p>
+<ul>
+<li>typ promluvy → <strong>vyprávění</strong> s minimem dialogu — ticho je rétorickou silou scény,</li>
+<li>prostředky → <strong>kontrast</strong> se scénou A (jídlo dávané × jídlo odepřené; veselé přijímání × ledové ignorování), <strong>symbolika jídla</strong>, <strong>ironie</strong> (Marseillaisa zní nad obětí vlastenectví), <strong>personifikace</strong> (slzy „se tlačily&quot;),</li>
+<li>funkce → <strong>pointa</strong> novely; <strong>mravní soud</strong> nad měšťanstvem; čtenář si bere s sebou obraz plačící Kuličky v mlčícím voze jako svědectví dvojí morálky.</li>
+</ul>
+
+<hr>
+
+
+<div class="speaking-badge helper"><span class="badge-step">📌 Pomocník</span><span class="badge-hint">Test pro sebe (autokontrola)</span></div><h2 id="cast-7">7) RYCHLÝ TEST PRO SEBE</h2>
+
+<p class="numbered"><strong>1.</strong> Jaký je literární druh a žánr Kuličky? <em>(epika, novela)</em></p>
+<p class="numbered"><strong>2.</strong> V jakém roce a v jakém almanachu vyšla? <em>(1880, Les Soirées de Médan / Medanské večery)</em></p>
+<p class="numbered"><strong>3.</strong> Jaká je trojdílná kompozice? <em>(cesta tam → zadržení v Tôtes → cesta zpět)</em></p>
+<p class="numbered"><strong>4.</strong> Kdo je vypravěč a jak hodnotí postavy? <em>(er-forma, vševědoucí, zdánlivě nezúčastněný, skrytě ironický)</em></p>
+<p class="numbered"><strong>5.</strong> Které sociální vrstvy jsou zastoupeny v dostavníku? <em>(aristokracie Brévilleovi, velká buržoazie Carré-Lamadonovi, drobná buržoazie Loiseauovi, církev — 2 jeptišky, demokrat Cornudet, prostitutka Kulička)</em></p>
+<p class="numbered"><strong>6.</strong> Co dělá Cornudet v poslední scéně a proč je to ironie? <em>(pohvizduje Marseillaisu — francouzskou hymnu — nad obětí, kterou Francouzi sami zorganizovali; falešný vlastenec slovem, ne činem)</em></p>
+
+<hr>
+
+
+<h2>Zdroje k ověření</h2>
+
+<ul>
+<li><a href="https://www.cesky-jazyk.cz/ctenarsky-denik/guy-de-maupassant/kulicka-rozbor.html" target="_blank" rel="noopener">Český-jazyk.cz — Kulička rozbor</a></li>
+<li><a href="https://rozbor-dila.cz/kulicka-rozbor-dila-k-maturite/" target="_blank" rel="noopener">Rozbor-dila.cz — Kulička</a></li>
+<li><a href="https://www.by-boudicca.cz/2024/02/guy-de-maupassant-kulicka-maturitni.html" target="_blank" rel="noopener">By Boudicca — Kulička maturitní rozbor</a></li>
+<li><a href="https://rozbor-dila.cz/guy-de-maupassant-zivotopis/" target="_blank" rel="noopener">Rozbor-dila.cz — Maupassant životopis</a></li>
+<li><a href="https://cs.wikipedia.org/wiki/Kuli%C4%8Dka_(pov%C3%ADdka" target="_blank" rel="noopener">Wikipedia — Kulička (povídka)</a>)</li>
+</ul>
+
+      </div>
+    </section>
+
+    
+    <section id="projev" class="section projev-section">
+      <h2>🎙️ Co říct u zkoušky — mluvený skript</h2>
+      <p class="section-hint">Plynulý text — to, co bys přímo říkal/a u maturity. Přečti si ho nahlas několikrát.</p>
+      <div class="tahak">
+        <h1>Co říct u zkoušky — Guy de Maupassant: Kulička</h1>
+
+<blockquote>Mluvený skript v pořadí mluvení (4 části). Čti si ho nahlas. Po 2–3 přečteních zjistíš, že už ho víc-méně umíš.</blockquote>
+
+<hr>
+
+<h2>1️⃣ ČÁST: Autor a literárněhistorický kontext (3 min · 4 b)</h2>
+
+<p>Autorem této knihy je Guy de Maupassant, francouzský prozaik druhé poloviny 19. století. Žil v letech 1850 až 1893, narodil se v Normandii, na zámku Miromesnil, a Normandie se mu pak vrátila i v jeho tvorbě, právě tam je totiž zasazena i Kulička. Pro pochopení jeho psaní je důležité, že byl žákem Gustava Flauberta, autora Paní Bovaryové. Flaubert byl rodinný přítel jeho matky a stal se jeho literárním mentorem. Učil ho takzvanému „le mot juste&quot;, tedy přesnosti slova, a strohé, objektivní popisnosti — to je něco, co u Maupassanta poznáme okamžitě.</p>
+
+<p>Maupassantův život poznamenala prusko-francouzská válka v letech 1870 a 1871, kterou si prožil osobně a která se mu pak přímo promítla do Kuličky. Pracoval jako úředník na ministerstvu námořnictva a školství a psaní se věnoval po práci. Stal se mistrem novely a povídky, napsal jich přes tři sta, k tomu šest románů. Smutný osud na něj čekal v závěru života, nakazil se totiž syfilidou, která mu postupně rozkládala mozek. Trpěl halucinacemi, klasická byla představa, že mu mouchy nebo červi požírají mozek. Po pokusu o sebevraždu v roce 1892 byl umístěn do psychiatrického ústavu doktora Blanche v Paříži, kde v roce 1893 zemřel ve věku pouhých dvaačtyřiceti let.</p>
+
+<p>Kromě Kuličky stojí za zmínku jeho slavný román Miláček z roku 1885 — vypráví o cynickém kariéristovi Georgesi Duroyovi, který se prospíchá vzhůru ve společnosti přes ženy a tisk. Velmi známá je také povídka Náhrdelník, kde žena promarní celý život snahou splatit ztracený šperk, který se nakonec ukáže jako falešný. A pak je tu fantastická povídka Horla, která pojednává o postupném šílenství vypravěče — což ironicky předjímá Maupassantův vlastní osud.</p>
+
+<p>A teď je dobré zasadit Maupassanta literárně. Patří k francouzskému kritickému realismu druhé poloviny 19. století, navazuje na Balzaca a Stendhala a právě na Flauberta. Realismus klade důraz na pravdivé zachycení reality, na sociální typizaci postav a na objektivitu vypravěče. Zároveň u Maupassanta najdeme prvky naturalismu, což je směr, který realismus jakoby vyhrocuje — člověk je v něm determinován dědičností, prostředím a fyziologií, a literatura má být téměř „přírodopisem člověka&quot;. Zakladatelem naturalismu byl Émile Zola a právě k Zolovu okruhu, takzvanému medanskému kroužku, Maupassant patřil. Kulička vyšla v roce 1880 ve sborníku Les Soirées de Médan, tedy Medanské večery, který tato skupina šesti autorů vydala. Maupassantova Kulička v něm byla nejvýraznější. Flaubert ji označil za mistrovský kus a Maupassanta to proslavilo přes noc. Posunu se tedy k samotnému dílu.</p>
+
+<hr>
+
+<h2>2️⃣ ČÁST: O knize — druh, žánr, kompozice, postavy, téma (~4 min · 8 b)</h2>
+
+<p>Z hlediska literárního druhu jde o epiku, žánrově se jedná o novelu — tedy delší povídku se sevřenou kompozicí, jedním hlavním dějovým motivem, omezeným počtem postav a výraznou pointou na konci. Někdy se Kulička označuje i jako povídka, ale svým sevřením a tou ostrou pointou je to typická novela. Vyšla v roce 1880 v almanachu Les Soirées de Médan, jak jsem už zmínil.</p>
+
+<p>Kompozice je zajímavá. Text není členěn do kapitol, je souvislý a chronologicky vyprávěný. Má ale jasnou trojdílnou strukturu, kterou si lze představit jako symetrický oblouk. První část je cesta z Rouenu do vesnice Tôtes, druhá část je zadržení cestujících v hostinci v Tôtes, a třetí část je cesta zpět směrem k Dieppe. Tato kompozice je rámcová — začátek a konec se zrcadlově odpovídají, na začátku Kulička dává jídlo ostatním, na konci jí naopak nikdo nedá ani sousto. To je klíčový kompoziční trik, paralela s kontrastem.</p>
+
+<p>Vypravěč je v er-formě, tedy ve třetí osobě, stojí mimo děj a je vševědoucí — zná myšlenky postav a popisuje jejich vnitřní stavy. Navenek se tváří nezúčastněně a objektivně, jak je u realismu zvykem, ale ve skutečnosti je skrytě ironický. Maupassant skrz drobné poznámky a kontrasty mezi tím, co postavy říkají a co dělají, vede čtenáře k jasnému morálnímu odsudku — sám ale nikdy nemoralizuje přímo.</p>
+
+<p>Teď ke krátkému shrnutí děje. Píše se rok 1870 a Prusové obsadili Normandii. Skupina deseti cestujících se rozhodne uprchnout dostavníkem z Rouenu přes Tôtes do Dieppe. V dostavníku jede průřez celou společností — drobná buržoazie, manželé Loiseauovi, on je vinař a šejdíř, ona dominantní žena; velká buržoazie, manželé Carré-Lamadonovi, on majitel bavlnářských manufaktur; aristokracie, hrabě a hraběnka de Bréville; dvě jeptišky, církev; demokrat a republikán Cornudet, falešný revolucionář; a konečně prostitutka Élisabeth Roussetová, přezdívaná Kulička, protože je baculatá jako koule sádla. Při cestě dostanou hlad, a jediná Kulička má s sebou plný košík jídla. Po počátečním pohrdání všichni přijmou její jídlo a sblíží se s ní.</p>
+
+<p>V Tôtes je ale zadrží pruský důstojník — žádá, aby s ním Kulička strávila noc, jinak nikoho nepustí dál. Kulička z vlastenectví odmítá. Cestující jí zprvu fandí, ale když se den za dnem nemohou hnout z místa a hrozí jim ztráty na obchodech a majetku, začnou ji obměkčovat. Hraběnka mateřsky, jeptišky teologicky argumentem o Juditě a Holofernovi — tedy biblickým příběhem o ženě, která svedla a zabila vojevůdce, aby zachránila svůj národ — a Loiseauovi obhroublými žerty. Kulička se zlomí a obětuje se. Druhý den ráno ale, při cestě zpět, jí všichni opovrhují, nikdo jí nenabídne ani sousto, ona pláče v koutě dostavníku a Cornudet si pro provokaci pohvizduje Marseillaisu. V tom je celá pointa.</p>
+
+<p>Hlavním tématem je pokrytectví měšťanské společnosti a její dvojí morálka. Ti, kdo se ohánějí mravností a vlastenectvím, jsou ti, kteří Kuličku obětují a pak jí pohrdají. Jediná „nemravná&quot; se chová mravně — sociální postavení a mravní hodnota jsou nepřímo úměrné. Vedle hlavního tématu se táhne několik motivů: jídlo a hlad jako symbol vztahů, peníze a chamtivost jako pravá motivace cesty, falešné vlastenectví, sociální třída a tělesnost, válka, okupace a mráz jako vnější rámec.</p>
+
+<p>Pokud bych dostal úryvek z této knihy, pravděpodobně by byl z jedné ze tří klíčových scén. První je scéna v dostavníku s jídlem, kde Kulička nabízí svůj košík cestujícím a všichni se s ní sblíží. Druhá je scéna v hostinci v Tôtes, kde ostatní Kuličku obměkčují, vrchol je tam argument jeptišek o Juditě a Holofernovi. A třetí je závěrečná scéna v dostavníku při cestě zpět, kdy Kulička hladoví, pláče v koutě a Cornudet pohvizduje Marseillaisu — to je samotná pointa.</p>
+
+<hr>
+
+<h2>3️⃣ ČÁST: Jak je napsaný — jazyk a umělecké prostředky (~3 min · 4 b)</h2>
+
+<p>A teď k jazykovým prostředkům. Maupassant píše spisovným jazykem vypravěče, bohatým a kultivovaným, s typicky naturalistickou popisností — popisy jídla, krajiny nebo postav jsou velmi smyslové a detailní, čtenář si je doslova představí. Forma je próza, převažuje vyprávění v er-formě, prokládané popisnými pasážemi a přímou řečí postav.</p>
+
+<p>Velmi důležitým prostředkem je diferenciace mluvy postav podle sociální vrstvy. Brévilleovi mluví vznešeně a opatrně zdvořile, Loiseauovi naopak hovorověji a s obhroublými žerty — Loiseau si neodpustí pikantní vtipy o Kuličce a důstojníkovi. Kulička mluví prostě a emocionálně, často pláče nebo prosí. A pruský důstojník mluví lámanou francouzštinou s tvrdým pruským „r&quot;. Z toho, jak postava mluví, poznáme její třídu i charakter.</p>
+
+<p>Teď k uměleckým prostředkům, vždy s funkcí. Naprosto klíčová je ironie, slovní i situační. Celá novela je vlastně jediná velká ironie. Slovní v tom, že vypravěč popisuje postavy s falešnou vážností a zdvořilostí, čímž odhaluje jejich směšnost. Situační v tom, že ti, kdo se ohánějí mravností, jednají nejnemravněji. Funkce této ironie je odhalit pokrytectví a vést čtenáře k mravnímu úsudku, aniž by autor moralizoval přímo.</p>
+
+<p>Druhý zásadní prostředek je kontrast. Najdeme ho na všech úrovních. Kontrast slova a činu, kontrast sociálního statusu a mravní hodnoty, kontrast začátku a konce — na začátku Kulička dává jídlo, na konci sama hladoví. Funkce kontrastu je zostřit vyznění a udělat ho exemplárním.</p>
+
+<p>Třetí důležitý prostředek je symbolika jídla. Jídlo není jen jídlo. Sdílení jídla znamená společenství, odepření znamená vyloučení. Kuličin košík plný jídla na začátku symbolizuje její štědrost, prázdný klín na konci její opuštění. Funkce symboliky je nést ideovou linii v hmotné, viditelné podobě.</p>
+
+<p>Čtvrtý prostředek je satira jako celkový tón díla. Maupassant ostře kritizuje měšťáckou morálku, ne jednotlivce, ale celou vrstvu. Funkce satiry je zesměšnit a obvinit.</p>
+
+<p>A pátý velmi výrazný prostředek je symbol Marseillaisy v závěru. Cornudetův pohvizdovaný refrén francouzské hymny zní v dostavníku, kde právě byla podruhé prodaná ženská čest. Funkce je ironický zámek příběhu — hymna o svobodě a bratrství zní nad obětí prodanou ve jménu vlastenectví.</p>
+
+<p>K tomu se přidávají běžnější prostředky jako přirovnání — „baculatá jako koule sádla&quot;, „oči jako dvě kapky inkoustu&quot; —, personifikace, kdy sníh „padá hustě&quot; a slzy „se tlačily&quot;, a metonymie, kdy postavy nejsou pojmenované jménem, ale rolí — hrabě, továrník, demokrat — což slouží k typizaci celé sociální vrstvy.</p>
+
+<hr>
+
+<h2>4️⃣ ČÁST: Neumělecký text (~5 min · 8 b)</h2>
+
+<blockquote>Po prostudování neuměleckého textu řeknu zhruba toto (vyplním podle konkrétního textu):</blockquote>
+<blockquote></blockquote>
+<blockquote>Tento neumělecký text patří k <strong>[funkčnímu stylu — vyber: prostěsdělovací / publicistický / odborný / administrativní / řečnický / umělecký]</strong>. Konkrétně se jedná o <strong>[útvar — článek, recenzi, esej, zprávu, dopis, návod, vědecký článek, reportáž, fejeton...]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>Typické prvky tohoto stylu, které tu nacházím: <strong>[konkrétně 2–3 prvky — např. odborná terminologie, expresivní výrazy, řečnické otázky, statistiky, citáty, neformální oslovení adresáta]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>Hlavní myšlenka textu je <strong>[téma]</strong>. Autor se k němu staví <strong>[informativně / kriticky / přesvědčovacně / popisně]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>Jazykové prostředky, které jsou v textu zajímavé:</blockquote>
+<blockquote>- <strong>[Prostředek 1]</strong> — funkce: <strong>[k čemu slouží]</strong></blockquote>
+<blockquote>- <strong>[Prostředek 2]</strong> — funkce: <strong>[k čemu slouží]</strong></blockquote>
+<blockquote></blockquote>
+<blockquote>Komunikační situace: text je psán pro <strong>[adresát — odborná veřejnost / laici / specifická skupina]</strong> s cílem <strong>[účel — informovat / přesvědčit / pobavit / poučit]</strong>.</blockquote>
+<blockquote></blockquote>
+<blockquote>A na závěr — souvislost s naším uměleckým textem: pokud najdu tematickou nebo myšlenkovou paralelu, zmíním ji. U Kuličky se nabízí paralela například s texty o <strong>válce a okupaci</strong>, o <strong>prostituci a sociální nerovnosti</strong>, o <strong>pokrytectví společnosti</strong>, o <strong>dvojí morálce médií a politiků</strong>, nebo o <strong>vlastenectví v krizových situacích</strong> — všechny tyto motivy jsou v Maupassantově novele přítomné a lze je s neuměleckým textem propojit.</blockquote>
+
+<hr>
+
+<h2>💡 Tipy k mluvení</h2>
+
+<ul>
+<li>Mluv pomalu a srozumitelně — máš 15 minut, nemusíš spěchat</li>
+<li>Když si na něco nemůžeš vzpomenout, řekni: <em>„Vrátím se k tomu za chvíli&quot;</em> a jdi dál</li>
+<li>Komise oceňuje <strong>strukturovanou mluvu</strong> — slovní pauzy mezi částmi typu „Posunu se k...&quot; / „A teď k jazykovým prostředkům...&quot; pomáhají</li>
+<li>Dej si <strong>vodu</strong> před sebe, doušek pomáhá srovnat myšlenky</li>
+<li>U argumentu jeptišek si zapamatuj jméno <strong>Judita a Holofernes</strong> — je to ten nejvýraznější moment pokrytectví v celé knize</li>
+<li>Pamatuj: <strong>Kulička = Élisabeth Roussetová</strong>, <strong>Cornudet zpívá Marseillaisu</strong> (NE Internacionálu), <strong>hostinec v Tôtes</strong>, <strong>cíl cesty Dieppe</strong></li>
+</ul>
+
+      </div>
+    </section>
+
+
+    <div class="nav-bottom">
+      <a href="05.html">← #05 Král Lávra</a><a href="../index.html" class="home">← Domů (všech 20)</a><a href="07.html">#07 Farma zvířat →</a>
+    </div>
+  </div>
+  <footer>
+    Vizuální studijní materiály pro maturitu 2026 · Kniha 06 / 20
+  </footer>
+  
+<script>
+(function() {
+  const popup = document.getElementById('exam-popup');
+  const header = document.getElementById('popup-header');
+  const toggleBtn = document.getElementById('popup-toggle');
+  const closeBtn = document.getElementById('popup-close');
+  const reopenBtn = document.getElementById('popup-reopen');
+
+  // Load saved position
+  try {
+    const savedPos = localStorage.getItem('examPopupPos');
+    if (savedPos) {
+      const pos = JSON.parse(savedPos);
+      if (pos.left) { popup.style.left = pos.left; popup.style.right = 'auto'; }
+      if (pos.top)  { popup.style.top = pos.top; }
+    }
+  } catch(e) {}
+
+  // Restore minimized / closed state
+  if (localStorage.getItem('examPopupMinimized') === '1') {
+    popup.classList.add('minimized');
+    toggleBtn.textContent = '+';
+  }
+  if (localStorage.getItem('examPopupClosed') === '1') {
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+  }
+
+  // Drag — mouse
+  let isDragging = false, ox = 0, oy = 0;
+  function startDrag(clientX, clientY) {
+    isDragging = true;
+    const rect = popup.getBoundingClientRect();
+    ox = clientX - rect.left;
+    oy = clientY - rect.top;
+  }
+  function doDrag(clientX, clientY) {
+    if (!isDragging) return;
+    let l = clientX - ox;
+    let t = clientY - oy;
+    // Keep on screen
+    l = Math.max(0, Math.min(window.innerWidth - 60, l));
+    t = Math.max(0, Math.min(window.innerHeight - 40, t));
+    popup.style.left = l + 'px';
+    popup.style.top = t + 'px';
+    popup.style.right = 'auto';
+  }
+  function endDrag() {
+    if (isDragging) {
+      isDragging = false;
+      localStorage.setItem('examPopupPos', JSON.stringify({
+        top: popup.style.top, left: popup.style.left
+      }));
+    }
+  }
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    startDrag(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', endDrag);
+
+  // Touch support
+  header.addEventListener('touchstart', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    const t = e.touches[0];
+    startDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    doDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchend', endDrag);
+
+  // Toggle minimize
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.classList.toggle('minimized');
+    const min = popup.classList.contains('minimized');
+    toggleBtn.textContent = min ? '+' : '−';
+    localStorage.setItem('examPopupMinimized', min ? '1' : '0');
+  });
+
+  // Close
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+    localStorage.setItem('examPopupClosed', '1');
+  });
+
+  // Reopen
+  reopenBtn.addEventListener('click', function() {
+    popup.style.display = 'flex';
+    reopenBtn.style.display = 'none';
+    localStorage.setItem('examPopupClosed', '0');
+  });
+})();
+
+// GUIDE POPUP — same mechanics, different IDs and storage keys
+(function() {
+  const popup = document.getElementById('guide-popup');
+  const header = document.getElementById('guide-header');
+  const toggleBtn = document.getElementById('guide-toggle');
+  const closeBtn = document.getElementById('guide-close');
+  const reopenBtn = document.getElementById('guide-reopen');
+  if (!popup || !header) return;
+
+  try {
+    const savedPos = localStorage.getItem('guidePopupPos');
+    if (savedPos) {
+      const pos = JSON.parse(savedPos);
+      if (pos.left) { popup.style.left = pos.left; popup.style.right = 'auto'; }
+      if (pos.top)  { popup.style.top = pos.top; }
+    }
+  } catch(e) {}
+
+  if (localStorage.getItem('guidePopupMinimized') === '1') {
+    popup.classList.add('minimized');
+    toggleBtn.textContent = '+';
+  }
+  if (localStorage.getItem('guidePopupClosed') === '1') {
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+  }
+
+  let isDragging = false, ox = 0, oy = 0;
+  function startDrag(clientX, clientY) {
+    isDragging = true;
+    const rect = popup.getBoundingClientRect();
+    ox = clientX - rect.left;
+    oy = clientY - rect.top;
+    popup.style.zIndex = 1001;
+  }
+  function doDrag(clientX, clientY) {
+    if (!isDragging) return;
+    let l = clientX - ox;
+    let t = clientY - oy;
+    l = Math.max(0, Math.min(window.innerWidth - 60, l));
+    t = Math.max(0, Math.min(window.innerHeight - 40, t));
+    popup.style.left = l + 'px';
+    popup.style.top = t + 'px';
+    popup.style.right = 'auto';
+  }
+  function endDrag() {
+    if (isDragging) {
+      isDragging = false;
+      localStorage.setItem('guidePopupPos', JSON.stringify({
+        top: popup.style.top, left: popup.style.left
+      }));
+    }
+  }
+
+  header.addEventListener('mousedown', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    startDrag(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', endDrag);
+
+  header.addEventListener('touchstart', function(e) {
+    if (e.target.closest('.popup-btn')) return;
+    const t = e.touches[0];
+    startDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchmove', function(e) {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    doDrag(t.clientX, t.clientY);
+  }, {passive: true});
+  document.addEventListener('touchend', endDrag);
+
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.classList.toggle('minimized');
+    const min = popup.classList.contains('minimized');
+    toggleBtn.textContent = min ? '+' : '−';
+    localStorage.setItem('guidePopupMinimized', min ? '1' : '0');
+  });
+
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    popup.style.display = 'none';
+    reopenBtn.style.display = 'block';
+    localStorage.setItem('guidePopupClosed', '1');
+  });
+
+  reopenBtn.addEventListener('click', function() {
+    popup.style.display = 'flex';
+    reopenBtn.style.display = 'none';
+    localStorage.setItem('guidePopupClosed', '0');
+  });
+})();
+
+// POP-OUT IMAGES — click "⤢ Popoutnout" on any embedded image to detach as draggable+resizable window
+(function() {
+  // All images that should get a pop-out button
+  const candidates = document.querySelectorAll(
+    '.embedded-image > a > img, .embedded-image > img, ' +
+    '.embedded-postavy > a > img, .embedded-postavy > img, ' +
+    '.embedded-komiks .komiks-strip > div > img, ' +
+    '.single-card > a > img, .single-card > img'
+  );
+
+  let popoutZ = 2000;
+
+  candidates.forEach(function(img) {
+    // Find the container that should host the trigger button
+    const container = img.closest(
+      '.embedded-image, .embedded-postavy, .komiks-strip > div, .single-card'
+    );
+    if (!container) return;
+    if (container.querySelector(':scope > .popout-trigger')) return; // already added
+
+    const btn = document.createElement('button');
+    btn.className = 'popout-trigger';
+    btn.title = 'Otevřít jako popup (lze přesouvat a měnit velikost)';
+    btn.innerHTML = '⤢ Popoutnout';
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      createPopout(img);
+    });
+    container.appendChild(btn);
+  });
+
+  function createPopout(srcImg) {
+    const popout = document.createElement('div');
+    popout.className = 'img-popout';
+
+    let caption = srcImg.alt || 'Obrázek';
+    const nearbyCaption = srcImg.closest('div')?.querySelector('.image-caption');
+    if (nearbyCaption && nearbyCaption.textContent.trim()) {
+      caption = nearbyCaption.textContent.trim();
+    }
+    const safeCaption = caption.replace(/[<>"'&]/g, function(c) {
+      return {'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','&':'&amp;'}[c];
+    });
+
+    popout.innerHTML = (
+      '<div class="img-popout-header">' +
+        '<span class="img-popout-title">' + safeCaption + '</span>' +
+        '<div class="img-popout-controls">' +
+          '<button class="popout-btn pop-zoom-out" title="Zmenšit obrázek">−</button>' +
+          '<button class="popout-btn pop-zoom-in" title="Zvětšit obrázek">+</button>' +
+          '<button class="popout-btn pop-zoom-reset" title="Reset zoomu (1:1)">⊡</button>' +
+          '<button class="popout-btn pop-close" title="Zavřít">×</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="img-popout-body">' +
+        '<img src="' + srcImg.src + '" alt="' + safeCaption + '" />' +
+        '<div class="img-popout-zoom-hint">Klikni = lupa · drag = posun · scroll = zoom</div>' +
+      '</div>' +
+      '<div class="img-popout-resize"></div>'
+    );
+    document.body.appendChild(popout);
+
+    // ====== POPOUT POSITION (transform-based for smooth dragging) ======
+    const existingCount = document.querySelectorAll('.img-popout').length;
+    let popX = 60 + (existingCount - 1) * 28;
+    let popY = 60 + (existingCount - 1) * 28;
+    function applyPopoutPos() {
+      popout.style.transform = 'translate3d(' + popX + 'px,' + popY + 'px,0)';
+    }
+    applyPopoutPos();
+    popout.style.zIndex = ++popoutZ;
+
+    popout.addEventListener('mousedown', function() {
+      popout.style.zIndex = ++popoutZ;
+    });
+
+    // ====== DRAG popup by header (uses transform + rAF) ======
+    const header = popout.querySelector('.img-popout-header');
+    let isDragging = false, dragStartX = 0, dragStartY = 0, dragOriginPopX = 0, dragOriginPopY = 0;
+    let dragRaf = null;
+
+    function startDrag(cx, cy) {
+      isDragging = true;
+      dragStartX = cx;
+      dragStartY = cy;
+      dragOriginPopX = popX;
+      dragOriginPopY = popY;
+    }
+    function doDrag(cx, cy) {
+      if (!isDragging) return;
+      if (dragRaf) return;
+      dragRaf = requestAnimationFrame(function() {
+        dragRaf = null;
+        const dx = cx - dragStartX;
+        const dy = cy - dragStartY;
+        popX = Math.max(0, Math.min(window.innerWidth - 60, dragOriginPopX + dx));
+        popY = Math.max(0, Math.min(window.innerHeight - 40, dragOriginPopY + dy));
+        applyPopoutPos();
+      });
+    }
+    let lastMouseX = 0, lastMouseY = 0;
+    function endDrag() { isDragging = false; }
+
+    function mouseMoveHandler(e) {
+      lastMouseX = e.clientX; lastMouseY = e.clientY;
+      if (isDragging) doDrag(e.clientX, e.clientY);
+      if (isResizing) doResize(e.clientX, e.clientY);
+      if (isPanning) doPan(e.clientX, e.clientY);
+    }
+    function mouseUpHandler() {
+      endDrag(); endResize(); endPan();
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
+    }
+    function attachDocListeners() {
+      document.addEventListener('mousemove', mouseMoveHandler);
+      document.addEventListener('mouseup', mouseUpHandler);
+    }
+
+    header.addEventListener('mousedown', function(e) {
+      if (e.target.closest('.popout-btn')) return;
+      startDrag(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+    });
+
+    // Touch drag
+    header.addEventListener('touchstart', function(e) {
+      if (e.target.closest('.popout-btn')) return;
+      const t = e.touches[0];
+      startDrag(t.clientX, t.clientY);
+    }, {passive: true});
+    popout.addEventListener('touchmove', function(e) {
+      const t = e.touches[0];
+      if (isDragging) doDrag(t.clientX, t.clientY);
+      if (isResizing) doResize(t.clientX, t.clientY);
+      if (isPanning) doPan(t.clientX, t.clientY);
+    }, {passive: true});
+    popout.addEventListener('touchend', function() {
+      endDrag(); endResize(); endPan();
+    });
+
+    // ====== RESIZE popup via corner ======
+    const resizeHandle = popout.querySelector('.img-popout-resize');
+    let isResizing = false, rsW = 0, rsH = 0, rsX = 0, rsY = 0;
+    let resizeRaf = null;
+
+    function startResize(cx, cy) {
+      isResizing = true;
+      const rect = popout.getBoundingClientRect();
+      rsW = rect.width; rsH = rect.height;
+      rsX = cx; rsY = cy;
+    }
+    function doResize(cx, cy) {
+      if (!isResizing) return;
+      if (resizeRaf) return;
+      resizeRaf = requestAnimationFrame(function() {
+        resizeRaf = null;
+        const dx = cx - rsX;
+        const dy = cy - rsY;
+        popout.style.width = Math.max(260, rsW + dx) + 'px';
+        popout.style.height = Math.max(180, rsH + dy) + 'px';
+      });
+    }
+    function endResize() { isResizing = false; }
+
+    resizeHandle.addEventListener('mousedown', function(e) {
+      startResize(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    resizeHandle.addEventListener('touchstart', function(e) {
+      const t = e.touches[0];
+      startResize(t.clientX, t.clientY);
+    }, {passive: true});
+
+    // ====== IMAGE ZOOM + PAN inside body ======
+    const bodyEl = popout.querySelector('.img-popout-body');
+    const imgEl = bodyEl.querySelector('img');
+    const zoomHint = bodyEl.querySelector('.img-popout-zoom-hint');
+    let zoomScale = 1;
+    let zoomTX = 0, zoomTY = 0;
+    const ZOOM_STEP = 1.5;
+    const ZOOM_MIN = 1;
+    const ZOOM_MAX = 8;
+    let zoomRaf = null;
+
+    function applyImgTransform() {
+      if (zoomRaf) return;
+      zoomRaf = requestAnimationFrame(function() {
+        zoomRaf = null;
+        imgEl.style.transform = 'translate3d(' + zoomTX + 'px,' + zoomTY + 'px,0) scale(' + zoomScale + ')';
+        if (zoomScale > 1) bodyEl.classList.add('zoomed');
+        else bodyEl.classList.remove('zoomed');
+        if (zoomScale > 1.01 && zoomHint) zoomHint.style.display = 'none';
+      });
+    }
+
+    function clampOffsets() {
+      // Allow panning at any scale (including 1:1). Keep at least some of image visible.
+      const bw = bodyEl.clientWidth;
+      const bh = bodyEl.clientHeight;
+      const iw = imgEl.naturalWidth || imgEl.clientWidth || bw;
+      const ih = imgEl.naturalHeight || imgEl.clientHeight || bh;
+      // Effective rendered size at scale 1 (object-fit: contain semantics):
+      const bodyAspect = bw / Math.max(1, bh);
+      const imgAspect = iw / Math.max(1, ih);
+      let dispW, dispH;
+      if (imgAspect > bodyAspect) {
+        dispW = bw;
+        dispH = bw / imgAspect;
+      } else {
+        dispH = bh;
+        dispW = bh * imgAspect;
+      }
+      const scaledW = dispW * zoomScale;
+      const scaledH = dispH * zoomScale;
+      // Keep at least this much of the image visible (so user can't completely lose it)
+      const visibleMargin = Math.min(80, scaledW * 0.25, scaledH * 0.25);
+      zoomTX = Math.max(-scaledW + visibleMargin, Math.min(bw - visibleMargin, zoomTX));
+      zoomTY = Math.max(-scaledH + visibleMargin, Math.min(bh - visibleMargin, zoomTY));
+    }
+
+    function zoomAtPoint(cx, cy, factor) {
+      // cx, cy are coords inside bodyEl (0..clientWidth, 0..clientHeight)
+      const newScale = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoomScale * factor));
+      if (Math.abs(newScale - zoomScale) < 0.001) return;
+      // Keep the point under cursor stable in image-space:
+      // imgPoint = (cx - zoomTX) / zoomScale
+      // After zoom: cx = imgPoint * newScale + new_zoomTX
+      const px = (cx - zoomTX) / zoomScale;
+      const py = (cy - zoomTY) / zoomScale;
+      zoomTX = cx - px * newScale;
+      zoomTY = cy - py * newScale;
+      zoomScale = newScale;
+      clampOffsets();
+      bodyEl.classList.add('smooth');
+      applyImgTransform();
+      setTimeout(function() { bodyEl.classList.remove('smooth'); }, 200);
+    }
+
+    function resetZoom() {
+      zoomScale = 1; zoomTX = 0; zoomTY = 0;
+      bodyEl.classList.add('smooth');
+      applyImgTransform();
+      if (zoomHint) zoomHint.style.display = '';
+      setTimeout(function() { bodyEl.classList.remove('smooth'); }, 200);
+    }
+
+    // ====== IMAGE PAN (when zoomed) ======
+    let isPanning = false, isPotentialPan = false, panStartX = 0, panStartY = 0, panOriginTX = 0, panOriginTY = 0;
+
+    function startPanCandidate(cx, cy) {
+      isPotentialPan = true;
+      panStartX = cx; panStartY = cy;
+      panOriginTX = zoomTX; panOriginTY = zoomTY;
+    }
+    function doPan(cx, cy) {
+      const dx = cx - panStartX;
+      const dy = cy - panStartY;
+      // Lower threshold for trackpad sensitivity — start panning sooner
+      if (!isPanning && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
+        isPanning = true;
+        bodyEl.classList.add('panning');
+        if (zoomHint) zoomHint.style.display = 'none';
+      }
+      if (isPanning) {
+        zoomTX = panOriginTX + dx;
+        zoomTY = panOriginTY + dy;
+        clampOffsets();
+        applyImgTransform();
+      }
+    }
+    function endPan() {
+      if (isPotentialPan && !isPanning) {
+        // It was a click — zoom in at the click point
+        const rect = bodyEl.getBoundingClientRect();
+        zoomAtPoint(lastMouseX - rect.left, lastMouseY - rect.top, ZOOM_STEP);
+      }
+      isPotentialPan = false;
+      isPanning = false;
+      bodyEl.classList.remove('panning');
+    }
+
+    bodyEl.addEventListener('mousedown', function(e) {
+      if (e.button !== 0) return;
+      lastMouseX = e.clientX; lastMouseY = e.clientY;
+      startPanCandidate(e.clientX, e.clientY);
+      attachDocListeners();
+      e.preventDefault();
+    });
+
+    bodyEl.addEventListener('touchstart', function(e) {
+      const t = e.touches[0];
+      lastMouseX = t.clientX; lastMouseY = t.clientY;
+      startPanCandidate(t.clientX, t.clientY);
+    }, {passive: true});
+
+    // Wheel = zoom at cursor (passive: false because we preventDefault)
+    bodyEl.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      const rect = bodyEl.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.18 : (1 / 1.18);
+      zoomAtPoint(cx, cy, factor);
+    }, {passive: false});
+
+    // Double-click = reset zoom
+    bodyEl.addEventListener('dblclick', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      resetZoom();
+    });
+
+    // Buttons
+    popout.querySelector('.pop-zoom-in').addEventListener('click', function() {
+      zoomAtPoint(bodyEl.clientWidth / 2, bodyEl.clientHeight / 2, ZOOM_STEP);
+    });
+    popout.querySelector('.pop-zoom-out').addEventListener('click', function() {
+      zoomAtPoint(bodyEl.clientWidth / 2, bodyEl.clientHeight / 2, 1 / ZOOM_STEP);
+    });
+    popout.querySelector('.pop-zoom-reset').addEventListener('click', resetZoom);
+
+    // Close
+    popout.querySelector('.pop-close').addEventListener('click', function() {
+      popout.remove();
+    });
+  }
+})();
+
+// POPUP LIST LINKS — click an item in the strategy popup → smooth scroll + flash highlight on page
+(function() {
+  document.querySelectorAll('.popup-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (!target) return;
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      document.querySelectorAll('.flash-highlight').forEach(function(el) {
+        el.classList.remove('flash-highlight');
+      });
+      void target.offsetWidth; // force reflow to re-trigger animation
+      target.classList.add('flash-highlight');
+      setTimeout(function() {
+        target.classList.remove('flash-highlight');
+      }, 2600);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
