@@ -606,7 +606,18 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
 #tts-controller label { display: flex; align-items: center; gap: 8px; }
 #tts-controller input[type="range"] { width: 110px; cursor: pointer; }
 #tts-controller .tts-rate-display { min-width: 38px; text-align: right; font-weight: 600; }
-#tts-controller .tts-status { font-size: 0.85em; opacity: 0.8; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#tts-controller .tts-status { font-size: 0.85em; opacity: 0.8; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#tts-controller select {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  max-width: 200px;
+  cursor: pointer;
+}
+#tts-controller select option { background: #2a1f15; color: white; }
 @media (max-width: 700px) {
   #tts-controller { font-size: 0.8em; padding: 8px 12px; gap: 8px; max-width: 95vw; }
   #tts-controller input[type="range"] { width: 80px; }

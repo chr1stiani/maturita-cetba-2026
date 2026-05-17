@@ -606,7 +606,18 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
 #tts-controller label { display: flex; align-items: center; gap: 8px; }
 #tts-controller input[type="range"] { width: 110px; cursor: pointer; }
 #tts-controller .tts-rate-display { min-width: 38px; text-align: right; font-weight: 600; }
-#tts-controller .tts-status { font-size: 0.85em; opacity: 0.8; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#tts-controller .tts-status { font-size: 0.85em; opacity: 0.8; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#tts-controller select {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  max-width: 200px;
+  cursor: pointer;
+}
+#tts-controller select option { background: #2a1f15; color: white; }
 @media (max-width: 700px) {
   #tts-controller { font-size: 0.8em; padding: 8px 12px; gap: 8px; max-width: 95vw; }
   #tts-controller input[type="range"] { width: 80px; }
@@ -1053,6 +1064,10 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
 <div id="tts-controller">
   <button id="tts-pause" class="tts-btn" title="Pauza / pokračovat">⏸</button>
   <button id="tts-stop" class="tts-btn" title="Stop">⏹</button>
+  <label class="tts-voice-label">
+    Hlas
+    <select id="tts-voice" title="Vyber hlas — Online/Premium jsou nejlepší"></select>
+  </label>
   <label>
     Rychlost
     <input id="tts-rate" type="range" min="0.5" max="2" step="0.1" value="1.0">
@@ -2215,25 +2230,80 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
   const statusEl = document.getElementById('tts-status');
   if (!readBtn || !controller) return;
 
-  // Trigger async voice loading
-  synth.getVoices();
-  window.addEventListener('voiceschanged', function() { synth.getVoices(); });
-
+  const voiceSelect = document.getElementById('tts-voice');
   let currentRate = parseFloat(localStorage.getItem('ttsRate') || '1.0');
   rateInput.value = currentRate;
   rateDisplay.textContent = currentRate.toFixed(1) + '×';
 
   let utterances = [];
   let currentIndex = 0;
+  let availableVoices = [];
 
-  function getCzechVoice() {
+  function voiceQualityRank(v) {
+    // Higher = better. Neural / Online / Premium voices score highest.
+    const name = (v.name || '').toLowerCase();
+    let score = 0;
+    if (/neural|natural|online/i.test(name)) score += 100;
+    if (/premium/i.test(name)) score += 50;
+    if (/enhanced/i.test(name)) score += 40;
+    if (/wavenet/i.test(name)) score += 80;       // Google Cloud
+    if (/microsoft.*online/i.test(name)) score += 90;
+    if (/google/i.test(name)) score += 60;
+    if (/zuzana|vlasta|jakub|anna/i.test(name)) score += 10;
+    return score;
+  }
+
+  function populateVoiceList() {
     const voices = synth.getVoices();
-    if (!voices.length) return null;
-    // Prefer premium Czech voices
-    let v = voices.find(function(x) { return x.lang && x.lang.toLowerCase().startsWith('cs') && /premium|enhanced/i.test(x.name); });
-    if (!v) v = voices.find(function(x) { return x.lang && x.lang.toLowerCase().startsWith('cs'); });
-    if (!v) v = voices.find(function(x) { return /zuzana|jakub|vlasta/i.test(x.name); });
-    return v;
+    if (!voices.length) return;
+    // Filter to Czech voices, then sort by quality
+    const czech = voices.filter(function(v) {
+      return v.lang && v.lang.toLowerCase().startsWith('cs');
+    });
+    // If no Czech voice, include all voices but mark them
+    availableVoices = czech.length ? czech.slice() : voices.slice();
+    availableVoices.sort(function(a, b) { return voiceQualityRank(b) - voiceQualityRank(a); });
+
+    const savedName = localStorage.getItem('ttsVoiceName');
+    voiceSelect.innerHTML = '';
+    availableVoices.forEach(function(v, idx) {
+      const opt = document.createElement('option');
+      opt.value = v.name;
+      const tag = voiceQualityRank(v) >= 50 ? ' ⭐' : '';
+      opt.textContent = v.name + ' (' + v.lang + ')' + tag;
+      if (savedName && v.name === savedName) opt.selected = true;
+      else if (!savedName && idx === 0) opt.selected = true;
+      voiceSelect.appendChild(opt);
+    });
+    if (!czech.length) {
+      const note = document.createElement('option');
+      note.disabled = true;
+      note.textContent = '⚠ Žádný český hlas — nainstaluj v Systému';
+      voiceSelect.insertBefore(note, voiceSelect.firstChild);
+    }
+  }
+
+  // Trigger async voice loading
+  synth.getVoices();
+  populateVoiceList();
+  window.speechSynthesis.addEventListener('voiceschanged', populateVoiceList);
+  setTimeout(populateVoiceList, 500);  // fallback for slow voice loading
+
+  voiceSelect.addEventListener('change', function() {
+    localStorage.setItem('ttsVoiceName', this.value);
+  });
+
+  function getSelectedVoice() {
+    const name = voiceSelect.value || localStorage.getItem('ttsVoiceName');
+    if (name) {
+      const v = synth.getVoices().find(function(x) { return x.name === name; });
+      if (v) return v;
+    }
+    // Fallback: best Czech by ranking
+    const sorted = synth.getVoices()
+      .filter(function(v) { return v.lang && v.lang.toLowerCase().startsWith('cs'); })
+      .sort(function(a, b) { return voiceQualityRank(b) - voiceQualityRank(a); });
+    return sorted[0] || null;
   }
 
   function chunkText(text) {
@@ -2281,8 +2351,8 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
     const chunk = utterances[currentIndex];
     const u = new SpeechSynthesisUtterance(chunk);
     u.lang = 'cs-CZ';
-    const voice = getCzechVoice();
-    if (voice) u.voice = voice;
+    const voice = getSelectedVoice();
+    if (voice) { u.voice = voice; u.lang = voice.lang; }
     u.rate = currentRate;
     statusEl.textContent = '🔊 ' + chunk.slice(0, 60) + (chunk.length > 60 ? '…' : '');
     u.onend = function() {
