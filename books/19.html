@@ -555,6 +555,63 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
   text-decoration: none;
 }
 
+/* TTS reader — floating "Read selected text" button + bottom controller */
+#tts-read-btn {
+  position: absolute;
+  background: #2d6a8c;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 5000;
+  font-weight: 600;
+  font-size: 0.92em;
+  display: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+#tts-read-btn:hover { background: #1d556f; transform: scale(1.05); }
+
+#tts-controller {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: none;
+  gap: 14px;
+  align-items: center;
+  z-index: 3000;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  font-size: 0.9em;
+  flex-wrap: wrap;
+}
+#tts-controller.active { display: flex; }
+#tts-controller .tts-btn {
+  background: rgba(255,255,255,0.18);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1;
+}
+#tts-controller .tts-btn:hover { background: rgba(255,255,255,0.35); }
+#tts-controller label { display: flex; align-items: center; gap: 8px; }
+#tts-controller input[type="range"] { width: 110px; cursor: pointer; }
+#tts-controller .tts-rate-display { min-width: 38px; text-align: right; font-weight: 600; }
+#tts-controller .tts-status { font-size: 0.85em; opacity: 0.8; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 700px) {
+  #tts-controller { font-size: 0.8em; padding: 8px 12px; gap: 8px; max-width: 95vw; }
+  #tts-controller input[type="range"] { width: 80px; }
+}
+
 /* Flash highlight when a popup link scrolls to a section */
 .flash-highlight {
   animation: flash-pulse 2.6s ease-out;
@@ -990,6 +1047,19 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
 </div>
 
 <button id="guide-reopen" class="guide-reopen" title="Zobrazit průvodce">🧭 Jak studovat</button>
+
+<!-- TTS Reader: button appears when text is selected, controller appears during playback -->
+<button id="tts-read-btn" title="Přečíst nahlas vybraný text">🔊 Číst nahlas</button>
+<div id="tts-controller">
+  <button id="tts-pause" class="tts-btn" title="Pauza / pokračovat">⏸</button>
+  <button id="tts-stop" class="tts-btn" title="Stop">⏹</button>
+  <label>
+    Rychlost
+    <input id="tts-rate" type="range" min="0.5" max="2" step="0.1" value="1.0">
+    <span class="tts-rate-display" id="tts-rate-display">1.0×</span>
+  </label>
+  <span class="tts-status" id="tts-status"></span>
+</div>
 
   <header class="book-header">
     <div class="container">
@@ -2236,6 +2306,173 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
         target.classList.remove('flash-highlight');
       }, 2600);
     });
+  });
+})();
+
+// TTS READER — select text on the page → button appears → click to read aloud (Czech voice)
+(function() {
+  if (!('speechSynthesis' in window)) return;
+  const synth = window.speechSynthesis;
+  const readBtn = document.getElementById('tts-read-btn');
+  const controller = document.getElementById('tts-controller');
+  const pauseBtn = document.getElementById('tts-pause');
+  const stopBtn = document.getElementById('tts-stop');
+  const rateInput = document.getElementById('tts-rate');
+  const rateDisplay = document.getElementById('tts-rate-display');
+  const statusEl = document.getElementById('tts-status');
+  if (!readBtn || !controller) return;
+
+  // Trigger async voice loading
+  synth.getVoices();
+  window.addEventListener('voiceschanged', function() { synth.getVoices(); });
+
+  let currentRate = parseFloat(localStorage.getItem('ttsRate') || '1.0');
+  rateInput.value = currentRate;
+  rateDisplay.textContent = currentRate.toFixed(1) + '×';
+
+  let utterances = [];
+  let currentIndex = 0;
+
+  function getCzechVoice() {
+    const voices = synth.getVoices();
+    if (!voices.length) return null;
+    // Prefer premium Czech voices
+    let v = voices.find(function(x) { return x.lang && x.lang.toLowerCase().startsWith('cs') && /premium|enhanced/i.test(x.name); });
+    if (!v) v = voices.find(function(x) { return x.lang && x.lang.toLowerCase().startsWith('cs'); });
+    if (!v) v = voices.find(function(x) { return /zuzana|jakub|vlasta/i.test(x.name); });
+    return v;
+  }
+
+  function chunkText(text) {
+    // Split text into reasonably-sized sentences for stable TTS playback
+    const raw = text.split(/(?<=[.!?…])\s+(?=[A-ZÁ-Ž])/);
+    const out = [];
+    for (const s of raw) {
+      const t = s.trim();
+      if (!t) continue;
+      // Further split very long chunks at commas
+      if (t.length > 280) {
+        const sub = t.split(/,\s+/);
+        let buf = '';
+        for (const piece of sub) {
+          if ((buf + piece).length > 240) {
+            if (buf) out.push(buf.trim());
+            buf = piece;
+          } else {
+            buf = buf ? buf + ', ' + piece : piece;
+          }
+        }
+        if (buf) out.push(buf.trim());
+      } else {
+        out.push(t);
+      }
+    }
+    return out.length ? out : [text];
+  }
+
+  function speakAll(text) {
+    synth.cancel();
+    utterances = chunkText(text);
+    currentIndex = 0;
+    controller.classList.add('active');
+    pauseBtn.textContent = '⏸';
+    speakNext();
+  }
+
+  function speakNext() {
+    if (currentIndex >= utterances.length) {
+      controller.classList.remove('active');
+      statusEl.textContent = '';
+      return;
+    }
+    const chunk = utterances[currentIndex];
+    const u = new SpeechSynthesisUtterance(chunk);
+    u.lang = 'cs-CZ';
+    const voice = getCzechVoice();
+    if (voice) u.voice = voice;
+    u.rate = currentRate;
+    statusEl.textContent = '🔊 ' + chunk.slice(0, 60) + (chunk.length > 60 ? '…' : '');
+    u.onend = function() {
+      currentIndex++;
+      speakNext();
+    };
+    u.onerror = function() {
+      currentIndex++;
+      speakNext();
+    };
+    synth.speak(u);
+  }
+
+  // Show read button when text is selected
+  function updateReadButton() {
+    const sel = window.getSelection();
+    const text = sel ? sel.toString().trim() : '';
+    if (text.length > 3) {
+      try {
+        const rect = sel.getRangeAt(0).getBoundingClientRect();
+        readBtn.style.left = (rect.right + window.scrollX + 8) + 'px';
+        readBtn.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+        readBtn.style.display = 'block';
+        readBtn.dataset.text = text;
+      } catch (e) {
+        readBtn.style.display = 'none';
+      }
+    } else {
+      readBtn.style.display = 'none';
+    }
+  }
+
+  document.addEventListener('mouseup', function() {
+    setTimeout(updateReadButton, 10);
+  });
+  document.addEventListener('touchend', function() {
+    setTimeout(updateReadButton, 10);
+  });
+  document.addEventListener('selectionchange', function() {
+    // Hide button if selection is empty
+    const sel = window.getSelection();
+    if (!sel || sel.toString().trim().length < 4) {
+      readBtn.style.display = 'none';
+    }
+  });
+
+  // Prevent button click from clearing selection prematurely
+  readBtn.addEventListener('mousedown', function(e) { e.preventDefault(); });
+  readBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const text = this.dataset.text;
+    if (text) speakAll(text);
+    this.style.display = 'none';
+  });
+
+  // Controller buttons
+  pauseBtn.addEventListener('click', function() {
+    if (synth.paused) {
+      synth.resume();
+      this.textContent = '⏸';
+    } else if (synth.speaking) {
+      synth.pause();
+      this.textContent = '▶️';
+    }
+  });
+  stopBtn.addEventListener('click', function() {
+    synth.cancel();
+    controller.classList.remove('active');
+    statusEl.textContent = '';
+    utterances = [];
+    currentIndex = 0;
+  });
+  rateInput.addEventListener('input', function() {
+    currentRate = parseFloat(this.value);
+    rateDisplay.textContent = currentRate.toFixed(1) + '×';
+    localStorage.setItem('ttsRate', String(currentRate));
+    // Rate change applies to the NEXT chunk (current one keeps original rate)
+  });
+
+  // Stop TTS when leaving page
+  window.addEventListener('beforeunload', function() {
+    try { synth.cancel(); } catch (e) {}
   });
 })();
 </script>

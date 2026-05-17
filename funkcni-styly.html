@@ -555,6 +555,63 @@ footer { text-align: center; color: #8a7a65; font-size: 0.9em; padding: 30px 24p
   text-decoration: none;
 }
 
+/* TTS reader — floating "Read selected text" button + bottom controller */
+#tts-read-btn {
+  position: absolute;
+  background: #2d6a8c;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 5000;
+  font-weight: 600;
+  font-size: 0.92em;
+  display: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+#tts-read-btn:hover { background: #1d556f; transform: scale(1.05); }
+
+#tts-controller {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #2a1f15, #4a3527);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: none;
+  gap: 14px;
+  align-items: center;
+  z-index: 3000;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  font-size: 0.9em;
+  flex-wrap: wrap;
+}
+#tts-controller.active { display: flex; }
+#tts-controller .tts-btn {
+  background: rgba(255,255,255,0.18);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1;
+}
+#tts-controller .tts-btn:hover { background: rgba(255,255,255,0.35); }
+#tts-controller label { display: flex; align-items: center; gap: 8px; }
+#tts-controller input[type="range"] { width: 110px; cursor: pointer; }
+#tts-controller .tts-rate-display { min-width: 38px; text-align: right; font-weight: 600; }
+#tts-controller .tts-status { font-size: 0.85em; opacity: 0.8; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 700px) {
+  #tts-controller { font-size: 0.8em; padding: 8px 12px; gap: 8px; max-width: 95vw; }
+  #tts-controller input[type="range"] { width: 80px; }
+}
+
 /* Flash highlight when a popup link scrolls to a section */
 .flash-highlight {
   animation: flash-pulse 2.6s ease-out;
